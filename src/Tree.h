@@ -237,6 +237,32 @@
 
  protected:
 
+  /**
+   * @brief Hook for subclasses to provide y data for linear combination fitting.
+   *
+   * Default implementation returns the full y_node matrix. TreeClassification
+   * overrides this to return a single column based on y_col_split.
+   *
+   * @return Matrix of y values to use in glmnet_fit() and user_fit()
+   */
+  virtual arma::mat get_y_for_linear_combination();
+
+  /**
+   * @brief Wrapper for evaluating predictions with R function.
+   *
+   * Handles conversion to R types and function call for OOB evaluation.
+   *
+   * @param y_data Matrix of outcome data
+   * @param w_data Vector of weights
+   * @param pred_data Vector of predictions
+   * @return Evaluation result from R function
+   */
+  double evaluate_oob_with_r_function(
+    const arma::mat& y_data,
+    const arma::vec& w_data,
+    const arma::vec& pred_data
+  );
+
   void resize_oobag_data();
 
   // pointer to oobag_denom in forest

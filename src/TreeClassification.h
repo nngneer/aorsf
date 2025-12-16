@@ -55,8 +55,6 @@
   double compute_prediction_accuracy_internal(arma::mat& preds) override;
 
   arma::mat glm_fit() override;
-  arma::mat glmnet_fit() override;
-  arma::mat user_fit() override;
 
   uword get_n_col_vi() override;
 
@@ -65,6 +63,12 @@
   std::vector<arma::vec>& get_leaf_pred_prob(){
    return(leaf_pred_prob);
   }
+
+ protected:
+
+  arma::mat get_y_for_linear_combination() override;
+
+ public:
 
   arma::uword n_class;
   bool binary;

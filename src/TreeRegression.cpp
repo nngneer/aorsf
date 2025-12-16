@@ -164,43 +164,6 @@
 
  }
 
- arma::mat TreeRegression::glmnet_fit(){
-
-  NumericMatrix xx = wrap(x_node);
-  NumericMatrix yy = wrap(y_node);
-  NumericVector ww = wrap(w_node);
-
-  // initialize function from tree object
-  // (Functions can't be stored in C++ classes, but RObjects can)
-  Function f_beta = as<Function>(lincomb_R_function);
-
-  NumericMatrix beta_R = f_beta(xx, yy, ww,
-                                lincomb_alpha,
-                                lincomb_df_target);
-
-  mat beta = mat(beta_R.begin(), beta_R.nrow(), beta_R.ncol(), false);
-
-  return(beta);
-
- }
-
- arma::mat TreeRegression::user_fit(){
-
-  NumericMatrix xx = wrap(x_node);
-  NumericMatrix yy = wrap(y_node);
-  NumericVector ww = wrap(w_node);
-
-  // initialize function from tree object
-  // (Functions can't be stored in C++ classes, but RObjects can)
-  Function f_beta = as<Function>(lincomb_R_function);
-
-  NumericMatrix beta_R = f_beta(xx, yy, ww);
-
-  mat beta = mat(beta_R.begin(), beta_R.nrow(), beta_R.ncol(), false);
-
-  return(beta);
-
- }
 
 
  double TreeRegression::compute_prediction_accuracy_internal(
@@ -208,21 +171,8 @@
  ){
 
   if (oobag_eval_type == EVAL_R_FUNCTION){
-
    vec preds_vec = preds.unsafe_col(0);
-
-   NumericMatrix y_wrap = wrap(y_oobag);
-   NumericVector w_wrap = wrap(w_oobag);
-   NumericVector p_wrap = wrap(preds_vec);
-
-   // initialize function from tree object
-   // (Functions can't be stored in C++ classes, but RObjects can)
-   Function f_oobag = as<Function>(oobag_R_function);
-
-   NumericVector result_R = f_oobag(y_wrap, w_wrap, p_wrap);
-
-   return(result_R[0]);
-
+   return evaluate_oob_with_r_function(y_oobag, w_oobag, preds_vec);
   }
 
   double result = 0;

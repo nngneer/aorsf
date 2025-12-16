@@ -171,46 +171,9 @@
 
  }
 
- arma::mat TreeClassification::glmnet_fit(){
-
-  arma::vec y_col = y_node.unsafe_col(y_col_split);
-
-  NumericMatrix xx = wrap(x_node);
-  NumericMatrix yy = wrap(y_col);
-  NumericVector ww = wrap(w_node);
-
-  // initialize function from tree object
-  // (Functions can't be stored in C++ classes, but RObjects can)
-  Function f_beta = as<Function>(lincomb_R_function);
-
-  NumericMatrix beta_R = f_beta(xx, yy, ww,
-                                lincomb_alpha,
-                                lincomb_df_target);
-
-  mat beta = mat(beta_R.begin(), beta_R.nrow(), beta_R.ncol(), false);
-
-  return(beta);
-
- }
-
- arma::mat TreeClassification::user_fit(){
-
-  vec y_col = y_node.unsafe_col(y_col_split);
-
-  NumericMatrix xx = wrap(x_node);
-  NumericMatrix yy = wrap(y_col);
-  NumericVector ww = wrap(w_node);
-
-  // initialize function from tree object
-  // (Functions can't be stored in C++ classes, but RObjects can)
-  Function f_beta = as<Function>(lincomb_R_function);
-
-  NumericMatrix beta_R = f_beta(xx, yy, ww);
-
-  mat beta = mat(beta_R.begin(), beta_R.nrow(), beta_R.ncol(), false);
-
-  return(beta);
-
+ arma::mat TreeClassification::get_y_for_linear_combination(){
+  // Return single column for binary/multiclass
+  return y_node.col(y_col_split);
  }
 
  double TreeClassification::compute_prediction_accuracy_internal(

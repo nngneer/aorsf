@@ -809,15 +809,34 @@
  }
 
  arma::mat Tree::glmnet_fit(){
-  Rcpp::stop("default glmnet fit function called");
-  mat out;
-  return(out);
+  arma::mat y_to_fit = get_y_for_linear_combination();
+
+  NumericMatrix xx = wrap(x_node);
+  NumericMatrix yy = wrap(y_to_fit);
+  NumericVector ww = wrap(w_node);
+
+  Function f_beta = as<Function>(lincomb_R_function);
+
+  NumericMatrix beta_R = f_beta(xx, yy, ww,
+                                lincomb_alpha,
+                                lincomb_df_target);
+
+  mat beta = mat(beta_R.begin(), beta_R.nrow(), beta_R.ncol(), false);
+  return(beta);
  }
 
  arma::mat Tree::user_fit(){
-  Rcpp::stop("default user fit function called");
-  mat out;
-  return(out);
+  arma::mat y_to_fit = get_y_for_linear_combination();
+
+  NumericMatrix xx = wrap(x_node);
+  NumericMatrix yy = wrap(y_to_fit);
+  NumericVector ww = wrap(w_node);
+
+  Function f_beta = as<Function>(lincomb_R_function);
+  NumericMatrix beta_R = f_beta(xx, yy, ww);
+
+  mat beta = mat(beta_R.begin(), beta_R.nrow(), beta_R.ncol(), false);
+  return(beta);
  }
  // # nocov end
 
@@ -1335,6 +1354,27 @@
 
   }
 
+ }
+
+ arma::mat Tree::get_y_for_linear_combination(){
+  // Default implementation: return full y_node matrix
+  // TreeClassification overrides this to return single column
+  return y_node;
+ }
+
+ double Tree::evaluate_oob_with_r_function(
+  const arma::mat& y_data,
+  const arma::vec& w_data,
+  const arma::vec& pred_data
+ ){
+  NumericMatrix y_wrap = wrap(y_data);
+  NumericVector w_wrap = wrap(w_data);
+  NumericVector p_wrap = wrap(pred_data);
+
+  Function f_oobag = as<Function>(oobag_R_function);
+  NumericVector result_R = f_oobag(y_wrap, w_wrap, p_wrap);
+
+  return(result_R[0]);
  }
 
  } // namespace aorsf
