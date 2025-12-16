@@ -9,7 +9,7 @@ LDFLAGS = $(R_LIB) $(shell R CMD config BLAS_LIBS) $(shell R CMD config LAPACK_L
 SOURCES_TO_TEST = ../utility.cpp ../Coxph.cpp
 
 # Test files
-TEST_SOURCES = test_main.cpp test_utility.cpp
+TEST_SOURCES = test_main.cpp test_utility.cpp test_coxph.cpp test_data.cpp test_regression.cpp
 
 # Object files
 TEST_OBJECTS = $(TEST_SOURCES:.cpp=.o)

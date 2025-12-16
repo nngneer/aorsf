@@ -571,9 +571,9 @@ TEST_CASE("scale_x centers and scales correctly", "[utility][scale]") {
 - [x] Tests are fast: `make -C src/tests test` completes in < 5 seconds (0.088s actual)
 
 #### Manual Verification:
-- [ ] Test output clearly indicates which utility functions are tested
-- [ ] Failed tests (if any) provide clear error messages
-- [ ] Can run individual test tags: `./test_runner "[logrank]"`
+- [x] Test output clearly indicates which utility functions are tested
+- [x] Failed tests (if any) provide clear error messages
+- [x] Can run individual test tags: `./test_runner "[logrank]"`
 
 **Implementation Note**: After completing this phase and all automated verification passes, pause here for manual confirmation before proceeding to the next phase.
 
