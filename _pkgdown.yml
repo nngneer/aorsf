@@ -1,0 +1,59 @@
+url: https://bcjaeger.github.io/aorsf
+
+template:
+  bootstrap: 5
+  bootswatch: sandstone
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, tutorials, news]
+    right: [search, github]
+
+articles:
+- title: Learn to use oblique RFs
+  navbar: ~
+  contents:
+  - aorsf
+  - pd
+  - oobag
+  - fast
+
+reference:
+- title: Oblique random forests (RFs)
+  desc: Fit, inspect, summarize, and apply oblique RFs
+- contents:
+  - matches("^orsf$")
+  - matches("^orsf_update$")
+  - matches("^print\\.ObliqueForest$")
+  - matches("^predict\\.ObliqueForest$")
+  - matches("^orsf_summarize")
+  - matches("^print\\.orsf_summary")
+- title: Control how your oblique RF works
+  desc: Choose how to identify linear combinations of predictors and set tuning parameters for your approach
+- contents:
+  - matches("^orsf_control")
+- title: Variable importance/selection
+  desc: Estimate the importance of individual variables and conduct variable selection using ORSFs
+- contents:
+  - matches("^orsf_vi")
+  - matches("^orsf_vs")
+- title: Partial dependence and individual conditional expectations
+  desc: Interpret your model by generating partial dependence or individual conditional expectation values. Plotting functions not included (but see examples)
+- contents:
+  - matches("^orsf_ice")
+  - matches("^orsf_pd")
+  - matches("^pred_spec")
+- title: Example survival data
+  desc: Datasets used in examples and vignettes.
+- contents:
+  - matches("^pbc_orsf$")
+  - matches("^penguins_orsf$")
+- title: Miscellaneous
+  desc: Functions that don't fit neatly into a category above, but are still helpful.
+- contents:
+  - matches("^as\\.data\\.table\\.orsf_summary")
+  - matches("^orsf_time_to_train$")
+- title: Back-end functions
+  desc: Techniques used by aorsf that may be helpful in other contexts.
+- contents:
+  - matches("scale_cph$")

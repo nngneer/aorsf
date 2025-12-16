@@ -1,0 +1,21 @@
+
+```{r echo=FALSE}
+
+library(aorsf)
+
+```
+
+```{r}
+
+set.seed(329)
+
+index_train <- sample(nrow(pbc_orsf), 150) 
+
+pbc_orsf_train <- pbc_orsf[index_train, ]
+pbc_orsf_test <- pbc_orsf[-index_train, ]
+
+fit_surv <- orsf(data = pbc_orsf_train, 
+                 formula = Surv(time, status) ~ . - id,
+                 oobag_pred_horizon = 365.25 * 5)
+
+```

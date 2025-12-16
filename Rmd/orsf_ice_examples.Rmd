@@ -1,0 +1,14 @@
+
+# Examples
+
+```{r, echo = FALSE}
+
+library(aorsf)
+library(magrittr) # for %>%
+
+```
+
+```{r child="orsf_ice_content.Rmd"}
+
+```
+

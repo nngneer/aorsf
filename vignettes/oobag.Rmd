@@ -1,0 +1,222 @@
+---
+title: "Out-of-bag predictions and evaluation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Out-of-bag predictions and evaluation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.height = 5, 
+  fig.width = 7
+)
+```
+
+```{r setup, warning=FALSE}
+
+library(aorsf)
+library(survival)
+
+```
+
+## Out-of-bag data
+
+In random forests, each tree is grown with a bootstrapped version of the training set. Because bootstrap samples are selected with replacement, each bootstrapped training set contains about two-thirds of instances in the original training set. The 'out-of-bag' data are instances that are _not_ in the bootstrapped training set.
+
+## Out-of-bag predictions and error
+
+Each tree in the random forest can make predictions for its out-of-bag data, and the out-of-bag predictions can be aggregated to make an ensemble out-of-bag prediction. Since the out-of-bag data are not used to grow the tree, the accuracy of the ensemble out-of-bag predictions approximate the generalization error of the random forest. Out-of-bag prediction error plays a central role for some routines that estimate variable importance, e.g. negation importance. 
+
+We fit an oblique random survival forest and plot the distribution of the ensemble out-of-bag predictions.
+
+```{r}
+
+fit <- orsf(data = pbc_orsf, 
+            formula = Surv(time, status) ~ . - id,
+            oobag_pred_type = 'surv',
+            n_tree = 5,
+            oobag_pred_horizon = 2000)
+
+hist(fit$pred_oobag, 
+     main = 'Out-of-bag survival predictions at t=2,000')
+
+```
+
+Next, let's check the out-of-bag accuracy of `fit`:
+
+```{r}
+
+# what function is used to evaluate out-of-bag predictions?
+fit$eval_oobag$stat_type
+
+# what is the output from this function?
+fit$eval_oobag$stat_values
+
+```
+
+The out-of-bag estimate of `r fit$eval_oobag$stat_type` (the default method to evaluate out-of-bag predictions) is `r as.numeric(fit$eval_oobag$stat_values)`.
+
+## Monitoring out-of-bag error
+
+As each out-of-bag data set contains about one-third of the training set, the out-of-bag error estimate usually converges to a stable value as more trees are added to the forest. If you want to monitor the convergence of out-of-bag error for your own oblique random survival forest, you can set `oobag_eval_every` to compute out-of-bag error at every `oobag_eval_every` tree. For example, let's compute out-of-bag error after fitting each tree in a forest of 50 trees:
+
+```{r}
+
+fit <- orsf(data = pbc_orsf,
+            formula = Surv(time, status) ~ . - id,
+            n_tree = 20,
+            tree_seeds = 2,
+            oobag_pred_type = 'surv',
+            oobag_pred_horizon = 2000,
+            oobag_eval_every = 1)
+
+plot(
+ x = seq(1, 20, by = 1),
+ y = fit$eval_oobag$stat_values, 
+ main = 'Out-of-bag C-statistic computed after each new tree is grown.',
+ xlab = 'Number of trees grown',
+ ylab = fit$eval_oobag$stat_type
+)
+
+lines(x=seq(1, 20), y = fit$eval_oobag$stat_values)
+
+```
+
+In general, at least 500 trees are recommended for a random forest fit. We're just using 10 for illustration.
+
+## User-supplied out-of-bag evaluation functions
+
+In some cases, you may want more control over how out-of-bag error is estimated. For example, let's use the Brier score from the `SurvMetrics` package:
+
+```{r}
+
+oobag_brier_surv <- function(y_mat, w_vec, s_vec){
+
+ # use if SurvMetrics is available
+ if(requireNamespace("SurvMetrics")){
+  
+  return(
+   # output is numeric vector of length 1
+   as.numeric(
+    SurvMetrics::Brier(
+     object = Surv(time = y_mat[, 1], event = y_mat[, 2]), 
+     pre_sp = s_vec,
+     # t_star in Brier() should match oob_pred_horizon in orsf()
+     t_star = 2000
+    )
+   )
+  )
+  
+  
+ }
+ 
+ # if not available, use a dummy version
+ mean( (y_mat[,2] - (1-s_vec))^2 )
+ 
+ 
+}
+```
+
+There are two ways to apply your own function to compute out-of-bag error. First, you can apply your function to the out-of-bag survival predictions that are stored in 'aorsf' objects, e.g:
+
+```{r}
+
+oobag_brier_surv(y_mat = pbc_orsf[,c('time', 'status')],
+                 s_vec = fit$pred_oobag)
+
+```
+
+Second, you can pass your function into `orsf()`, and it will be used in place of Harrell's C-statistic:
+
+```{r}
+
+# instead of copy/pasting the modeling code and then modifying it,
+# you can just use orsf_update.
+
+fit_brier <- orsf_update(fit, oobag_fun = oobag_brier_surv)
+
+plot(
+ x = seq(1, 20, by = 1),
+ y = fit_brier$eval_oobag$stat_values, 
+ main = 'Out-of-bag error computed after each new tree is grown.',
+ sub = 'For the Brier score, lower values indicate more accurate predictions',
+ xlab = 'Number of trees grown',
+ ylab = "Brier score"
+)
+
+lines(x=seq(1, 20), y = fit_brier$eval_oobag$stat_values)
+
+```
+
+<!-- Although earlier versions of `aorsf` were not compatible with `riskRegression::Score()`, they now work together nicely. Notably, it is a little tricky to make the prediction horizon time pass all tests imposed by `aorsf` and `riskRegression` (see code below). -->
+
+<!-- ```{r} -->
+
+<!-- oobag_cstat_surv <- function(y_mat, w_vec, s_vec){ -->
+
+<!--  data <- as.data.frame(y_mat) -->
+<!--  names(data) <- c("time", "status") -->
+
+<!--  times <- 2000 -->
+
+<!--  if(max(data$time) < 2000) times <- median(data$time) -->
+
+<!--  if(any(s_vec > 1) || any(s_vec < 0)){ -->
+<!--   s_vec <- scales::rescale(s_vec, to = c(0, 1)) -->
+<!--  } -->
+
+<!--  sc <- riskRegression::Score(object = list(p = s_vec), -->
+<!--                              formula = Surv(time, status) ~ 1, -->
+<!--                              data = data, -->
+<!--                              times = times) -->
+
+<!--  cstat <- sc$AUC$score$AUC[1] -->
+
+<!--  if(is.nan(cstat)) return(1/2) -->
+
+<!--  if(cstat < 1/2) return(1-cstat) -->
+
+<!--  cstat -->
+
+<!-- } -->
+
+<!-- fit_cstat <- orsf_update(fit, oobag_fun = oobag_cstat_surv) -->
+
+<!-- plot( -->
+<!--  x = seq(1, 20, by = 1), -->
+<!--  y = fit_cstat$eval_oobag$stat_values,  -->
+<!--  main = 'Out-of-bag error computed after each new tree is grown.', -->
+<!--  sub = 'For the C-statistic, higher values indicate better discrimination between low and high risk observations', -->
+<!--  xlab = 'Number of trees grown', -->
+<!--  ylab = "C-statistic using Score()" -->
+<!-- ) -->
+
+<!-- lines(x=seq(1, 20), y = fit_cstat$eval_oobag$stat_values) -->
+
+<!-- ``` -->
+
+### Specific instructions on user-supplied functions
+
+`r aorsf:::roxy_oobag_fun_user()`
+
+- `r aorsf:::roxy_oobag_fun_inputs()`
+
+- `r aorsf:::roxy_oobag_fun_ymat()`
+
+- `r aorsf:::roxy_oobag_fun_svec()`
+
+- `r aorsf:::roxy_oobag_fun_return()`
+
+
+## Notes
+
+When evaluating out-of-bag error: 
+
+- the `oobag_pred_horizon` input in `orsf()` determines the prediction horizon for out-of-bag predictions. The prediction horizon needs to be specified to evaluate prediction accuracy in some cases, such as the examples above. Be sure to check if that is the case when using your own functions, and if so, be sure that `oobag_pred_horizon` matches the prediction horizon used in your custom function. 
+
+- Some functions expect predicted risk (i.e., 1 - predicted survival), others expect predicted survival. 
+

@@ -1,0 +1,75 @@
+citHeader("To cite aorsf in publications use:")
+
+
+
+bibentry(
+  bibtype  = "Article",
+  title    = "aorsf: An R package for supervised learning using the oblique random survival forest",
+  author   = c(as.person("Byron C. Jaeger"),
+               as.person("Sawyer Welden"),
+               as.person("Kristin Lenoir"),
+               as.person("Nicholas M. Pajewski")),
+  journal  = "Journal of Open Source Software",
+  year     = "2022",
+  volume   = "7",
+  number   = "77",
+  pages    = "4705",
+  url      = "https://doi.org/10.21105/joss.04705",
+  textVersion = paste(
+   "Jaeger et al. (2022). aorsf: An R package for supervised learning using",
+   "the oblique random survival forest. Journal of Open Source Software,",
+   "7(77), 4705. https://doi.org/10.21105/joss.04705."
+  )
+)
+
+bibentry(
+  bibtype  =  "Article",
+  title    = "Accelerated and interpretable oblique random survival forests",
+  author   = c(as.person("Byron C. Jaeger"),
+               as.person("Sawyer Welden"),
+               as.person("Kristin Lenoir"),
+               as.person("Jaime L. Speiser"),
+               as.person("Matthew W. Segar"),
+               as.person("Ambarish Pandey"),
+               as.person("Nicholas M. Pajewski")),
+  journal  = "Journal of Computational and Graphical Statistics",
+  year     = "2023",
+  url      = "https://doi.org/10.1080/10618600.2023.2231048",
+  textVersion = paste(
+   "Jaeger BC, Welden S, Lenoir K, Speiser JL, Segar MW, Pandey A, Pajewski NM.",
+   "Accelerated and interpretable oblique random survival forests.",
+   "Journal of Computational and Graphical Statistics. 2023 Aug 3:1-6."
+  )
+)
+
+bibentry(
+  bibtype      = "Article",
+  title        = "Oblique Random Survival Forests",
+  author       = c(
+                   as.person("Byron C. Jaeger"),
+                   as.person("D. Leann Long"),
+                   as.person("Dustin M. Long"),
+                   as.person("Mario Sims"),
+                   as.person("Jeff M. Szychowski"),
+                   as.person("Yuan-I Min"),
+                   as.person("Leslie A. Mcclure"),
+                   as.person("George Howard"),
+                   as.person("Noah Simon")
+                   ),
+  journal      = "Annals of Applied Statistics",
+  year         = "2019",
+  volume       = "13",
+  number       = "3",
+  pages        = "1847--1883",
+  url          = "https://doi.org/10.1214/19-AOAS1261",
+
+  textVersion  =
+  paste("Jaeger BC, Long DL, Long DM, Sims M, Szychowski JM, Min YI, Mcclure LA, Howard G, Simon N.",
+        "Oblique Random Survival Forests.",
+        "The Annals of Applied Statistics.",
+        "13(3): 1847-1883.",
+        "URL https://doi.org/10.1214/19-AOAS1261",
+        "DOI: 10.1214/19-AOAS1261"),
+  header = "if orsf_control_net() is used please additionally cite:"
+)
+

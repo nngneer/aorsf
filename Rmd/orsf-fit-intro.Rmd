@@ -1,0 +1,36 @@
+
+For classification, we fit an oblique RF to predict penguin species using `penguin` data from the magnificent `palmerpenguins` [R package](https://allisonhorst.github.io/palmerpenguins/)
+
+```{r}
+# An oblique classification RF
+penguin_fit <- orsf(data = penguins_orsf,
+                    n_tree = 5, 
+                    formula = species ~ .)
+
+penguin_fit
+
+```
+
+For regression, we use the same data but predict bill length of penguins:
+
+```{r}
+# An oblique regression RF
+bill_fit <- orsf(data = penguins_orsf, 
+                 n_tree = 5, 
+                 formula = bill_length_mm ~ .)
+
+bill_fit
+
+```
+
+My personal favorite is the oblique survival RF with accelerated Cox regression because it was the first type of oblique RF that `aorsf` provided (see [ArXiv paper](https://arxiv.org/abs/2208.01129); the paper is also published in *Journal of Computational and Graphical Statistics* but is not publicly available there). Here, we use it to predict mortality risk following diagnosis of primary biliary cirrhosis:
+
+```{r}
+# An oblique survival RF
+pbc_fit <- orsf(data = pbc_orsf, 
+                n_tree = 5,
+                formula = Surv(time, status) ~ . - id)
+
+pbc_fit
+
+```

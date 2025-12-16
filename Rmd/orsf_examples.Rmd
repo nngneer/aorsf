@@ -1,0 +1,102 @@
+
+# Examples
+
+```{r}
+library(aorsf)
+library(magrittr) # for %>%
+```
+
+`orsf()` is the entry-point of the `aorsf` package. It can be used to fit classification, regression, and survival forests. 
+
+```{r child = "orsf-fit-intro.Rmd"}
+
+```
+
+## More than one way to grow a forest
+
+You can use `orsf(no_fit = TRUE)` to make a *specification* to grow a forest instead of a fitted forest. 
+```{r}
+orsf_spec <- orsf(pbc_orsf, 
+                  formula = time + status ~ . - id,
+                  no_fit = TRUE)
+
+orsf_spec
+```
+
+Why would you do this? Two reasons:
+
+1. For very computational tasks, you may want to check how long it will take to fit the forest before you commit to it:
+
+```{r}
+
+orsf_spec %>% 
+ orsf_update(n_tree = 10000) %>%
+ orsf_time_to_train()
+
+```
+
+
+1. If fitting multiple forests, use the blueprint along with `orsf_train()` and `orsf_update()` to simplify your code:
+
+```{r}
+
+orsf_fit <- orsf_train(orsf_spec)
+orsf_fit_10 <- orsf_update(orsf_fit, leaf_min_obs = 10)
+orsf_fit_20 <- orsf_update(orsf_fit, leaf_min_obs = 20)
+
+orsf_fit$leaf_min_obs
+orsf_fit_10$leaf_min_obs
+orsf_fit_20$leaf_min_obs
+
+```
+
+## tidymodels
+
+`tidymodels` includes support for `aorsf` as a computational engine:
+
+```{r, warning=FALSE, echo=TRUE, message=FALSE}
+
+library(tidymodels)
+library(censored)
+library(yardstick)
+
+pbc_tidy <- pbc_orsf %>% 
+ mutate(event_time = Surv(time, status), .before = 1) %>% 
+ select(-c(id, time, status)) %>% 
+ as_tibble()
+
+split  <- initial_split(pbc_tidy)
+
+orsf_spec <- rand_forest() %>% 
+ set_engine("aorsf") %>% 
+ set_mode("censored regression")
+
+orsf_fit <- fit(orsf_spec, 
+                formula = event_time ~ ., 
+                data = training(split))
+
+```
+
+Prediction with `aorsf` models at different times is also supported:
+
+```{r}
+
+time_points <- seq(500, 3000, by = 500)
+
+test_pred <- augment(orsf_fit, 
+                     new_data = testing(split), 
+                     eval_time = time_points)
+
+brier_scores <- test_pred %>% 
+  brier_survival(truth = event_time, .pred)
+
+brier_scores
+
+roc_scores <- test_pred %>% 
+  roc_auc_survival(truth = event_time, .pred)
+
+roc_scores
+
+```
+
+
