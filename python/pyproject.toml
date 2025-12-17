@@ -1,0 +1,57 @@
+[build-system]
+requires = ["scikit-build-core>=0.5", "nanobind>=2.0"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "pyaorsf"
+version = "0.1.0"
+description = "Accelerated Oblique Random Forests for Python"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Byron C. Jaeger", email = "bjaeger@wakehealth.edu"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.20",
+    "scipy>=1.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "scikit-learn>=1.0",
+]
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+
+[project.urls]
+Homepage = "https://github.com/ropensci/aorsf"
+Documentation = "https://docs.ropensci.org/aorsf/"
+Repository = "https://github.com/ropensci/aorsf"
+
+[tool.scikit-build]
+cmake.minimum-version = "3.15"
+cmake.build-type = "Release"
+wheel.packages = ["pyaorsf"]
+
+[tool.scikit-build.cmake.define]
+BUILD_PYTHON = "ON"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
