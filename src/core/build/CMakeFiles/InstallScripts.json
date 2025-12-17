@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/mweiss/sandbox/aorsf/src/core/build/cmake_install.cmake",
+		"/Users/mweiss/sandbox/aorsf/src/core/build/tests/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

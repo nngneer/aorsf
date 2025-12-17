@@ -1,0 +1,2 @@
+/usr/bin/ar qc libaorsf_core.a CMakeFiles/aorsf_core.dir/Coxph.cpp.o CMakeFiles/aorsf_core.dir/Forest.cpp.o CMakeFiles/aorsf_core.dir/ForestClassification.cpp.o CMakeFiles/aorsf_core.dir/ForestRegression.cpp.o CMakeFiles/aorsf_core.dir/ForestSurvival.cpp.o CMakeFiles/aorsf_core.dir/Tree.cpp.o CMakeFiles/aorsf_core.dir/TreeClassification.cpp.o CMakeFiles/aorsf_core.dir/TreeRegression.cpp.o CMakeFiles/aorsf_core.dir/TreeSurvival.cpp.o CMakeFiles/aorsf_core.dir/utility.cpp.o
+/usr/bin/ranlib libaorsf_core.a
