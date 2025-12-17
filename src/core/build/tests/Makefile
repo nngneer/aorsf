@@ -175,6 +175,20 @@ test_standalone/fast:
 	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/build
 .PHONY : test_standalone/fast
 
+# Convenience name for target.
+tests/CMakeFiles/test_survival.dir/rule:
+	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_survival.dir/rule
+.PHONY : tests/CMakeFiles/test_survival.dir/rule
+
+# Convenience name for target.
+test_survival: tests/CMakeFiles/test_survival.dir/rule
+.PHONY : test_survival
+
+# fast build rule for target.
+test_survival/fast:
+	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/build
+.PHONY : test_survival/fast
+
 test_standalone.o: test_standalone.cpp.o
 .PHONY : test_standalone.o
 
@@ -199,6 +213,30 @@ test_standalone.cpp.s:
 	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.s
 .PHONY : test_standalone.cpp.s
 
+test_survival.o: test_survival.cpp.o
+.PHONY : test_survival.o
+
+# target to build an object file
+test_survival.cpp.o:
+	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/test_survival.cpp.o
+.PHONY : test_survival.cpp.o
+
+test_survival.i: test_survival.cpp.i
+.PHONY : test_survival.i
+
+# target to preprocess a source file
+test_survival.cpp.i:
+	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/test_survival.cpp.i
+.PHONY : test_survival.cpp.i
+
+test_survival.s: test_survival.cpp.s
+.PHONY : test_survival.s
+
+# target to generate assembly for a file
+test_survival.cpp.s:
+	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/test_survival.cpp.s
+.PHONY : test_survival.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -212,9 +250,13 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... test_standalone"
+	@echo "... test_survival"
 	@echo "... test_standalone.o"
 	@echo "... test_standalone.i"
 	@echo "... test_standalone.s"
+	@echo "... test_survival.o"
+	@echo "... test_survival.i"
+	@echo "... test_survival.s"
 .PHONY : help
 
 

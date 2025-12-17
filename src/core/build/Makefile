@@ -187,6 +187,19 @@ test_standalone/fast:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/build
 .PHONY : test_standalone/fast
 
+#=============================================================================
+# Target rules for targets named test_survival
+
+# Build rule for target.
+test_survival: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_survival
+.PHONY : test_survival
+
+# fast build rule for target.
+test_survival/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/build
+.PHONY : test_survival/fast
+
 Coxph.o: Coxph.cpp.o
 .PHONY : Coxph.o
 
@@ -441,6 +454,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... aorsf_core"
 	@echo "... test_standalone"
+	@echo "... test_survival"
 	@echo "... Coxph.o"
 	@echo "... Coxph.i"
 	@echo "... Coxph.s"

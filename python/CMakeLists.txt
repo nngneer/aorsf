@@ -14,15 +14,6 @@ find_package(Armadillo REQUIRED)
 # Find OpenMP (optional)
 find_package(OpenMP)
 
-# Include carma for Armadillo <-> NumPy conversion
-include(FetchContent)
-FetchContent_Declare(
-    carma
-    GIT_REPOSITORY https://github.com/RUrlus/carma.git
-    GIT_TAG v0.6.7
-)
-FetchContent_MakeAvailable(carma)
-
 # Path to aorsf core
 set(AORSF_CORE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../src/core")
 
@@ -54,13 +45,11 @@ nanobind_add_module(_pyaorsf
 target_include_directories(_pyaorsf PRIVATE
     ${AORSF_CORE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/python
     ${ARMADILLO_INCLUDE_DIRS}
 )
 
 target_link_libraries(_pyaorsf PRIVATE
     ${ARMADILLO_LIBRARIES}
-    carma::carma
 )
 
 if(OpenMP_CXX_FOUND)
