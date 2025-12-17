@@ -445,8 +445,68 @@ nb::dict fit_forest(
             result["importance"] = arma_vec_to_numpy(vi);
         }
 
-        // Store forest structure for serialization (simplified)
+        // Store forest structure for serialization
         result["oobag_denom"] = arma_vec_to_numpy(forest->get_oobag_denom());
+
+        // Store full tree structure for prediction on new data
+        // cutpoint: list of vectors, one per tree
+        auto cutpoints = forest->get_cutpoint();
+        nb::list cutpoint_list;
+        for (const auto& cp : cutpoints) {
+            nb::list tree_cp;
+            for (double v : cp) tree_cp.append(v);
+            cutpoint_list.append(tree_cp);
+        }
+        result["cutpoint"] = cutpoint_list;
+
+        // child_left: list of vectors, one per tree
+        auto child_lefts = forest->get_child_left();
+        nb::list child_left_list;
+        for (const auto& cl : child_lefts) {
+            nb::list tree_cl;
+            for (auto v : cl) tree_cl.append(static_cast<int>(v));
+            child_left_list.append(tree_cl);
+        }
+        result["child_left"] = child_left_list;
+
+        // coef_values: list of list of vectors (one per node per tree)
+        auto coef_vals = forest->get_coef_values();
+        nb::list coef_values_list;
+        for (const auto& tree_coefs : coef_vals) {
+            nb::list node_list;
+            for (const auto& node_coef : tree_coefs) {
+                node_list.append(arma_vec_to_numpy(node_coef));
+            }
+            coef_values_list.append(node_list);
+        }
+        result["coef_values"] = coef_values_list;
+
+        // coef_indices: list of list of vectors (one per node per tree)
+        auto coef_idxs = forest->get_coef_indices();
+        nb::list coef_indices_list;
+        for (const auto& tree_idxs : coef_idxs) {
+            nb::list node_list;
+            for (const auto& node_idx : tree_idxs) {
+                node_list.append(arma_uvec_to_numpy(node_idx));
+            }
+            coef_indices_list.append(node_list);
+        }
+        result["coef_indices"] = coef_indices_list;
+
+        // leaf_summary: list of vectors (one per tree)
+        auto leaf_sums = forest->get_leaf_summary();
+        nb::list leaf_summary_list;
+        for (const auto& ls : leaf_sums) {
+            nb::list tree_ls;
+            for (double v : ls) tree_ls.append(v);
+            leaf_summary_list.append(tree_ls);
+        }
+        result["leaf_summary"] = leaf_summary_list;
+
+        // For survival forests, also store unique event times
+        if (tt == TREE_SURVIVAL) {
+            result["unique_event_times"] = arma_vec_to_numpy(forest->get_unique_event_times());
+        }
 
         // Type-specific data
         if (tt == TREE_CLASSIFICATION) {
@@ -460,6 +520,120 @@ nb::dict fit_forest(
     } catch (const std::exception& e) {
         throw std::runtime_error(std::string("Internal error: ") + e.what());
     }
+}
+
+// =============================================================================
+// Prediction Function
+// =============================================================================
+
+/**
+ * @brief Predict using a fitted forest structure.
+ *
+ * Takes the tree structure from fit_forest and predicts on new data.
+ */
+nb::ndarray<nb::numpy, double, nb::ndim<2>> predict_forest(
+    nb::ndarray<double, nb::ndim<2>, nb::c_contig> x,  // New data to predict
+    nb::list cutpoint,       // List of lists: cutpoints per tree
+    nb::list child_left,     // List of lists: child indices per tree
+    nb::list coef_values,    // List of list of arrays: coefficients per node per tree
+    nb::list coef_indices,   // List of list of arrays: feature indices per node per tree
+    nb::list leaf_summary,   // List of lists: leaf values per tree
+    int tree_type,           // Type of tree
+    int n_class,             // Number of classes (for classification)
+    bool aggregate           // Whether to aggregate predictions
+) {
+    // Convert input data
+    arma::mat X = numpy_to_arma_mat(x);
+    size_t n_obs = X.n_rows;
+    size_t n_tree = nb::len(cutpoint);
+
+    // Determine output dimensions based on tree type
+    size_t n_cols_out = 1;
+    if (tree_type == TREE_CLASSIFICATION) {
+        n_cols_out = static_cast<size_t>(n_class);
+    }
+
+    // Initialize output matrix
+    arma::mat result;
+    if (aggregate) {
+        result.zeros(n_obs, n_cols_out);
+    } else {
+        result.zeros(n_obs, n_tree);
+    }
+
+    // Process each tree
+    for (size_t t = 0; t < n_tree; ++t) {
+        // Get tree structure
+        nb::list tree_cp = nb::cast<nb::list>(cutpoint[t]);
+        nb::list tree_cl = nb::cast<nb::list>(child_left[t]);
+        nb::list tree_coef_vals = nb::cast<nb::list>(coef_values[t]);
+        nb::list tree_coef_idxs = nb::cast<nb::list>(coef_indices[t]);
+        nb::list tree_ls = nb::cast<nb::list>(leaf_summary[t]);
+
+        size_t n_nodes = nb::len(tree_cp);
+
+        // Convert to vectors for faster access
+        std::vector<double> cp(n_nodes);
+        std::vector<int> cl(n_nodes);
+        for (size_t i = 0; i < n_nodes; ++i) {
+            cp[i] = nb::cast<double>(tree_cp[i]);
+            cl[i] = nb::cast<int>(tree_cl[i]);
+        }
+
+        // Predict for each observation
+        for (size_t i = 0; i < n_obs; ++i) {
+            // Traverse tree to find leaf
+            size_t node = 0;
+
+            while (cl[node] != 0) {  // 0 means leaf (no children)
+                // Get linear combination for this node
+                nb::ndarray<double> node_coefs = nb::cast<nb::ndarray<double>>(tree_coef_vals[node]);
+                nb::ndarray<double> node_idxs = nb::cast<nb::ndarray<double>>(tree_coef_idxs[node]);
+
+                // Compute linear combination: X[i, indices] * coefficients
+                double lc = 0.0;
+                size_t n_coefs = node_coefs.shape(0);
+                const double* coef_ptr = node_coefs.data();
+                const double* idx_ptr = node_idxs.data();
+
+                for (size_t j = 0; j < n_coefs; ++j) {
+                    size_t col_idx = static_cast<size_t>(idx_ptr[j]);
+                    lc += X(i, col_idx) * coef_ptr[j];
+                }
+
+                // Go left or right based on cutpoint
+                if (lc <= cp[node]) {
+                    node = static_cast<size_t>(cl[node]);  // left child
+                } else {
+                    node = static_cast<size_t>(cl[node]) + 1;  // right child
+                }
+            }
+
+            // Get leaf prediction
+            double leaf_val = nb::cast<double>(tree_ls[node]);
+
+            if (aggregate) {
+                if (tree_type == TREE_CLASSIFICATION) {
+                    // For classification, leaf_val is the predicted class
+                    size_t pred_class = static_cast<size_t>(leaf_val);
+                    if (pred_class < n_cols_out) {
+                        result(i, pred_class) += 1.0;
+                    }
+                } else {
+                    result(i, 0) += leaf_val;
+                }
+            } else {
+                result(i, t) = leaf_val;
+            }
+        }
+    }
+
+    // Average predictions if aggregating
+    if (aggregate) {
+        result /= static_cast<double>(n_tree);
+    }
+
+    return arma_mat_to_numpy(result);
 }
 
 // =============================================================================
@@ -573,4 +747,17 @@ NB_MODULE(_pyaorsf, m) {
           nb::arg("oobag_eval_every"),
           nb::arg("n_thread"),
           nb::arg("verbose"));
+
+    // Prediction function
+    m.def("predict_forest", &predict_forest,
+          "Predict using a fitted forest structure",
+          nb::arg("x"),
+          nb::arg("cutpoint"),
+          nb::arg("child_left"),
+          nb::arg("coef_values"),
+          nb::arg("coef_indices"),
+          nb::arg("leaf_summary"),
+          nb::arg("tree_type"),
+          nb::arg("n_class"),
+          nb::arg("aggregate") = true);
 }
