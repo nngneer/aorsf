@@ -7,7 +7,7 @@
 #ifndef AORSF_CALLBACKS_H_
 #define AORSF_CALLBACKS_H_
 
-#include <armadillo>
+#include "arma_config.h"
 #include <functional>
 
 namespace aorsf {

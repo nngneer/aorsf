@@ -7,7 +7,7 @@
 #ifndef COXPH_H
 #define COXPH_H
 
-#include <armadillo>
+#include "arma_config.h"
 #include "globals.h"
 
 

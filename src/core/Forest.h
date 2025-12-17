@@ -36,7 +36,7 @@ public:
  // Methods
 
  void init(std::unique_ptr<Data> input_data,
-           Rcpp::IntegerVector& tree_seeds,
+           std::vector<int>& tree_seeds,
            arma::uword n_tree,
            arma::uword mtry,
            bool sample_with_replacement,
@@ -280,7 +280,7 @@ protected:
  arma::uword mtry;
  bool sample_with_replacement;
  double sample_fraction;
- Rcpp::IntegerVector tree_seeds;
+ std::vector<int> tree_seeds;
 
  std::vector<std::unique_ptr<Tree>> trees;
 

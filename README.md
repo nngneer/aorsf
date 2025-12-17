@@ -49,6 +49,64 @@ You can install the development version of aorsf from
 remotes::install_github("ropensci/aorsf")
 ```
 
+## Standalone C++ Library
+
+The core computational engine of `aorsf` is written in standalone C++
+with no R dependencies. This allows the library to be used with other
+language bindings (e.g., Python).
+
+### Library Structure
+
+    src/
+    ├── core/           # Standalone C++ library (no R/Rcpp dependencies)
+    │   ├── Forest.cpp/h
+    │   ├── Tree.cpp/h
+    │   ├── Data.h
+    │   ├── Coxph.cpp/h
+    │   ├── utility.cpp/h
+    │   └── ...
+    └── rcpp/           # R-specific adapters
+        ├── RcppOutput.h
+        ├── RcppInterrupts.h
+        └── RcppRMath.h
+
+### Dependencies
+
+The core library requires:
+
+- **Armadillo** (C++ linear algebra library)
+- A C++17 compatible compiler
+
+### Building for Other Languages
+
+The core library uses dependency injection for platform-specific
+functionality:
+
+- **Output**: Implement `OutputHandler` interface for logging
+- **Interrupts**: Implement `InterruptHandler` interface for user
+  interrupt checking
+- **Statistics**: Implement `StatDistributions` interface for `pt()` and
+  `pchisq()` functions
+
+Example initialization for a custom binding:
+
+``` cpp
+#include "core/Forest.h"
+#include "core/Output.h"
+#include "core/Interrupts.h"
+#include "core/RMath.h"
+
+// Set up custom handlers before using the library
+aorsf::OutputManager::set_handler(my_output_handler);
+aorsf::InterruptManager::set_handler(my_interrupt_handler);
+aorsf::StatManager::set_distributions(my_stat_distributions);
+```
+
+For Python bindings, consider using
+[nanobind](https://github.com/wjakob/nanobind) with
+[carma](https://github.com/RUrlus/carma) for Armadillo/NumPy
+interoperability.
+
 ## Get started
 
 ``` r
@@ -78,9 +136,9 @@ penguin_fit
 #>                  N trees: 5
 #>       N predictors total: 7
 #>    N predictors per node: 3
-#>  Average leaves per tree: 6
+#>  Average leaves per tree: 5.8
 #> Min observations in leaf: 5
-#>           OOB stat value: 0.99
+#>           OOB stat value: 0.98
 #>            OOB stat type: AUC-ROC
 #>      Variable importance: anova
 #> 
@@ -104,9 +162,9 @@ bill_fit
 #>                  N trees: 5
 #>       N predictors total: 7
 #>    N predictors per node: 3
-#>  Average leaves per tree: 42.6
+#>  Average leaves per tree: 51.2
 #> Min observations in leaf: 5
-#>           OOB stat value: 0.76
+#>           OOB stat value: 0.77
 #>            OOB stat type: RSQ
 #>      Variable importance: anova
 #> 
@@ -115,10 +173,10 @@ bill_fit
 
 My personal favorite is the oblique survival RF with accelerated Cox
 regression because it was the first type of oblique RF that `aorsf`
-provided (see [JCGS
-paper](https://doi.org/10.1080/10618600.2023.2231048)). Here, we use it
-to predict mortality risk following diagnosis of primary biliary
-cirrhosis:
+provided (see [ArXiv paper](https://arxiv.org/abs/2208.01129); the paper
+is also published in *Journal of Computational and Graphical Statistics*
+but is not publicly available there). Here, we use it to predict
+mortality risk following diagnosis of primary biliary cirrhosis:
 
 ``` r
 # An oblique survival RF
@@ -135,10 +193,10 @@ pbc_fit
 #>                  N trees: 5
 #>       N predictors total: 17
 #>    N predictors per node: 5
-#>  Average leaves per tree: 20.4
+#>  Average leaves per tree: 20.8
 #> Min observations in leaf: 5
 #>       Min events in leaf: 1
-#>           OOB stat value: 0.79
+#>           OOB stat value: 0.78
 #>            OOB stat type: Harrell's C-index
 #>      Variable importance: anova
 #> 
@@ -293,14 +351,14 @@ vector
 
   ``` r
   orsf_vi_negate(pbc_fit)
-  #>          bili        copper         stage           sex           age 
-  #>  0.1552460736  0.1156218837  0.0796917628  0.0533427094  0.0283132385 
-  #>       albumin           trt          chol      alk.phos      platelet 
-  #>  0.0279823814  0.0168238416  0.0153010749  0.0148718669  0.0094582765 
-  #>         edema       ascites       spiders       protime        hepato 
-  #>  0.0067975986  0.0065505801  0.0062356214 -0.0004653046 -0.0026664147 
-  #>           ast          trig 
-  #> -0.0028902524 -0.0106616501
+  #>          bili          chol        copper       ascites           age 
+  #>  0.0927268221  0.0608229584  0.0478810740  0.0291988056  0.0246337315 
+  #>        hepato         stage       spiders       albumin       protime 
+  #>  0.0218506525  0.0193156243  0.0125759501  0.0110979392  0.0080810921 
+  #>           ast      platelet          trig           sex         edema 
+  #>  0.0076885672  0.0068084464  0.0021303266  0.0010149493 -0.0004657918 
+  #>      alk.phos           trt 
+  #> -0.0058280945 -0.0135098286
   ```
 
 - **permutation**: Each variable is assessed separately by randomly
@@ -313,10 +371,10 @@ vector
 
   ``` r
   orsf_vi_permute(penguin_fit)
-  #>    bill_length_mm     bill_depth_mm       body_mass_g            island 
-  #>       0.121351910       0.101846889       0.097822451       0.080772909 
-  #>               sex flipper_length_mm              year 
-  #>       0.035053517       0.008270751      -0.008058339
+  #> flipper_length_mm    bill_length_mm       body_mass_g            island 
+  #>       0.147092756       0.101879429       0.096925209       0.077248082 
+  #>     bill_depth_mm               sex              year 
+  #>       0.045489860       0.010025729      -0.001415467
   ```
 
 - **analysis of variance (ANOVA)**<sup>4</sup>: A p-value is computed
@@ -331,10 +389,10 @@ vector
 
   ``` r
   orsf_vi_anova(bill_fit)
-  #>           species               sex     bill_depth_mm flipper_length_mm 
-  #>        0.51652893        0.27906977        0.06315789        0.04950495 
-  #>       body_mass_g            island              year 
-  #>        0.04807692        0.02687148        0.00000000
+  #>           species               sex flipper_length_mm            island 
+  #>        0.24618736        0.14545455        0.08620690        0.06499109 
+  #>     bill_depth_mm       body_mass_g              year 
+  #>        0.06153846        0.05468750        0.00000000
   ```
 
 You can supply your own R function to estimate out-of-bag error (see
@@ -357,24 +415,28 @@ or let `aorsf` pick reasonable values for you if you use
 orsf_pd_oob(bill_fit, pred_spec = list(species = c("Adelie", "Gentoo")))
 #>    species     mean      lwr     medn      upr
 #>     <fctr>    <num>    <num>    <num>    <num>
-#> 1:  Adelie 39.99394 35.76532 39.80782 46.13931
-#> 2:  Gentoo 46.66565 40.02938 46.88517 51.61367
+#> 1:  Adelie 41.74289 36.00233 40.70375 51.98937
+#> 2:  Gentoo 43.38986 36.42250 43.20000 50.91862
 
 # let aorsf pick reasonable values for you:
 orsf_pd_oob(bill_fit, pred_spec = pred_spec_auto(bill_depth_mm, island))
 #>     bill_depth_mm    island     mean      lwr     medn      upr
 #>             <num>    <fctr>    <num>    <num>    <num>    <num>
-#>  1:          14.3    Biscoe 43.94960 35.90421 45.30159 51.05109
-#>  2:          15.6    Biscoe 44.24705 36.62759 45.57321 51.08020
-#>  3:          17.3    Biscoe 44.84757 36.53804 45.62910 53.93833
-#>  4:          18.7    Biscoe 45.08939 36.35893 46.16893 54.42075
-#>  5:          19.5    Biscoe 45.13608 36.21033 46.08023 54.42075
-#> ---                                                            
-#> 11:          14.3 Torgersen 43.55984 35.47143 44.18127 51.05109
-#> 12:          15.6 Torgersen 43.77317 35.44683 44.28406 51.08020
-#> 13:          17.3 Torgersen 44.56465 35.84585 44.83694 53.93833
-#> 14:          18.7 Torgersen 44.68367 35.44010 44.86667 54.42075
-#> 15:          19.5 Torgersen 44.64605 35.44010 44.86667 54.42075
+#>  1:         14.32    Biscoe 45.31979 36.06667 46.00714 50.00000
+#>  2:         15.60    Biscoe 44.68833 36.03333 45.03333 51.85606
+#>  3:         17.30    Biscoe 43.95395 35.97108 44.17619 53.72679
+#>  4:         18.70    Biscoe 44.41456 36.09233 44.86000 54.69222
+#>  5:         19.50    Biscoe 44.50362 36.14572 44.86000 54.69222
+#>  6:         14.32     Dream 45.20036 37.45500 45.76389 50.04442
+#>  7:         15.60     Dream 44.94930 36.53667 45.49476 52.96000
+#>  8:         17.30     Dream 44.06989 36.21500 44.17619 53.40000
+#>  9:         18.70     Dream 44.58579 36.23099 44.86000 53.88649
+#> 10:         19.50     Dream 44.67921 36.20874 45.33000 53.85375
+#> 11:         14.32 Torgersen 44.38289 36.06952 45.33000 50.92758
+#> 12:         15.60 Torgersen 44.43864 36.10000 44.97500 50.94286
+#> 13:         17.30 Torgersen 44.03883 35.94000 43.71250 53.72679
+#> 14:         18.70 Torgersen 44.29852 35.80000 44.57286 54.69222
+#> 15:         19.50 Torgersen 44.29565 35.80000 44.47111 54.69222
 ```
 
 The summary function, `orsf_summarize_uni()`, computes PD for as many
@@ -383,27 +445,27 @@ variables as you ask it to, using sensible values.
 ``` r
 orsf_summarize_uni(pbc_fit, n_variables = 2)
 #> 
-#> -- bili (VI Rank: 1) -----------------------------
+#> -- bili (VI Rank: 1) ----------------------------
 #> 
-#>         |----------------- Risk -----------------|
-#>   Value      Mean     Median     25th %    75th %
-#>  <char>     <num>      <num>      <num>     <num>
-#>    0.60 0.2098108 0.07168855 0.01138461 0.2860450
-#>    0.80 0.2117933 0.07692308 0.01709469 0.2884990
-#>    1.40 0.2326560 0.08445419 0.02100837 0.3563622
-#>    3.55 0.4265979 0.35820106 0.05128824 0.7342923
-#>    7.30 0.4724608 0.44746241 0.11759259 0.8039683
+#>         |---------------- Risk ----------------|
+#>   Value      Mean    Median     25th %    75th %
+#>  <char>     <num>     <num>      <num>     <num>
+#>    0.60 0.2652584 0.1666667 0.03213938 0.4132576
+#>    0.80 0.2619876 0.1557492 0.03078482 0.4073864
+#>    1.40 0.2856810 0.1855346 0.03333333 0.4833333
+#>    3.52 0.4076895 0.3333333 0.04471801 0.6919147
+#>    7.25 0.5296084 0.5166667 0.14829505 0.8822115
 #> 
-#> -- copper (VI Rank: 2) ---------------------------
+#> -- chol (VI Rank: 2) ----------------------------
 #> 
-#>         |----------------- Risk -----------------|
-#>   Value      Mean     Median     25th %    75th %
-#>  <char>     <num>      <num>      <num>     <num>
-#>    25.0 0.2332412 0.04425936 0.01587919 0.3888304
-#>    42.5 0.2535448 0.07417582 0.01754386 0.4151786
-#>    74.0 0.2825471 0.11111111 0.01988069 0.4770833
-#>     130 0.3259604 0.18771003 0.04658385 0.5054348
-#>     217 0.4213303 0.28571429 0.13345865 0.6859423
+#>         |---------------- Risk ----------------|
+#>   Value      Mean    Median     25th %    75th %
+#>  <char>     <num>     <num>      <num>     <num>
+#>     212 0.3572797 0.1982323 0.02504209 0.6666667
+#>     250 0.3546476 0.1982323 0.02504209 0.6666667
+#>     310 0.3515586 0.2147727 0.03846154 0.5826599
+#>     401 0.3619913 0.2475329 0.05229197 0.5826599
+#>     567 0.3834873 0.3021991 0.09090909 0.6638889
 #> 
 #>  Predicted risk at time t = 1788 for top 2 predictors
 ```
@@ -439,18 +501,18 @@ pbc_interactions <- pbc_fit %>%
  orsf_vint(n_thread = 0,  predictors = preds_interaction)
 
 pbc_interactions
-#>          interaction      score
-#>               <char>      <num>
-#>  1: albumin..protime 0.97837184
-#>  2:    protime..bili 0.78999788
-#>  3:    albumin..bili 0.59128756
-#>  4:    bili..spiders 0.13192184
-#>  5:        bili..trt 0.13192184
-#>  6: albumin..spiders 0.06578222
-#>  7:     albumin..trt 0.06578222
-#>  8: protime..spiders 0.03012718
-#>  9:     protime..trt 0.03012718
-#> 10:     spiders..trt 0.00000000
+#>          interaction     score          pd_values
+#>               <char>     <num>             <list>
+#>  1: albumin..protime 1.0725123 <data.table[25x9]>
+#>  2:    bili..spiders 0.8458761 <data.table[10x9]>
+#>  3: protime..spiders 0.8456060 <data.table[10x9]>
+#>  4:    protime..bili 0.7119054 <data.table[25x9]>
+#>  5:    albumin..bili 0.5468455 <data.table[25x9]>
+#>  6: albumin..spiders 0.3183702 <data.table[10x9]>
+#>  7:        bili..trt 0.2500514 <data.table[10x9]>
+#>  8:     spiders..trt 0.1456292  <data.table[4x9]>
+#>  9:     albumin..trt 0.1180540 <data.table[10x9]>
+#> 10:     protime..trt 0.0907605 <data.table[10x9]>
 ```
 
 What do the values in `score` mean? These values are the average of the
@@ -529,12 +591,10 @@ paper](https://doi.org/10.1080/10618600.2023.2231048). The paper:
 1.  Jaeger BC, Long DL, Long DM, Sims M, Szychowski JM, Min Y, Mcclure
     LA, Howard G, Simon N (2019). “Oblique random survival forests.”
     *The Annals of Applied Statistics*, *13*(3).
-    <doi:10.1214/19-aoas1261> <https://doi.org/10.1214/19-aoas1261>.
 2.  Jaeger BC, Welden S, Lenoir K, Speiser JL, Segar MW, Pandey A,
     Pajewski NM (2023). “Accelerated and interpretable oblique random
     survival forests.” *Journal of Computational and Graphical
-    Statistics*, 1-16. <doi:10.1080/10618600.2023.2231048>
-    <https://doi.org/10.1080/10618600.2023.2231048>.
+    Statistics*, 1-16.
 3.  Horst AM, Hill AP, Gorman KB (2020). *palmerpenguins: Palmer
     Archipelago (Antarctica) penguin data*. R package version 0.1.0,
     <https://allisonhorst.github.io/palmerpenguins/>.

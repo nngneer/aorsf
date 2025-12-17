@@ -7,7 +7,7 @@
 #ifndef DATA_H_
 #define DATA_H_
 
-#include <armadillo>
+#include "arma_config.h"
 #include "globals.h"
 
  using namespace arma;

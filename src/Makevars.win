@@ -1,5 +1,14 @@
 # This file will only be used on R < 4.2.
 # Newer versions of R will prefer Makevars.ucrt
 CXX_STD = CXX14
-PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS)
+PKG_CXXFLAGS = -I. -I./core -I./rcpp $(SHLIB_OPENMP_CXXFLAGS)
 PKG_LIBS = $(SHLIB_OPENMP_CXXFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+
+# Source files in subdirectories
+SOURCES = AAA_check_cpp_version.cpp RcppExports.cpp orsf_rcpp.cpp \
+          core/Coxph.cpp core/Forest.cpp core/ForestClassification.cpp \
+          core/ForestRegression.cpp core/ForestSurvival.cpp \
+          core/Tree.cpp core/TreeClassification.cpp core/TreeRegression.cpp \
+          core/TreeSurvival.cpp core/utility.cpp
+
+OBJECTS = $(SOURCES:.cpp=.o)

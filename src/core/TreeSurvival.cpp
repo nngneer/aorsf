@@ -4,7 +4,7 @@
  aorsf may be modified and distributed under the terms of the MIT license.
 #----------------------------------------------------------------------------*/
 
-#include <RcppArmadillo.h>
+#include "arma_config.h"
 #include "TreeSurvival.h"
 #include "Coxph.h"
 #include "utility.h"
@@ -12,7 +12,8 @@
 // #include "NodeSplitStats.h"
 
  using namespace arma;
- using namespace Rcpp;
+
+ #include "Output.h"
 
  namespace aorsf {
 
@@ -128,9 +129,11 @@
    uvec rows_event = find(y_print.col(1) == 1);
    x_print = x_print.rows(rows_event);
 
-   Rcout << "  --- Column " << j << " was sampled but ";
-   Rcout << " unique values of column " << j << " are ";
-   Rcout << unique(x_print.col(j)) << std::endl;
+   std::ostringstream oss;
+   oss << "  --- Column " << j << " was sampled but ";
+   oss << " unique values of column " << j << " are ";
+   oss << unique(x_print.col(j)) << std::endl;
+   AORSF_OUT.print(oss.str());
    // # nocov end
   }
 
@@ -180,11 +183,13 @@
 
      if(verbosity > 2){
       // # nocov start
-      Rcout << std::endl;
-      Rcout << "  -- lower cutpoint: "        << lincomb(*it) << std::endl;
-      Rcout << "     - n_events, left node: " << n_events << std::endl;
-      Rcout << "     - n_risk, left node:   " << n_risk   << std::endl;
-      Rcout << std::endl;
+      std::ostringstream oss;
+      oss << std::endl;
+      oss << "  -- lower cutpoint: "        << lincomb(*it) << std::endl;
+      oss << "     - n_events, left node: " << n_events << std::endl;
+      oss << "     - n_risk, left node:   " << n_risk   << std::endl;
+      oss << std::endl;
+      AORSF_OUT.print(oss.str());
       // # nocov end
      }
 
@@ -202,7 +207,7 @@
 
    if(verbosity > 2){
     // # nocov start
-    Rcout << "   -- Could not find a valid cut-point" << std::endl;
+    AORSF_OUT.println("   -- Could not find a valid cut-point");
     // # nocov end
    }
 
@@ -239,11 +244,13 @@
 
      if(verbosity > 2){
       // # nocov start
-      Rcout << std::endl;
-      Rcout << "  -- upper cutpoint: " << lincomb(*it) << std::endl;
-      Rcout << "     - n_events, right node: " << n_events    << std::endl;
-      Rcout << "     - n_risk, right node:   " << n_risk      << std::endl;
-      Rcout << std::endl;
+      std::ostringstream oss;
+      oss << std::endl;
+      oss << "  -- upper cutpoint: " << lincomb(*it) << std::endl;
+      oss << "     - n_events, right node: " << n_events    << std::endl;
+      oss << "     - n_risk, right node:   " << n_risk      << std::endl;
+      oss << std::endl;
+      AORSF_OUT.print(oss.str());
       // # nocov end
      }
 
@@ -264,7 +271,7 @@
 
    if(verbosity > 2) {
     // # nocov start
-    Rcout << "Could not find valid cut-points" << std::endl;
+    AORSF_OUT.println("Could not find valid cut-points");
     // # nocov end
    }
 
@@ -583,7 +590,7 @@
    }
 
    default:
-    Rcout << "Invalid pred type; R will crash";
+    AORSF_OUT.println("Invalid pred type");
     break;
 
    }

@@ -4,13 +4,13 @@
  aorsf may be modified and distributed under the terms of the MIT license.
 #----------------------------------------------------------------------------*/
 
-#include <RcppArmadillo.h>
+#include "arma_config.h"
 #include "globals.h"
 #include "Coxph.h"
 #include "utility.h"
+#include "RMath.h"
 
  using namespace arma;
- using namespace Rcpp;
 
  namespace aorsf {
 
@@ -38,7 +38,7 @@
 
    pivot1 = vmat.at(i, i);
 
-   if (pivot1 < R_PosInf && pivot1 > eps_chol) {
+   if (pivot1 < AORSF_POS_INF && pivot1 > eps_chol) {
 
     for(j = (i+1); j < n_vars; j++){
 
@@ -420,7 +420,7 @@
   if(iter_max <= 1) XB = x_node * beta_new;
 
   // for standard cph, iterate until convergence
-  if(iter_max > 1 && stat_best < R_PosInf){
+  if(iter_max > 1 && stat_best < AORSF_POS_INF){
 
    for(iter = 1; iter < iter_max; iter++){
 
@@ -659,8 +659,9 @@
     vmat.at(i, i) = 1.0;
    }
 
-   pvalues[i] = R::pchisq(
-    pow(beta_current[i], 2) / vmat.at(i, i), 1, false, false
+   // P-value from chi-squared test (1 - CDF gives upper tail)
+   pvalues[i] = 1.0 - AORSF_STAT.pchisq(
+    pow(beta_current[i], 2) / vmat.at(i, i), 1.0
    );
 
    if(do_scale){

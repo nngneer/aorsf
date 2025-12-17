@@ -4,12 +4,13 @@
  aorsf may be modified and distributed under the terms of the MIT license.
 #----------------------------------------------------------------------------*/
 
-#include <RcppArmadillo.h>
+#include "arma_config.h"
 #include "utility.h"
 #include "globals.h"
+#include "Output.h"
+#include "RMath.h"
 
  using namespace arma;
- using namespace Rcpp;
 
  namespace aorsf {
 
@@ -26,9 +27,11 @@
   if(x.n_cols < max_cols) ncol_print = x.n_cols-1;
 
 
-  Rcout << "   -- " << label << std::endl << std::endl;
-  Rcout << x.submat(0, 0, nrow_print, ncol_print);
-  Rcout << std::endl << std::endl;
+  std::ostringstream oss;
+  oss << "   -- " << label << std::endl << std::endl;
+  oss << x.submat(0, 0, nrow_print, ncol_print);
+  oss << std::endl << std::endl;
+  AORSF_OUT.print(oss.str());
 
  }
 
@@ -39,15 +42,17 @@
   uword n_print = max_elem-1;
 
   if(x.size() <= n_print) n_print = x.size()-1;
-  Rcout << "   -- " << label << std::endl << std::endl;
+  std::ostringstream oss;
+  oss << "   -- " << label << std::endl << std::endl;
 
   if(x.size() == 0){
-   Rcout << "   empty vector";
+   oss << "   empty vector";
   } else {
-   Rcout << x.subvec(0, n_print).t();
+   oss << x.subvec(0, n_print).t();
   }
 
-  Rcout << std::endl << std::endl;
+  oss << std::endl << std::endl;
+  AORSF_OUT.print(oss.str());
 
  }
 
@@ -58,15 +63,17 @@
   uword n_print = max_elem-1;
 
   if(x.size() <= n_print) n_print = x.size()-1;
-  Rcout << "   -- " << label << std::endl << std::endl;
+  std::ostringstream oss;
+  oss << "   -- " << label << std::endl << std::endl;
 
   if(x.size() == 0){
-   Rcout << "   empty vector";
+   oss << "   empty vector";
   } else {
-   Rcout << x.subvec(0, n_print).t();
+   oss << x.subvec(0, n_print).t();
   }
 
-  Rcout << std::endl << std::endl;
+  oss << std::endl << std::endl;
+  AORSF_OUT.print(oss.str());
 
  }
 
@@ -664,7 +671,7 @@
 
    double tstat = std::abs(tscores[i]);
 
-   pvalues[i] = 2 * (1 - R::pt(tstat, resid_df, 1, 0));
+   pvalues[i] = 2 * (1 - AORSF_STAT.pt(tstat, resid_df));
 
   }
 

@@ -1,13 +1,14 @@
 //  Forest.cpp
 
-#include <RcppArmadillo.h>
+#include "arma_config.h"
 #include "ForestClassification.h"
 #include "TreeClassification.h"
 
 #include <memory>
 
 using namespace arma;
-using namespace Rcpp;
+
+#include "Output.h"
 
 namespace aorsf {
 
@@ -25,8 +26,10 @@ void ForestClassification::resize_pred_mat_internal(arma::mat& p,
  p.zeros(n, this->n_class);
 
  if(verbosity > 3){
-  Rcout << "   -- pred mat size: " << p.n_rows << " rows by ";
-  Rcout << p.n_cols << " columns." << std::endl << std::endl;
+  std::ostringstream oss;
+  oss << "   -- pred mat size: " << p.n_rows << " rows by ";
+  oss << p.n_cols << " columns." << std::endl << std::endl;
+  AORSF_OUT.print(oss.str());
  }
 
 }
@@ -58,8 +61,8 @@ void ForestClassification::load(
  this->oobag_denom = oobag_denom;
 
  if(verbosity > 2){
-  Rcout << "---- loading forest from input list ----";
-  Rcout << std::endl << std::endl;
+  AORSF_OUT.println("---- loading forest from input list ----");
+  AORSF_OUT.println("");
  }
 
  // Create trees

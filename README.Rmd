@@ -61,6 +61,58 @@ You can install the development version of aorsf from [GitHub](https://github.co
 remotes::install_github("ropensci/aorsf")
 ```
 
+## Standalone C++ Library
+
+The core computational engine of `aorsf` is written in standalone C++ with no R dependencies. This allows the library to be used with other language bindings (e.g., Python).
+
+### Library Structure
+
+```
+src/
+├── core/           # Standalone C++ library (no R/Rcpp dependencies)
+│   ├── Forest.cpp/h
+│   ├── Tree.cpp/h
+│   ├── Data.h
+│   ├── Coxph.cpp/h
+│   ├── utility.cpp/h
+│   └── ...
+└── rcpp/           # R-specific adapters
+    ├── RcppOutput.h
+    ├── RcppInterrupts.h
+    └── RcppRMath.h
+```
+
+### Dependencies
+
+The core library requires:
+
+- **Armadillo** (C++ linear algebra library)
+- A C++17 compatible compiler
+
+### Building for Other Languages
+
+The core library uses dependency injection for platform-specific functionality:
+
+- **Output**: Implement `OutputHandler` interface for logging
+- **Interrupts**: Implement `InterruptHandler` interface for user interrupt checking
+- **Statistics**: Implement `StatDistributions` interface for `pt()` and `pchisq()` functions
+
+Example initialization for a custom binding:
+
+```cpp
+#include "core/Forest.h"
+#include "core/Output.h"
+#include "core/Interrupts.h"
+#include "core/RMath.h"
+
+// Set up custom handlers before using the library
+aorsf::OutputManager::set_handler(my_output_handler);
+aorsf::InterruptManager::set_handler(my_interrupt_handler);
+aorsf::StatManager::set_distributions(my_stat_distributions);
+```
+
+For Python bindings, consider using [nanobind](https://github.com/wjakob/nanobind) with [carma](https://github.com/RUrlus/carma) for Armadillo/NumPy interoperability.
+
 ## Get started
 
 ```{r}

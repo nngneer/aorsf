@@ -4,7 +4,7 @@
  aorsf may be modified and distributed under the terms of the MIT license.
 #----------------------------------------------------------------------------*/
 
-#include <RcppArmadillo.h>
+#include "arma_config.h"
 #include "TreeRegression.h"
 #include "Coxph.h"
 #include "utility.h"
@@ -12,7 +12,8 @@
 // #include "NodeSplitStats.h"
 
  using namespace arma;
- using namespace Rcpp;
+
+ #include "Output.h"
 
  namespace aorsf {
 
@@ -201,7 +202,9 @@
    double n = y_node.n_rows;
 
    if(verbosity > 3){
-    Rcout << "   -- N obs (unweighted): " << n << std::endl;
+    std::ostringstream oss;
+    oss << "   -- N obs (unweighted): " << n << std::endl;
+    AORSF_OUT.print(oss.str());
    }
 
    while (n / safer_mtry < 3){

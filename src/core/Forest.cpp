@@ -1,9 +1,11 @@
 //  Forest.cpp
 
-#include <RcppArmadillo.h>
+#include "arma_config.h"
 #include "Forest.h"
 #include "Tree.h"
 #include "Output.h"
+#include "Interrupts.h"
+#include "Exceptions.h"
 
 using namespace arma;
 
@@ -12,7 +14,7 @@ namespace aorsf {
 Forest::Forest(){ }
 
 void Forest::init(std::unique_ptr<Data> input_data,
-                  Rcpp::IntegerVector& tree_seeds,
+                  std::vector<int>& tree_seeds,
                   arma::uword n_tree,
                   arma::uword mtry,
                   bool sample_with_replacement,
@@ -313,7 +315,9 @@ void Forest::grow_single_thread(vec* oobag_denom_ptr,
 
   }
 
-  Rcpp::checkUserInterrupt();
+  if (InterruptManager::check()) {
+    throw computation_error("User interrupt");
+  }
 
  }
 
@@ -440,7 +444,9 @@ void Forest::compute_oobag_vi_single_thread(vec* vi_numer_ptr) {
 
   }
 
-  Rcpp::checkUserInterrupt();
+  if (InterruptManager::check()) {
+    throw computation_error("User interrupt");
+  }
 
  }
 
@@ -1004,7 +1010,7 @@ void Forest::show_progress(std::string operation, size_t max_progress) {
   seconds elapsed_time = duration_cast<seconds>(steady_clock::now() - last_time);
 
   // Check for user interrupt
-  if (!aborted && checkInterrupt()) {
+  if (!aborted && InterruptManager::check()) {
    aborted = true;
   }
   if (aborted && aborted_threads >= n_thread) {

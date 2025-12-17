@@ -4,7 +4,7 @@
  aorsf may be modified and distributed under the terms of the MIT license.
 #----------------------------------------------------------------------------*/
 
-#include <RcppArmadillo.h>
+#include "arma_config.h"
 #include "TreeClassification.h"
 #include "Coxph.h"
 #include "utility.h"
@@ -12,7 +12,8 @@
 // #include "NodeSplitStats.h"
 
  using namespace arma;
- using namespace Rcpp;
+
+ #include "Output.h"
 
  namespace aorsf {
 
@@ -239,9 +240,11 @@
   double y_sum_cases = sum(y_node.col(1));
 
   if(verbosity > 3){
-   Rcout << "   -- Y sums (unweighted): ";
-   Rcout << y_sum_cases << " cases, ";
-   Rcout << y_sum_ctrls << " controls" << std::endl;
+   std::ostringstream oss;
+   oss << "   -- Y sums (unweighted): ";
+   oss << y_sum_cases << " cases, ";
+   oss << y_sum_ctrls << " controls" << std::endl;
+   AORSF_OUT.print(oss.str());
   }
 
   splittable_y_cols.zeros(1);
@@ -269,8 +272,8 @@
   }
 
   if(verbosity > 3){
-   Rcout << "   -- No y columns are splittable";
-   Rcout << std::endl << std::endl;
+   AORSF_OUT.println("   -- No y columns are splittable");
+   AORSF_OUT.println("");
   }
 
   return 0;
@@ -291,9 +294,11 @@
   if(verbosity > 3){
 
    for(uword i = 0; i < y_sum_cases.size(); ++i){
-    Rcout << "   -- For column " << i << ": ";
-    Rcout << y_sum_cases[i] << " cases, ";
-    Rcout << y_sum_ctrls[i] << " controls (unweighted)" << std::endl;
+    std::ostringstream oss;
+    oss << "   -- For column " << i << ": ";
+    oss << y_sum_cases[i] << " cases, ";
+    oss << y_sum_ctrls[i] << " controls (unweighted)" << std::endl;
+    AORSF_OUT.print(oss.str());
    }
   }
 
@@ -315,7 +320,8 @@
   if(counter == 0){
 
    if(verbosity > 3){
-    Rcout << "   -- No y columns are splittable" << std::endl << std::endl;
+    AORSF_OUT.println("   -- No y columns are splittable");
+    AORSF_OUT.println("");
    }
 
    return counter;
@@ -324,7 +330,9 @@
 
   if(verbosity > 3){
    for(auto &i : splittable_y_cols){
-    Rcout << "   -- Y column " << i << " is splittable" << std::endl;
+    std::ostringstream oss;
+    oss << "   -- Y column " << i << " is splittable" << std::endl;
+    AORSF_OUT.print(oss.str());
    }
   }
 
@@ -348,7 +356,9 @@
   }
 
   if(verbosity > 3){
-   Rcout << "   -- Most splittable Y column: " << y_col_split << std::endl;
+   std::ostringstream oss;
+   oss << "   -- Most splittable Y column: " << y_col_split << std::endl;
+   AORSF_OUT.print(oss.str());
   }
 
   // glmnet can handle higher dimension x,

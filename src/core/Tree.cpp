@@ -4,16 +4,18 @@
  aorsf may be modified and distributed under the terms of the MIT license.
 #----------------------------------------------------------------------------*/
 
-#include <RcppArmadillo.h>
+#include "arma_config.h"
 #include "Tree.h"
 #include "Coxph.h"
 #include "Exceptions.h"
+#include "RMath.h"
 
 #include <memory>
 #include <random>
 
  using namespace arma;
- using namespace Rcpp;
+
+ #include "Output.h"
 
  namespace aorsf {
 
@@ -335,9 +337,11 @@
   if(verbosity > 4){
    // # nocov start
    mat x_print = x_inbag.rows(rows_node);
-   Rcout << "   -- Column " << j << " was sampled but ";
-   Rcout << "its unique values are " << unique(x_print.col(j));
-   Rcout << std::endl;
+   std::ostringstream oss;
+   oss << "   -- Column " << j << " was sampled but ";
+   oss << "its unique values are " << unique(x_print.col(j));
+   oss << std::endl;
+   AORSF_OUT.print(oss.str());
    // # nocov end
   }
 
@@ -408,10 +412,12 @@
 
      if(verbosity > 3){
       // # nocov start
-      Rcout << std::endl;
-      Rcout << "   -- lower cutpoint: " << lincomb(*it) << std::endl;
-      Rcout << "      - n_obs, left node:   " << n_obs   << std::endl;
-      Rcout << std::endl;
+      std::ostringstream oss;
+      oss << std::endl;
+      oss << "   -- lower cutpoint: " << lincomb(*it) << std::endl;
+      oss << "      - n_obs, left node:   " << n_obs   << std::endl;
+      oss << std::endl;
+      AORSF_OUT.print(oss.str());
       // # nocov end
      }
 
@@ -429,7 +435,7 @@
 
    if(verbosity > 3){
     // # nocov start
-    Rcout << "   -- Could not find a valid cut-point" << std::endl;
+    AORSF_OUT.println("   -- Could not find a valid cut-point");
     // # nocov end
    }
 
@@ -464,10 +470,12 @@
 
      if(verbosity > 3){
       // # nocov start
-      Rcout << std::endl;
-      Rcout << "   -- upper cutpoint: " << lincomb(*it) << std::endl;
-      Rcout << "      - n_obs, right node:   " << n_obs << std::endl;
-      Rcout << std::endl;
+      std::ostringstream oss;
+      oss << std::endl;
+      oss << "   -- upper cutpoint: " << lincomb(*it) << std::endl;
+      oss << "      - n_obs, right node:   " << n_obs << std::endl;
+      oss << std::endl;
+      AORSF_OUT.print(oss.str());
       // # nocov end
      }
 
@@ -488,7 +496,7 @@
 
    if(verbosity > 2) {
     // # nocov start
-    Rcout << "   -- Could not find valid cut-points" << std::endl;
+    AORSF_OUT.println("   -- Could not find valid cut-points");
     // # nocov end
    }
 
@@ -532,7 +540,7 @@
 
   if(verbosity > 3){
    // # nocov start
-   Rcout << "   -- cutpoint (score)" << std::endl;
+   AORSF_OUT.println("   -- cutpoint (score)");
    // # nocov end
   }
 
@@ -549,11 +557,13 @@
 
    if(verbosity > 3){
     // # nocov start
-    Rcout << "   --- ";
-    Rcout << lincomb.at(lincomb_sort(*it));
-    Rcout << " (" << stat << "), ";
-    Rcout << "N = " << sum(g_node % w_node) << " moving right";
-    Rcout << std::endl;
+    std::ostringstream oss;
+    oss << "   --- ";
+    oss << lincomb.at(lincomb_sort(*it));
+    oss << " (" << stat << "), ";
+    oss << "N = " << sum(g_node % w_node) << " moving right";
+    oss << std::endl;
+    AORSF_OUT.print(oss.str());
     // # nocov end
    }
 
@@ -561,16 +571,18 @@
 
   if(verbosity > 3){
    // # nocov start
-   Rcout << std::endl;
-   Rcout << "   -- best stat:  " << stat_best;
-   Rcout << ", min to split: " << split_min_stat;
-   Rcout << std::endl;
-   Rcout << std::endl;
+   std::ostringstream oss;
+   oss << std::endl;
+   oss << "   -- best stat:  " << stat_best;
+   oss << ", min to split: " << split_min_stat;
+   oss << std::endl;
+   oss << std::endl;
+   AORSF_OUT.print(oss.str());
    // # nocov end
   }
 
   // do not split if best stat < minimum stat
-  if(stat_best < split_min_stat){ return(R_PosInf); }
+  if(stat_best < split_min_stat){ return(AORSF_POS_INF); }
 
   // backtrack g_node to be what it was when best it was found
   if(it_best < it_start){
@@ -626,10 +638,12 @@
  void Tree::sprout_leaf(uword node_id){
 
   if(verbosity > 2){
-   Rcout << "-- sprouting node " << node_id << " into a leaf";
-   Rcout << " (N = " << sum(w_node) << ")";
-   Rcout << std::endl;
-   Rcout << std::endl;
+   std::ostringstream oss;
+   oss << "-- sprouting node " << node_id << " into a leaf";
+   oss << " (N = " << sum(w_node) << ")";
+   oss << std::endl;
+   oss << std::endl;
+   AORSF_OUT.print(oss.str());
   }
 
   sprout_leaf_internal(node_id);
@@ -689,11 +703,13 @@
 
   if(verbosity > 1){
    // # nocov start
-   Rcout << "   -- prediction accuracy before noising: ";
-   Rcout << accuracy_normal << std::endl;
-   Rcout << "   -- mean leaf pred: ";
-   Rcout << mean(conv_to<vec>::from(pred_leaf));
-   Rcout << std::endl << std::endl;
+   std::ostringstream oss;
+   oss << "   -- prediction accuracy before noising: ";
+   oss << accuracy_normal << std::endl;
+   oss << "   -- mean leaf pred: ";
+   oss << mean(conv_to<vec>::from(pred_leaf));
+   oss << std::endl << std::endl;
+   AORSF_OUT.print(oss.str());
    // # nocov end
   }
 
@@ -732,11 +748,13 @@
 
     if(verbosity > 3){
      // # nocov start
-     Rcout << "   -- prediction accuracy after noising " << pred_col << ": ";
-     Rcout << accuracy_permuted << std::endl;
-     Rcout << "      - mean leaf pred: ";
-     Rcout << mean(conv_to<vec>::from(pred_leaf));
-     Rcout << std::endl << std::endl;
+     std::ostringstream oss;
+     oss << "   -- prediction accuracy after noising " << pred_col << ": ";
+     oss << accuracy_permuted << std::endl;
+     oss << "      - mean leaf pred: ";
+     oss << mean(conv_to<vec>::from(pred_leaf));
+     oss << std::endl << std::endl;
+     AORSF_OUT.print(oss.str());
      // # nocov end
     }
 
@@ -774,7 +792,9 @@
   uword n_specs = pd_x_vals.size();
 
   if(verbosity > 3){
-   Rcout << "   -- n specs: " << n_specs << std::endl;
+   std::ostringstream oss;
+   oss << "   -- n specs: " << n_specs << std::endl;
+   AORSF_OUT.print(oss.str());
   }
 
   for(uword k = 0; k < n_specs; ++k){
@@ -782,7 +802,9 @@
    uword n_items = pd_x_vals[k].n_rows;
 
    if(verbosity > 3){
-    Rcout << "   -- n items in this spec: " << n_items << std::endl;
+    std::ostringstream oss;
+    oss << "   -- n items in this spec: " << n_items << std::endl;
+    AORSF_OUT.print(oss.str());
     print_mat(pd_x_vals[k], "x_vals[k]", 5, 5);
    }
 
@@ -856,15 +878,17 @@
 
   if(verbosity > 2){
    // # nocov start
-   Rcout << "- N obs inbag: " << n_obs_inbag;
-   Rcout << std::endl;
-   Rcout << "- N row inbag: " << n_rows_inbag;
-   Rcout << std::endl;
-   Rcout << "- max nodes: " << max_nodes;
-   Rcout << std::endl;
-   Rcout << "- max leaves: " << max_leaves;
-   Rcout << std::endl;
-   Rcout << std::endl;
+   std::ostringstream oss;
+   oss << "- N obs inbag: " << n_obs_inbag;
+   oss << std::endl;
+   oss << "- N row inbag: " << n_rows_inbag;
+   oss << std::endl;
+   oss << "- max nodes: " << max_nodes;
+   oss << std::endl;
+   oss << "- max leaves: " << max_leaves;
+   oss << std::endl;
+   oss << std::endl;
+   AORSF_OUT.print(oss.str());
    // # nocov end
   }
 
@@ -922,11 +946,13 @@
 
     if(verbosity > 3){
      // # nocov start
-     Rcout << "-- attempting to split node " << *node;
-     Rcout << " (N = " << sum(w_node) << ",";
-     Rcout << " try number " << n_retry << ")";
-     Rcout << std::endl;
-     Rcout << std::endl;
+     std::ostringstream oss;
+     oss << "-- attempting to split node " << *node;
+     oss << " (N = " << sum(w_node) << ",";
+     oss << " try number " << n_retry << ")";
+     oss << std::endl;
+     oss << std::endl;
+     AORSF_OUT.print(oss.str());
      // # nocov end
     }
 
@@ -1004,8 +1030,7 @@
 
       if(verbosity > 3 && cuts_all.is_empty()){
        // # nocov start
-       Rcout << "   -- no cutpoints identified";
-       Rcout << std::endl;
+       AORSF_OUT.println("   -- no cutpoints identified");
        // # nocov end
       }
 
@@ -1016,7 +1041,7 @@
 
        double cut_point = find_best_cut();
 
-       if(cut_point < R_PosInf){
+       if(cut_point < AORSF_POS_INF){
 
         if(vi_type == VI_ANOVA && lincomb_type == LC_GLM){
 
@@ -1026,7 +1051,7 @@
 
          if(verbosity > 3){
           // # nocov start
-          Rcout << "   -- p-values:" << std::endl;
+          AORSF_OUT.println("   -- p-values:");
           // # nocov end
          }
 
@@ -1044,13 +1069,15 @@
 
            if(verbosity > 3){
             // # nocov start
-            Rcout << "   --- column " << cols_node[i] << ": ";
-            Rcout << pvalue;
-            if(pvalue < 0.05) Rcout << "*";
-            if(pvalue < 0.01) Rcout << "*";
-            if(pvalue < 0.001) Rcout << "*";
-            if(pvalue < vi_max_pvalue) Rcout << " [+1 to VI numerator]";
-            Rcout << std::endl;
+            std::ostringstream oss;
+            oss << "   --- column " << cols_node[i] << ": ";
+            oss << pvalue;
+            if(pvalue < 0.05) oss << "*";
+            if(pvalue < 0.01) oss << "*";
+            if(pvalue < 0.001) oss << "*";
+            if(pvalue < vi_max_pvalue) oss << " [+1 to VI numerator]";
+            oss << std::endl;
+            AORSF_OUT.print(oss.str());
             // # nocov end
            }
 
@@ -1062,7 +1089,7 @@
 
          if(verbosity > 3){
           // # nocov start
-          Rcout << std::endl;
+          AORSF_OUT.println("");
           // # nocov end
          }
 
@@ -1083,11 +1110,13 @@
 
         if(verbosity > 2){
          // # nocov start
-         Rcout << "-- node " << *node << " was split into ";
-         Rcout << "node " << node_left << " (left) and ";
-         Rcout << node_left+1 << " (right)";
-         Rcout << std::endl;
-         Rcout << std::endl;
+         std::ostringstream oss;
+         oss << "-- node " << *node << " was split into ";
+         oss << "node " << node_left << " (left) and ";
+         oss << node_left+1 << " (right)";
+         oss << std::endl;
+         oss << std::endl;
+         AORSF_OUT.print(oss.str());
          // # nocov end
         }
 
@@ -1144,7 +1173,7 @@
 
   if(verbosity > 2){
    // # nocov start
-   Rcout << "   -- computing leaf predictions" << std::endl;
+   AORSF_OUT.println("   -- computing leaf predictions");
    // # nocov end
   }
 
@@ -1195,10 +1224,12 @@
       // # nocov start
       uvec in_left = find(pred_leaf == child_left[i]);
       uvec in_right = find(pred_leaf == child_left[i]+1);
-      Rcout << "No. to node " << child_left[i] << ": ";
-      Rcout << in_left.size() << "; " << std::endl;
-      Rcout << "No. to node " << child_left[i]+1 << ": ";
-      Rcout << in_right.size() << std::endl << std::endl;
+      std::ostringstream oss;
+      oss << "No. to node " << child_left[i] << ": ";
+      oss << in_left.size() << "; " << std::endl;
+      oss << "No. to node " << child_left[i]+1 << ": ";
+      oss << in_right.size() << std::endl << std::endl;
+      AORSF_OUT.print(oss.str());
       // # nocov end
      }
 
@@ -1224,7 +1255,7 @@
 
   if(verbosity > 2){
    // # nocov start
-   Rcout << "   -- computing dependence leaf predictions" << std::endl;
+   AORSF_OUT.println("   -- computing dependence leaf predictions");
    // # nocov end
   }
 
@@ -1277,10 +1308,12 @@
       // # nocov start
       uvec in_left = find(pred_leaf == child_left[i]);
       uvec in_right = find(pred_leaf == child_left[i]+1);
-      Rcout << "No. to node " << child_left[i] << ": ";
-      Rcout << in_left.size() << "; " << std::endl;
-      Rcout << "No. to node " << child_left[i]+1 << ": ";
-      Rcout << in_right.size() << std::endl << std::endl;
+      std::ostringstream oss;
+      oss << "No. to node " << child_left[i] << ": ";
+      oss << in_left.size() << "; " << std::endl;
+      oss << "No. to node " << child_left[i]+1 << ": ";
+      oss << in_right.size() << std::endl << std::endl;
+      AORSF_OUT.print(oss.str());
       // # nocov end
      }
 
@@ -1303,11 +1336,15 @@
    uvec tmp_uvec = find(pred_leaf < max_nodes);
 
    if(tmp_uvec.size() == 0){
-    Rcout << pred_leaf                  << std::endl;
-    Rcout << "max_nodes: " << max_nodes << std::endl;
+    std::ostringstream oss;
+    oss << pred_leaf                  << std::endl;
+    oss << "max_nodes: " << max_nodes << std::endl;
+    AORSF_OUT.print(oss.str());
    }
 
-   Rcout << "   -- N preds expected: " << tmp_uvec.size() << std::endl;
+   std::ostringstream oss2;
+   oss2 << "   -- N preds expected: " << tmp_uvec.size() << std::endl;
+   AORSF_OUT.print(oss2.str());
    // # nocov end
   }
 
@@ -1320,9 +1357,11 @@
 
   if(verbosity > 2){
    // # nocov start
-   Rcout << "   -- N preds made: " << n_preds_made;
-   Rcout << std::endl;
-   Rcout << std::endl;
+   std::ostringstream oss;
+   oss << "   -- N preds made: " << n_preds_made;
+   oss << std::endl;
+   oss << std::endl;
+   AORSF_OUT.print(oss.str());
    // # nocov end
   }
 

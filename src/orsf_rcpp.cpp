@@ -24,6 +24,8 @@
 #include "core/Exceptions.h"
 #include "rcpp/RcppOutput.h"
 #include "rcpp/RcppCallbacks.h"
+#include "rcpp/RcppInterrupts.h"
+#include "rcpp/RcppRMath.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -408,10 +410,15 @@ double compute_mse_exported(arma::vec& y,
                bool                     run_forest,
                int                      verbosity){
 
-  // Initialize R output handler for console messages
+  // Initialize R output, interrupt handlers, and stat distributions
   init_r_output();
+  init_r_interrupt();
+  init_r_stat();
 
   try {
+
+  // Convert R IntegerVector to std::vector<int> for core library
+  std::vector<int> seeds_vec(tree_seeds.begin(), tree_seeds.end());
 
   // re-cast integer inputs from R into enumerations
   VariableImportance vi_type = (VariableImportance) vi_type_R;
@@ -524,7 +531,7 @@ double compute_mse_exported(arma::vec& y,
   }
 
   forest->init(std::move(data),
-               tree_seeds,
+               seeds_vec,
                n_tree,
                mtry,
                sample_with_replacement,

@@ -7,8 +7,7 @@ aorsf may be modified and distributed under the terms of the MIT license.
 #ifndef UTILITY_H
 #define UTILITY_H
 
-#include <armadillo>
-#include <Rcpp.h>
+#include "arma_config.h"
 #include "globals.h"
 
 
@@ -55,14 +54,7 @@ aorsf may be modified and distributed under the terms of the MIT license.
   */
  std::string beautifyTime(uint seconds);
 
- static void chkIntFn(void *dummy) {
-  R_CheckUserInterrupt();
- }
-
- inline bool checkInterrupt() {
-  return (R_ToplevelExec(chkIntFn, NULL) == FALSE);
- }
-
+ 
  double compute_logrank(arma::mat& y,
                         arma::vec& w,
                         arma::uvec& g);
