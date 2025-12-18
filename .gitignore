@@ -16,3 +16,24 @@ src/tests/test_runner
 src/tests/*.o
 
 .claude/
+build/
+plans/
+.vscode/
+*.pyc
+
+
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.aider*
+.env
+env-values.tfvars
+*.tfvars
+!*.template.tfvars
+.terraform/
+.idea/
+/IaC/.terraform.lock.hcl
+csharp/native-build
+*.dylib
