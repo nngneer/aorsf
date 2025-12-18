@@ -8,6 +8,7 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/vector.h>
+#include <nanobind/stl/optional.h>
 #include <nanobind/ndarray.h>
 
 // Include aorsf core headers
@@ -20,6 +21,7 @@
 #include "ForestRegression.h"
 #include "Exceptions.h"
 #include "utility.h"
+#include "Callbacks.h"
 
 // Python-specific adapters
 #include "python/PythonOutput.h"
@@ -222,6 +224,84 @@ double compute_gini_py(
 }
 
 // =============================================================================
+// Python Callback Wrappers
+// =============================================================================
+
+/**
+ * @brief Create a LinCombCallback from a Python callable.
+ *
+ * The Python function should have signature:
+ *   def lincomb_func(x: np.ndarray, y: np.ndarray, w: np.ndarray) -> np.ndarray
+ *
+ * Where:
+ *   x: Feature matrix at the node (n_obs, n_features)
+ *   y: Outcome matrix at the node (n_obs, n_outcomes)
+ *   w: Weight vector at the node (n_obs,)
+ *   returns: Coefficient vector (n_features,) or matrix (n_features, 1)
+ */
+LinCombCallback create_lincomb_callback(nb::callable py_func) {
+    // Capture the Python callable by value (shared ownership)
+    return [py_func](const arma::mat& x, const arma::mat& y, const arma::vec& w) -> arma::mat {
+        // Acquire GIL since we're calling Python
+        nb::gil_scoped_acquire gil;
+
+        // Convert Armadillo to NumPy
+        nb::ndarray<nb::numpy, double, nb::ndim<2>> x_np = arma_mat_to_numpy(x);
+        nb::ndarray<nb::numpy, double, nb::ndim<2>> y_np = arma_mat_to_numpy(y);
+        nb::ndarray<nb::numpy, double, nb::ndim<1>> w_np = arma_vec_to_numpy(w);
+
+        // Call Python function
+        nb::object result = py_func(x_np, y_np, w_np);
+
+        // Convert result back to Armadillo matrix
+        // Handle both 1D and 2D results
+        if (nb::isinstance<nb::ndarray<double, nb::ndim<1>>>(result)) {
+            auto arr = nb::cast<nb::ndarray<double, nb::ndim<1>, nb::c_contig>>(result);
+            size_t n = arr.shape(0);
+            arma::mat out(n, 1);
+            const double* data = arr.data();
+            for (size_t i = 0; i < n; ++i) {
+                out(i, 0) = data[i];
+            }
+            return out;
+        } else {
+            auto arr = nb::cast<nb::ndarray<double, nb::ndim<2>, nb::c_contig>>(result);
+            return numpy_to_arma_mat(arr);
+        }
+    };
+}
+
+/**
+ * @brief Create an OobagEvalCallback from a Python callable.
+ *
+ * The Python function should have signature:
+ *   def eval_func(y: np.ndarray, w: np.ndarray, p: np.ndarray) -> float
+ *
+ * Where:
+ *   y: True outcome matrix (n_obs, n_outcomes)
+ *   w: Weight vector (n_obs,)
+ *   p: Prediction vector (n_obs,)
+ *   returns: Scalar accuracy metric
+ */
+OobagEvalCallback create_oobag_callback(nb::callable py_func) {
+    return [py_func](const arma::mat& y, const arma::vec& w, const arma::vec& p) -> double {
+        // Acquire GIL since we're calling Python
+        nb::gil_scoped_acquire gil;
+
+        // Convert Armadillo to NumPy
+        nb::ndarray<nb::numpy, double, nb::ndim<2>> y_np = arma_mat_to_numpy(y);
+        nb::ndarray<nb::numpy, double, nb::ndim<1>> w_np = arma_vec_to_numpy(w);
+        nb::ndarray<nb::numpy, double, nb::ndim<1>> p_np = arma_vec_to_numpy(p);
+
+        // Call Python function
+        nb::object result = py_func(y_np, w_np, p_np);
+
+        // Convert result to double
+        return nb::cast<double>(result);
+    };
+}
+
+// =============================================================================
 // Low-Level Forest Training Function
 // =============================================================================
 
@@ -263,7 +343,9 @@ nb::dict fit_forest(
     int oobag_eval_type,
     int oobag_eval_every,
     int n_thread,
-    int verbose
+    int verbose,
+    std::optional<nb::callable> lincomb_python_func,
+    std::optional<nb::callable> oobag_python_func
 ) {
     // Initialize Python handlers
     init_python_output(verbose > 0);
@@ -358,9 +440,19 @@ nb::dict fit_forest(
         std::vector<arma::uvec> pd_x_cols;
         arma::vec pd_probs;
 
-        // No custom callbacks for now (will be added in Phase 6)
+        // Create callbacks from Python functions if provided
         LinCombCallback lc_callback = nullptr;
         OobagEvalCallback oob_callback = nullptr;
+
+        if (lincomb_python_func.has_value()) {
+            lc_callback = create_lincomb_callback(lincomb_python_func.value());
+            if (verbose > 0) AORSF_OUT.println("DEBUG: Using custom Python lincomb function");
+        }
+
+        if (oobag_python_func.has_value()) {
+            oob_callback = create_oobag_callback(oobag_python_func.value());
+            if (verbose > 0) AORSF_OUT.println("DEBUG: Using custom Python oobag eval function");
+        }
 
         // Initialize forest
         if (verbose > 0) AORSF_OUT.println("DEBUG: Calling forest->init()...");
@@ -746,7 +838,9 @@ NB_MODULE(_pyaorsf, m) {
           nb::arg("oobag_eval_type"),
           nb::arg("oobag_eval_every"),
           nb::arg("n_thread"),
-          nb::arg("verbose"));
+          nb::arg("verbose"),
+          nb::arg("lincomb_func") = nb::none(),
+          nb::arg("oobag_func") = nb::none());
 
     // Prediction function
     m.def("predict_forest", &predict_forest,

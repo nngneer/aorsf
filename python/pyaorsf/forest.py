@@ -57,11 +57,24 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
         Random seed for reproducibility.
     verbose : int, default=0
         Verbosity level.
+    importance : str, default=None
+        Variable importance method. One of 'negate', 'permute', 'anova', or None.
+        If None, variable importance is not computed.
+    lincomb_func : callable, default=None
+        Custom function for computing linear combinations at each node.
+        Signature: lincomb_func(x, y, w) -> coefficients
+        Where x is (n_obs, n_features), y is (n_obs, n_outcomes), w is (n_obs,).
+        Returns coefficient array of shape (n_features,) or (n_features, 1).
+    oobag_eval_func : callable, default=None
+        Custom function for out-of-bag evaluation.
+        Signature: oobag_eval_func(y, w, p) -> float
+        Where y is (n_obs, n_outcomes), w is (n_obs,), p is (n_obs,).
+        Returns scalar accuracy metric.
 
     Attributes
     ----------
     feature_importances_ : ndarray of shape (n_features,)
-        Feature importances computed using negation method.
+        Feature importances. Only available if importance parameter is set.
     n_classes_ : int
         Number of classes.
     classes_ : ndarray
@@ -99,6 +112,9 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
         n_threads: int = 1,
         random_state: Optional[int] = None,
         verbose: int = 0,
+        importance: Optional[str] = None,
+        lincomb_func=None,
+        oobag_eval_func=None,
     ):
         self.n_trees = n_trees
         self.mtry = mtry
@@ -118,6 +134,9 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
         self.n_threads = n_threads
         self.random_state = random_state
         self.verbose = verbose
+        self.importance = importance
+        self.lincomb_func = lincomb_func
+        self.oobag_eval_func = oobag_eval_func
 
         # Attributes set during fit
         self._forest_data = None
@@ -142,6 +161,23 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
             'glmnet': _pyaorsf.LinearCombo.GLMNET.value,
         }
         return types.get(self.lincomb_type.lower(), _pyaorsf.LinearCombo.RANDOM.value)
+
+    def _get_vi_type(self):
+        """Convert string importance type to enum value."""
+        if self.importance is None:
+            return _pyaorsf.VariableImportance.NONE.value
+        types = {
+            'negate': _pyaorsf.VariableImportance.NEGATE.value,
+            'permute': _pyaorsf.VariableImportance.PERMUTE.value,
+            'anova': _pyaorsf.VariableImportance.ANOVA.value,
+        }
+        vi_type = types.get(self.importance.lower())
+        if vi_type is None:
+            raise ValueError(
+                f"importance must be one of 'negate', 'permute', 'anova', or None, "
+                f"got '{self.importance}'"
+            )
+        return vi_type
 
     def fit(self, X, y, sample_weight=None):
         """
@@ -185,6 +221,16 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
         rng = np.random.RandomState(self.random_state)
         tree_seeds = rng.randint(1, 2**31 - 1, size=self.n_trees).tolist()
 
+        # Determine lincomb_type: use custom if lincomb_func is provided
+        lincomb_type = self._get_lincomb_type()
+        if self.lincomb_func is not None:
+            lincomb_type = _pyaorsf.LinearCombo.CUSTOM.value
+
+        # Determine oobag_eval_type: use custom if oobag_eval_func is provided
+        oobag_eval_type = _pyaorsf.EvalType.NONE.value
+        if self.oobag_eval_func is not None:
+            oobag_eval_type = _pyaorsf.EvalType.CUSTOM.value
+
         # Call C++ fit function
         self._forest_data = _pyaorsf.fit_forest(
             x=X, y=y_2d, w=sample_weight,
@@ -194,7 +240,7 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
             mtry=mtry,
             sample_with_replacement=self.sample_with_replacement,
             sample_fraction=self.sample_fraction,
-            vi_type=_pyaorsf.VariableImportance.NONE.value,
+            vi_type=self._get_vi_type(),
             vi_max_pvalue=0.01,
             leaf_min_events=1.0,
             leaf_min_obs=float(self.leaf_min_obs),
@@ -204,7 +250,7 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
             split_min_stat=self.split_min_stat,
             split_max_cuts=self.split_max_cuts,
             split_max_retry=self.split_max_retry,
-            lincomb_type=self._get_lincomb_type(),
+            lincomb_type=lincomb_type,
             lincomb_eps=self.lincomb_eps,
             lincomb_iter_max=self.lincomb_iter_max,
             lincomb_scale=self.lincomb_scale,
@@ -214,10 +260,12 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
             pred_horizon=[],
             pred_type=_pyaorsf.PredType.PROBABILITY.value,
             oobag=True,
-            oobag_eval_type=_pyaorsf.EvalType.NONE.value,
+            oobag_eval_type=oobag_eval_type,
             oobag_eval_every=self.n_trees,
             n_thread=self.n_threads,
-            verbose=self.verbose
+            verbose=self.verbose,
+            lincomb_func=self.lincomb_func,
+            oobag_func=self.oobag_eval_func
         )
 
         # Store OOB predictions for later use
@@ -225,6 +273,12 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
             self._oob_predictions = self._forest_data['oob_predictions']
         else:
             self._oob_predictions = None
+
+        # Extract feature importances if computed
+        if 'importance' in self._forest_data:
+            self.feature_importances_ = self._forest_data['importance']
+        else:
+            self.feature_importances_ = None
 
         return self
 
@@ -319,6 +373,9 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
             'n_threads': self.n_threads,
             'random_state': self.random_state,
             'verbose': self.verbose,
+            'importance': self.importance,
+            'lincomb_func': self.lincomb_func,
+            'oobag_eval_func': self.oobag_eval_func,
         }
 
     def set_params(self, **params):
@@ -372,11 +429,20 @@ class ObliqueForestRegressor(BaseEstimator, RegressorMixin):
         Random seed for reproducibility.
     verbose : int, default=0
         Verbosity level.
+    importance : str, default=None
+        Variable importance method. One of 'negate', 'permute', 'anova', or None.
+        If None, variable importance is not computed.
+    lincomb_func : callable, default=None
+        Custom function for computing linear combinations at each node.
+        Signature: lincomb_func(x, y, w) -> coefficients
+    oobag_eval_func : callable, default=None
+        Custom function for out-of-bag evaluation.
+        Signature: oobag_eval_func(y, w, p) -> float
 
     Attributes
     ----------
     feature_importances_ : ndarray of shape (n_features,)
-        Feature importances computed using negation method.
+        Feature importances. Only available if importance parameter is set.
     n_features_in_ : int
         Number of features seen during fit.
 
@@ -409,6 +475,9 @@ class ObliqueForestRegressor(BaseEstimator, RegressorMixin):
         n_threads: int = 1,
         random_state: Optional[int] = None,
         verbose: int = 0,
+        importance: Optional[str] = None,
+        lincomb_func=None,
+        oobag_eval_func=None,
     ):
         self.n_trees = n_trees
         self.mtry = mtry
@@ -427,6 +496,9 @@ class ObliqueForestRegressor(BaseEstimator, RegressorMixin):
         self.n_threads = n_threads
         self.random_state = random_state
         self.verbose = verbose
+        self.importance = importance
+        self.lincomb_func = lincomb_func
+        self.oobag_eval_func = oobag_eval_func
 
         # Attributes set during fit
         self._forest_data = None
@@ -441,6 +513,23 @@ class ObliqueForestRegressor(BaseEstimator, RegressorMixin):
             'glmnet': _pyaorsf.LinearCombo.GLMNET.value,
         }
         return types.get(self.lincomb_type.lower(), _pyaorsf.LinearCombo.RANDOM.value)
+
+    def _get_vi_type(self):
+        """Convert string importance type to enum value."""
+        if self.importance is None:
+            return _pyaorsf.VariableImportance.NONE.value
+        types = {
+            'negate': _pyaorsf.VariableImportance.NEGATE.value,
+            'permute': _pyaorsf.VariableImportance.PERMUTE.value,
+            'anova': _pyaorsf.VariableImportance.ANOVA.value,
+        }
+        vi_type = types.get(self.importance.lower())
+        if vi_type is None:
+            raise ValueError(
+                f"importance must be one of 'negate', 'permute', 'anova', or None, "
+                f"got '{self.importance}'"
+            )
+        return vi_type
 
     def fit(self, X, y, sample_weight=None):
         """
@@ -479,6 +568,16 @@ class ObliqueForestRegressor(BaseEstimator, RegressorMixin):
         rng = np.random.RandomState(self.random_state)
         tree_seeds = rng.randint(1, 2**31 - 1, size=self.n_trees).tolist()
 
+        # Determine lincomb_type: use custom if lincomb_func is provided
+        lincomb_type = self._get_lincomb_type()
+        if self.lincomb_func is not None:
+            lincomb_type = _pyaorsf.LinearCombo.CUSTOM.value
+
+        # Determine oobag_eval_type: use custom if oobag_eval_func is provided
+        oobag_eval_type = _pyaorsf.EvalType.NONE.value
+        if self.oobag_eval_func is not None:
+            oobag_eval_type = _pyaorsf.EvalType.CUSTOM.value
+
         # Call C++ fit function
         self._forest_data = _pyaorsf.fit_forest(
             x=X, y=y, w=sample_weight,
@@ -488,7 +587,7 @@ class ObliqueForestRegressor(BaseEstimator, RegressorMixin):
             mtry=mtry,
             sample_with_replacement=self.sample_with_replacement,
             sample_fraction=self.sample_fraction,
-            vi_type=_pyaorsf.VariableImportance.NONE.value,
+            vi_type=self._get_vi_type(),
             vi_max_pvalue=0.01,
             leaf_min_events=1.0,
             leaf_min_obs=float(self.leaf_min_obs),
@@ -498,7 +597,7 @@ class ObliqueForestRegressor(BaseEstimator, RegressorMixin):
             split_min_stat=self.split_min_stat,
             split_max_cuts=self.split_max_cuts,
             split_max_retry=self.split_max_retry,
-            lincomb_type=self._get_lincomb_type(),
+            lincomb_type=lincomb_type,
             lincomb_eps=self.lincomb_eps,
             lincomb_iter_max=self.lincomb_iter_max,
             lincomb_scale=self.lincomb_scale,
@@ -508,11 +607,19 @@ class ObliqueForestRegressor(BaseEstimator, RegressorMixin):
             pred_horizon=[],
             pred_type=_pyaorsf.PredType.MEAN.value,
             oobag=True,
-            oobag_eval_type=_pyaorsf.EvalType.NONE.value,
+            oobag_eval_type=oobag_eval_type,
             oobag_eval_every=self.n_trees,
             n_thread=self.n_threads,
-            verbose=self.verbose
+            verbose=self.verbose,
+            lincomb_func=self.lincomb_func,
+            oobag_func=self.oobag_eval_func
         )
+
+        # Extract feature importances if computed
+        if 'importance' in self._forest_data:
+            self.feature_importances_ = self._forest_data['importance']
+        else:
+            self.feature_importances_ = None
 
         return self
 
@@ -589,6 +696,9 @@ class ObliqueForestRegressor(BaseEstimator, RegressorMixin):
             'n_threads': self.n_threads,
             'random_state': self.random_state,
             'verbose': self.verbose,
+            'importance': self.importance,
+            'lincomb_func': self.lincomb_func,
+            'oobag_eval_func': self.oobag_eval_func,
         }
 
     def set_params(self, **params):
