@@ -344,15 +344,21 @@ AORSF_C_API aorsf_error_t aorsf_forest_fit(
         aorsf::LinearCombo lincomb_type = static_cast<aorsf::LinearCombo>(config.lincomb_type);
         aorsf::EvalType oobag_eval_type = aorsf::EVAL_NONE;
 
-        /* Set appropriate evaluation type based on tree type */
+        /* Set appropriate evaluation type and prediction type based on tree type */
+        aorsf::PredType pred_type_init = aorsf::PRED_RISK;  /* default for survival */
         if (config.oobag) {
             switch (tt) {
                 case aorsf::TREE_SURVIVAL:
+                    oobag_eval_type = aorsf::EVAL_CONCORD;
+                    pred_type_init = aorsf::PRED_RISK;
+                    break;
                 case aorsf::TREE_CLASSIFICATION:
                     oobag_eval_type = aorsf::EVAL_CONCORD;
+                    pred_type_init = aorsf::PRED_CLASS;
                     break;
                 case aorsf::TREE_REGRESSION:
                     oobag_eval_type = aorsf::EVAL_RSQ;
+                    pred_type_init = aorsf::PRED_MEAN;
                     break;
                 default:
                     break;
@@ -384,7 +390,7 @@ AORSF_C_API aorsf_error_t aorsf_forest_fit(
             static_cast<arma::uword>(config.lincomb_df_target),
             1,  /* lincomb_ties_method */
             lc_callback,
-            aorsf::PRED_RISK,  /* pred_type */
+            pred_type_init,  /* pred_type - varies by tree type */
             false,  /* pred_mode (growing, not predicting) */
             true,   /* pred_aggregate */
             aorsf::PD_NONE,
@@ -539,8 +545,9 @@ AORSF_C_API aorsf_error_t aorsf_forest_predict(
         size_t n_cols_out = 1;
         aorsf_tree_type_t tree_type = handle->config.tree_type;
 
+        /* For classification, we need n_class columns to accumulate votes */
         if (tree_type == AORSF_TREE_CLASSIFICATION &&
-            (pred_type == AORSF_PRED_PROBABILITY)) {
+            (pred_type == AORSF_PRED_PROBABILITY || pred_type == AORSF_PRED_CLASS)) {
             n_cols_out = static_cast<size_t>(handle->n_class);
         }
 
@@ -584,25 +591,34 @@ AORSF_C_API aorsf_error_t aorsf_forest_predict(
 
                 /* Add leaf prediction to result */
                 if (tree_type == AORSF_TREE_CLASSIFICATION &&
-                    pred_type == AORSF_PRED_PROBABILITY) {
-                    /* For classification probability, leaf_summary has n_class values per leaf */
-                    /* This is simplified - actual implementation depends on how leaf_summary is structured */
-                    for (size_t c = 0; c < n_cols_out && c < tree_ls.size(); ++c) {
-                        result(i, c) += tree_ls[node * n_cols_out + c] / static_cast<double>(n_tree);
+                    (pred_type == AORSF_PRED_PROBABILITY || pred_type == AORSF_PRED_CLASS)) {
+                    /* For classification, leaf_summary[node] is the predicted class */
+                    /* Accumulate votes for that class */
+                    size_t pred_class = static_cast<size_t>(tree_ls[node]);
+                    if (pred_class < n_cols_out) {
+                        result(i, pred_class) += 1.0;
                     }
                 } else {
-                    result(i, 0) += tree_ls[node] / static_cast<double>(n_tree);
+                    result(i, 0) += tree_ls[node];
                 }
             }
         }
 
-        /* For classification with class prediction, convert probabilities to class */
-        if (tree_type == AORSF_TREE_CLASSIFICATION && pred_type == AORSF_PRED_CLASS) {
-            for (int32_t i = 0; i < n_rows; ++i) {
-                predictions[i] = static_cast<double>(result.row(i).index_max());
+        /* Handle classification output */
+        if (tree_type == AORSF_TREE_CLASSIFICATION) {
+            if (pred_type == AORSF_PRED_CLASS) {
+                /* Return the class with most votes */
+                for (int32_t i = 0; i < n_rows; ++i) {
+                    predictions[i] = static_cast<double>(result.row(i).index_max());
+                }
+            } else if (pred_type == AORSF_PRED_PROBABILITY) {
+                /* Normalize votes to probabilities */
+                result /= static_cast<double>(n_tree);
+                arma_to_rowmajor(result, predictions);
             }
         } else {
-            /* Convert to row-major output */
+            /* For regression/survival, average the predictions */
+            result /= static_cast<double>(n_tree);
             arma_to_rowmajor(result, predictions);
         }
 

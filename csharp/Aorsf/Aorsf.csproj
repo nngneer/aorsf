@@ -29,11 +29,11 @@
     <!-- Include README in package -->
     <None Include="..\README.md" Pack="true" PackagePath="\" Condition="Exists('..\README.md')" />
 
-    <!-- Include native libraries for each platform -->
-    <None Include="runtimes\win-x64\native\*.dll" Pack="true" PackagePath="runtimes\win-x64\native" Condition="Exists('runtimes\win-x64\native')" />
-    <None Include="runtimes\linux-x64\native\*.so" Pack="true" PackagePath="runtimes\linux-x64\native" Condition="Exists('runtimes\linux-x64\native')" />
-    <None Include="runtimes\osx-x64\native\*.dylib" Pack="true" PackagePath="runtimes\osx-x64\native" Condition="Exists('runtimes\osx-x64\native')" />
-    <None Include="runtimes\osx-arm64\native\*.dylib" Pack="true" PackagePath="runtimes\osx-arm64\native" Condition="Exists('runtimes\osx-arm64\native')" />
+    <!-- Include native libraries for each platform - for both packaging and runtime -->
+    <None Include="runtimes\win-x64\native\*.dll" Pack="true" PackagePath="runtimes\win-x64\native" CopyToOutputDirectory="PreserveNewest" Link="runtimes\win-x64\native\%(Filename)%(Extension)" Condition="Exists('runtimes\win-x64\native')" />
+    <None Include="runtimes\linux-x64\native\*.so" Pack="true" PackagePath="runtimes\linux-x64\native" CopyToOutputDirectory="PreserveNewest" Link="runtimes\linux-x64\native\%(Filename)%(Extension)" Condition="Exists('runtimes\linux-x64\native')" />
+    <None Include="runtimes\osx-x64\native\*.dylib" Pack="true" PackagePath="runtimes\osx-x64\native" CopyToOutputDirectory="PreserveNewest" Link="runtimes\osx-x64\native\%(Filename)%(Extension)" Condition="Exists('runtimes\osx-x64\native')" />
+    <None Include="runtimes\osx-arm64\native\*.dylib" Pack="true" PackagePath="runtimes\osx-arm64\native" CopyToOutputDirectory="PreserveNewest" Link="runtimes\osx-arm64\native\%(Filename)%(Extension)" Condition="Exists('runtimes\osx-arm64\native')" />
   </ItemGroup>
 
 </Project>

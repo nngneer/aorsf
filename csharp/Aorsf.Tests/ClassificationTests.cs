@@ -45,7 +45,7 @@ public class ClassificationTests
         Assert.All(predictions, p => Assert.True(p == 0 || p == 1));
     }
 
-    [Fact(Skip = "Probability prediction not fully implemented in C API")]
+    [Fact]
     public void PredictProbability_ReturnsProbabilities()
     {
         var (features, labels) = GenerateData(100, 5);
@@ -107,7 +107,7 @@ public class ClassificationTests
         Assert.True(classifier.FeatureImportances.Any(x => Math.Abs(x) > 0.001));
     }
 
-    [Fact(Skip = "OOB evaluation not fully implemented in C API")]
+    [Fact]
     public void OutOfBagScore_IsAvailable()
     {
         var (features, labels) = GenerateData(200, 5);

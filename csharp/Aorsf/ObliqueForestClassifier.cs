@@ -142,10 +142,10 @@ namespace Aorsf
 
                 _featureCount = NativeMethods.aorsf_forest_get_n_features(_handle);
 
-                // Get OOB score
+                // Get OOB score (concordance/accuracy metric - higher is better)
                 err = NativeMethods.aorsf_forest_get_oob_error(_handle, out double oobError);
                 if (err == NativeMethods.AORSF_SUCCESS)
-                    OutOfBagScore = 1.0 - oobError;  // Convert error to accuracy
+                    OutOfBagScore = oobError;
 
                 // Get importance if computed
                 if (Importance != ImportanceType.None)

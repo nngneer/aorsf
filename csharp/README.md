@@ -99,13 +99,6 @@ double[] riskScores = survivalForest.Predict(testFeatures);
 | `Permute` | Permutation importance | Moderate |
 | `Anova` | ANOVA-based importance | Fast |
 
-## Known Limitations (v0.1.0)
-
-- **Probability prediction**: `PredictProbability()` for classifiers is not fully implemented
-- **OOB scoring**: `OutOfBagScore` and `OutOfBagConcordance` properties may return invalid values
-
-These will be addressed in a future release.
-
 ## Platform Support
 
 - Windows x64

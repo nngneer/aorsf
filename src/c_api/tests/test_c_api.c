@@ -144,6 +144,23 @@ void test_classification_fit_predict(void) {
     for (int i = 0; i < n_rows; i++) {
         ASSERT_TRUE(pred[i] == 0.0 || pred[i] == 1.0);
     }
+    free(pred);
+
+    /* Test probability prediction */
+    int32_t prob_rows, prob_cols;
+    ASSERT_SUCCESS(aorsf_predict_get_dims(forest, n_rows, AORSF_PRED_PROBABILITY, &prob_rows, &prob_cols));
+    ASSERT_TRUE(prob_rows == n_rows);
+    ASSERT_TRUE(prob_cols == 2);  /* Binary classification */
+
+    double* prob = malloc(prob_rows * prob_cols * sizeof(double));
+    ASSERT_SUCCESS(aorsf_forest_predict(forest, x, n_rows, n_cols, AORSF_PRED_PROBABILITY, prob, prob_rows * prob_cols));
+
+    /* Check probabilities sum to 1 */
+    for (int i = 0; i < n_rows; i++) {
+        double sum = prob[i * 2 + 0] + prob[i * 2 + 1];
+        ASSERT_TRUE(fabs(sum - 1.0) < 0.01);  /* Should sum to ~1 */
+    }
+    free(prob);
 
     /* Get importance */
     double* importance = malloc(n_cols * sizeof(double));
@@ -158,7 +175,6 @@ void test_classification_fit_predict(void) {
 
     /* Cleanup */
     free(importance);
-    free(pred);
     aorsf_data_destroy(data);
     aorsf_forest_destroy(forest);
     free(x);
