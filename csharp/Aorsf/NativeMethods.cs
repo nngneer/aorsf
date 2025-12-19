@@ -14,7 +14,18 @@ namespace Aorsf.Native
         public const int AORSF_ERROR_NOT_FITTED = -3;
         public const int AORSF_ERROR_COMPUTATION = -4;
         public const int AORSF_ERROR_OUT_OF_MEMORY = -5;
+        public const int AORSF_ERROR_IO = -6;
+        public const int AORSF_ERROR_FORMAT = -7;
         public const int AORSF_ERROR_UNKNOWN = -99;
+
+        // Serialization format
+        public const int AORSF_FORMAT_BINARY = 0;
+        public const int AORSF_FORMAT_JSON = 1;
+
+        // Serialization flags
+        public const uint AORSF_FLAG_HAS_IMPORTANCE = 0x01;
+        public const uint AORSF_FLAG_HAS_OOB = 0x02;
+        public const uint AORSF_FLAG_HAS_METADATA = 0x04;
 
         // Config struct
         [StructLayout(LayoutKind.Sequential)]
@@ -137,6 +148,46 @@ namespace Aorsf.Native
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr aorsf_get_version();
+
+        // Serialization functions
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int aorsf_forest_get_save_size(
+            IntPtr handle,
+            int format,
+            uint flags,
+            out UIntPtr size
+        );
+
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int aorsf_forest_save(
+            IntPtr handle,
+            int format,
+            uint flags,
+            [Out] byte[] buffer,
+            UIntPtr bufferSize,
+            out UIntPtr written
+        );
+
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int aorsf_forest_load(
+            out IntPtr handle,
+            [In] byte[] buffer,
+            UIntPtr bufferSize
+        );
+
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int aorsf_forest_save_file(
+            IntPtr handle,
+            [MarshalAs(UnmanagedType.LPUTF8Str)] string filepath,
+            int format,
+            uint flags
+        );
+
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int aorsf_forest_load_file(
+            out IntPtr handle,
+            [MarshalAs(UnmanagedType.LPUTF8Str)] string filepath
+        );
 
         // Helper to get error string
         public static string GetLastError()

@@ -7,8 +7,7 @@
  */
 
 #include "aorsf_c.h"
-#include "../core/arma_config.h"
-#include "../core/Forest.h"
+#include "aorsf_internal.h"
 #include "../core/ForestSurvival.h"
 #include "../core/ForestClassification.h"
 #include "../core/ForestRegression.h"
@@ -27,49 +26,10 @@
 /* Thread-local error message storage */
 static thread_local std::string g_last_error;
 
-static void set_error(const std::string& msg) {
+/* Non-static so it can be used from aorsf_serialize.cpp */
+void set_error(const std::string& msg) {
     g_last_error = msg;
 }
-
-/* ============== Internal Structures ============== */
-
-/**
- * @brief Internal forest wrapper structure
- *
- * This structure holds the C++ Forest object along with configuration
- * and cached results for easy retrieval.
- */
-struct aorsf_forest_t {
-    std::unique_ptr<aorsf::Forest> forest;
-    aorsf_config_t config;
-    bool is_fitted;
-    int32_t n_features;
-    int32_t n_class;
-    std::vector<double> importance;
-    std::vector<double> unique_times;  /* survival only */
-    double oob_error;
-
-    // Store tree structure for prediction
-    std::vector<std::vector<double>> cutpoints;
-    std::vector<std::vector<arma::uword>> child_left;
-    std::vector<std::vector<arma::vec>> coef_values;
-    std::vector<std::vector<arma::uvec>> coef_indices;
-    std::vector<std::vector<double>> leaf_summary;
-
-    aorsf_forest_t() : is_fitted(false), n_features(0), n_class(0), oob_error(0.0) {}
-};
-
-/**
- * @brief Internal data wrapper structure
- */
-struct aorsf_data_t {
-    arma::mat x;
-    arma::mat y;
-    arma::vec w;
-    int32_t n_class;
-
-    aorsf_data_t() : n_class(0) {}
-};
 
 /* ============== Helper Functions ============== */
 
@@ -448,6 +408,28 @@ AORSF_C_API aorsf_error_t aorsf_forest_fit(
         handle->coef_indices = forest->get_coef_indices();
         handle->leaf_summary = forest->get_leaf_summary();
 
+        /* Store type-specific leaf data */
+        if (tt == aorsf::TREE_CLASSIFICATION) {
+            auto* class_forest = dynamic_cast<aorsf::ForestClassification*>(forest.get());
+            if (class_forest) {
+                handle->leaf_pred_prob = class_forest->get_leaf_pred_prob();
+            }
+        } else if (tt == aorsf::TREE_SURVIVAL) {
+            auto* surv_forest = dynamic_cast<aorsf::ForestSurvival*>(forest.get());
+            if (surv_forest) {
+                handle->leaf_pred_indx = surv_forest->get_leaf_pred_indx();
+                handle->leaf_pred_prob = surv_forest->get_leaf_pred_prob();
+                handle->leaf_pred_chaz = surv_forest->get_leaf_pred_chaz();
+            }
+        }
+
+        /* Store OOB data if computed */
+        if (config.oobag) {
+            handle->rows_oobag = forest->get_rows_oobag();
+            arma::vec& oobag_denom = forest->get_oobag_denom();
+            handle->oobag_denom.assign(oobag_denom.begin(), oobag_denom.end());
+        }
+
         /* Store forest pointer */
         handle->forest = std::move(forest);
 
@@ -799,4 +781,145 @@ AORSF_C_API const char* aorsf_get_last_error(void) {
 
 AORSF_C_API const char* aorsf_get_version(void) {
     return "0.1.6";
+}
+
+/* ============== Metadata Functions ============== */
+
+AORSF_C_API aorsf_error_t aorsf_forest_set_feature_names(
+    aorsf_forest_handle handle,
+    const char** names,
+    int32_t n_features
+) {
+    if (!handle || !names) {
+        set_error("Null pointer argument");
+        return AORSF_ERROR_NULL_POINTER;
+    }
+
+    if (handle->is_fitted && n_features != handle->n_features) {
+        set_error("Number of feature names must match n_features");
+        return AORSF_ERROR_INVALID_ARGUMENT;
+    }
+
+    try {
+        handle->feature_names.clear();
+        handle->feature_names.reserve(n_features);
+        for (int32_t i = 0; i < n_features; ++i) {
+            if (names[i]) {
+                handle->feature_names.push_back(names[i]);
+            } else {
+                handle->feature_names.push_back("");
+            }
+        }
+        return AORSF_SUCCESS;
+    } catch (const std::bad_alloc&) {
+        set_error("Out of memory");
+        return AORSF_ERROR_OUT_OF_MEMORY;
+    }
+}
+
+AORSF_C_API aorsf_error_t aorsf_forest_get_feature_names(
+    aorsf_forest_handle handle,
+    const char** names,
+    int32_t n_features
+) {
+    if (!handle || !names) {
+        set_error("Null pointer argument");
+        return AORSF_ERROR_NULL_POINTER;
+    }
+
+    if (handle->feature_names.empty()) {
+        set_error("Feature names not set");
+        return AORSF_ERROR_INVALID_ARGUMENT;
+    }
+
+    if (n_features < static_cast<int32_t>(handle->feature_names.size())) {
+        set_error("Buffer too small");
+        return AORSF_ERROR_INVALID_ARGUMENT;
+    }
+
+    for (size_t i = 0; i < handle->feature_names.size(); ++i) {
+        names[i] = handle->feature_names[i].c_str();
+    }
+
+    return AORSF_SUCCESS;
+}
+
+AORSF_C_API int32_t aorsf_forest_has_feature_names(aorsf_forest_handle handle) {
+    return (handle && !handle->feature_names.empty()) ? 1 : 0;
+}
+
+AORSF_C_API aorsf_error_t aorsf_forest_set_feature_stats(
+    aorsf_forest_handle handle,
+    const double* means,
+    const double* stds,
+    int32_t n_features
+) {
+    if (!handle) {
+        set_error("Null pointer argument");
+        return AORSF_ERROR_NULL_POINTER;
+    }
+
+    if (handle->is_fitted && n_features != handle->n_features) {
+        set_error("Number of features must match n_features");
+        return AORSF_ERROR_INVALID_ARGUMENT;
+    }
+
+    try {
+        if (means) {
+            handle->feature_means.assign(means, means + n_features);
+        } else {
+            handle->feature_means.clear();
+        }
+
+        if (stds) {
+            handle->feature_stds.assign(stds, stds + n_features);
+        } else {
+            handle->feature_stds.clear();
+        }
+
+        return AORSF_SUCCESS;
+    } catch (const std::bad_alloc&) {
+        set_error("Out of memory");
+        return AORSF_ERROR_OUT_OF_MEMORY;
+    }
+}
+
+AORSF_C_API aorsf_error_t aorsf_forest_get_feature_stats(
+    aorsf_forest_handle handle,
+    double* means,
+    double* stds,
+    int32_t n_features
+) {
+    if (!handle) {
+        set_error("Null pointer argument");
+        return AORSF_ERROR_NULL_POINTER;
+    }
+
+    if (handle->feature_means.empty() && handle->feature_stds.empty()) {
+        set_error("Feature statistics not set");
+        return AORSF_ERROR_INVALID_ARGUMENT;
+    }
+
+    int32_t expected_size = static_cast<int32_t>(
+        std::max(handle->feature_means.size(), handle->feature_stds.size())
+    );
+
+    if (n_features < expected_size) {
+        set_error("Buffer too small");
+        return AORSF_ERROR_INVALID_ARGUMENT;
+    }
+
+    if (means && !handle->feature_means.empty()) {
+        std::copy(handle->feature_means.begin(), handle->feature_means.end(), means);
+    }
+
+    if (stds && !handle->feature_stds.empty()) {
+        std::copy(handle->feature_stds.begin(), handle->feature_stds.end(), stds);
+    }
+
+    return AORSF_SUCCESS;
+}
+
+AORSF_C_API int32_t aorsf_forest_has_feature_stats(aorsf_forest_handle handle) {
+    return (handle && (!handle->feature_means.empty() || !handle->feature_stds.empty())) ? 1 : 0;
 }

@@ -233,6 +233,150 @@ void test_survival_fit_predict(void) {
     printf("PASSED\n");
 }
 
+void test_serialization_binary(void) {
+    printf("Testing binary serialization... ");
+
+    int n_rows = 200, n_cols = 5;
+    double* x = malloc(n_rows * n_cols * sizeof(double));
+    double* y = malloc(n_rows * sizeof(double));
+
+    generate_classification_data(x, y, n_rows, n_cols);
+
+    /* Create and fit forest */
+    aorsf_config_t config;
+    aorsf_config_init(&config, AORSF_TREE_CLASSIFICATION);
+    config.n_tree = 10;
+    config.vi_type = AORSF_VI_NEGATE;
+
+    aorsf_forest_handle forest = NULL;
+    ASSERT_SUCCESS(aorsf_forest_create(&forest, &config));
+
+    aorsf_data_handle data = NULL;
+    ASSERT_SUCCESS(aorsf_data_create(&data, x, n_rows, n_cols, y, 1, NULL, 2));
+    ASSERT_SUCCESS(aorsf_forest_fit(forest, data));
+
+    /* Get predictions before save */
+    double* pred_before = malloc(n_rows * sizeof(double));
+    ASSERT_SUCCESS(aorsf_forest_predict(forest, x, n_rows, n_cols, AORSF_PRED_CLASS, pred_before, n_rows));
+
+    /* Get save size */
+    size_t save_size;
+    ASSERT_SUCCESS(aorsf_forest_get_save_size(forest, AORSF_FORMAT_BINARY, AORSF_FLAG_HAS_IMPORTANCE, &save_size));
+    ASSERT_TRUE(save_size > 0);
+
+    /* Save to buffer */
+    unsigned char* buffer = malloc(save_size);
+    size_t written;
+    ASSERT_SUCCESS(aorsf_forest_save(forest, AORSF_FORMAT_BINARY, AORSF_FLAG_HAS_IMPORTANCE, buffer, save_size, &written));
+    ASSERT_TRUE(written > 0);
+
+    /* Load from buffer */
+    aorsf_forest_handle loaded = NULL;
+    ASSERT_SUCCESS(aorsf_forest_load(&loaded, buffer, written));
+    ASSERT_TRUE(loaded != NULL);
+    ASSERT_TRUE(aorsf_forest_is_fitted(loaded) == 1);
+    ASSERT_TRUE(aorsf_forest_get_n_features(loaded) == n_cols);
+    ASSERT_TRUE(aorsf_forest_get_n_class(loaded) == 2);
+
+    /* Get predictions after load */
+    double* pred_after = malloc(n_rows * sizeof(double));
+    ASSERT_SUCCESS(aorsf_forest_predict(loaded, x, n_rows, n_cols, AORSF_PRED_CLASS, pred_after, n_rows));
+
+    /* Predictions should match */
+    for (int i = 0; i < n_rows; i++) {
+        ASSERT_TRUE(fabs(pred_before[i] - pred_after[i]) < 0.001);
+    }
+
+    /* Test file I/O */
+    const char* test_file = "/tmp/claude/test_forest.bin";
+    ASSERT_SUCCESS(aorsf_forest_save_file(forest, test_file, AORSF_FORMAT_BINARY, AORSF_FLAG_HAS_IMPORTANCE));
+
+    aorsf_forest_handle file_loaded = NULL;
+    ASSERT_SUCCESS(aorsf_forest_load_file(&file_loaded, test_file));
+    ASSERT_TRUE(aorsf_forest_is_fitted(file_loaded) == 1);
+
+    /* Cleanup */
+    free(pred_before);
+    free(pred_after);
+    free(buffer);
+    aorsf_forest_destroy(file_loaded);
+    aorsf_forest_destroy(loaded);
+    aorsf_data_destroy(data);
+    aorsf_forest_destroy(forest);
+    free(x);
+    free(y);
+
+    printf("PASSED\n");
+}
+
+void test_serialization_json(void) {
+    printf("Testing JSON serialization... ");
+
+    int n_rows = 200, n_cols = 5;
+    double* x = malloc(n_rows * n_cols * sizeof(double));
+    double* y = malloc(n_rows * sizeof(double));
+
+    generate_classification_data(x, y, n_rows, n_cols);
+
+    /* Create and fit forest */
+    aorsf_config_t config;
+    aorsf_config_init(&config, AORSF_TREE_CLASSIFICATION);
+    config.n_tree = 10;
+    config.vi_type = AORSF_VI_NEGATE;
+
+    aorsf_forest_handle forest = NULL;
+    ASSERT_SUCCESS(aorsf_forest_create(&forest, &config));
+
+    aorsf_data_handle data = NULL;
+    ASSERT_SUCCESS(aorsf_data_create(&data, x, n_rows, n_cols, y, 1, NULL, 2));
+    ASSERT_SUCCESS(aorsf_forest_fit(forest, data));
+
+    /* Get predictions before save */
+    double* pred_before = malloc(n_rows * sizeof(double));
+    ASSERT_SUCCESS(aorsf_forest_predict(forest, x, n_rows, n_cols, AORSF_PRED_CLASS, pred_before, n_rows));
+
+    /* Get save size */
+    size_t save_size;
+    ASSERT_SUCCESS(aorsf_forest_get_save_size(forest, AORSF_FORMAT_JSON, AORSF_FLAG_HAS_IMPORTANCE, &save_size));
+    ASSERT_TRUE(save_size > 0);
+
+    /* Save to buffer (add extra space for pretty printing) */
+    size_t buffer_size = save_size * 2;
+    unsigned char* buffer = malloc(buffer_size);
+    size_t written;
+    ASSERT_SUCCESS(aorsf_forest_save(forest, AORSF_FORMAT_JSON, AORSF_FLAG_HAS_IMPORTANCE, buffer, buffer_size, &written));
+    ASSERT_TRUE(written > 0);
+
+    /* Load from buffer */
+    aorsf_forest_handle loaded = NULL;
+    ASSERT_SUCCESS(aorsf_forest_load(&loaded, buffer, written));
+    ASSERT_TRUE(loaded != NULL);
+    ASSERT_TRUE(aorsf_forest_is_fitted(loaded) == 1);
+    ASSERT_TRUE(aorsf_forest_get_n_features(loaded) == n_cols);
+    ASSERT_TRUE(aorsf_forest_get_n_class(loaded) == 2);
+
+    /* Get predictions after load */
+    double* pred_after = malloc(n_rows * sizeof(double));
+    ASSERT_SUCCESS(aorsf_forest_predict(loaded, x, n_rows, n_cols, AORSF_PRED_CLASS, pred_after, n_rows));
+
+    /* Predictions should match */
+    for (int i = 0; i < n_rows; i++) {
+        ASSERT_TRUE(fabs(pred_before[i] - pred_after[i]) < 0.001);
+    }
+
+    /* Cleanup */
+    free(pred_before);
+    free(pred_after);
+    free(buffer);
+    aorsf_forest_destroy(loaded);
+    aorsf_data_destroy(data);
+    aorsf_forest_destroy(forest);
+    free(x);
+    free(y);
+
+    printf("PASSED\n");
+}
+
 void test_error_handling(void) {
     printf("Testing error handling... ");
 
@@ -263,6 +407,113 @@ void test_error_handling(void) {
     printf("PASSED\n");
 }
 
+void test_metadata(void) {
+    printf("Testing metadata... ");
+
+    int n_rows = 200, n_cols = 5;
+    double* x = malloc(n_rows * n_cols * sizeof(double));
+    double* y = malloc(n_rows * sizeof(double));
+
+    generate_classification_data(x, y, n_rows, n_cols);
+
+    /* Create and fit forest */
+    aorsf_config_t config;
+    aorsf_config_init(&config, AORSF_TREE_CLASSIFICATION);
+    config.n_tree = 10;
+    config.vi_type = AORSF_VI_NEGATE;  /* Enable importance for testing */
+
+    aorsf_forest_handle forest = NULL;
+    ASSERT_SUCCESS(aorsf_forest_create(&forest, &config));
+
+    aorsf_data_handle data = NULL;
+    ASSERT_SUCCESS(aorsf_data_create(&data, x, n_rows, n_cols, y, 1, NULL, 2));
+    ASSERT_SUCCESS(aorsf_forest_fit(forest, data));
+
+    /* Test feature names */
+    ASSERT_TRUE(aorsf_forest_has_feature_names(forest) == 0);
+
+    const char* names[5] = {"feature_a", "feature_b", "feature_c", "feature_d", "feature_e"};
+    ASSERT_SUCCESS(aorsf_forest_set_feature_names(forest, names, n_cols));
+    ASSERT_TRUE(aorsf_forest_has_feature_names(forest) == 1);
+
+    const char* retrieved_names[5];
+    ASSERT_SUCCESS(aorsf_forest_get_feature_names(forest, retrieved_names, n_cols));
+    for (int i = 0; i < n_cols; i++) {
+        ASSERT_TRUE(strcmp(retrieved_names[i], names[i]) == 0);
+    }
+
+    /* Test feature stats */
+    ASSERT_TRUE(aorsf_forest_has_feature_stats(forest) == 0);
+
+    double means[5] = {0.0, 1.0, 2.0, 3.0, 4.0};
+    double stds[5] = {1.0, 2.0, 3.0, 4.0, 5.0};
+    ASSERT_SUCCESS(aorsf_forest_set_feature_stats(forest, means, stds, n_cols));
+    ASSERT_TRUE(aorsf_forest_has_feature_stats(forest) == 1);
+
+    double retrieved_means[5];
+    double retrieved_stds[5];
+    ASSERT_SUCCESS(aorsf_forest_get_feature_stats(forest, retrieved_means, retrieved_stds, n_cols));
+    for (int i = 0; i < n_cols; i++) {
+        ASSERT_TRUE(fabs(retrieved_means[i] - means[i]) < 1e-10);
+        ASSERT_TRUE(fabs(retrieved_stds[i] - stds[i]) < 1e-10);
+    }
+
+    /* Test metadata serialization (binary) */
+    size_t save_size;
+    ASSERT_SUCCESS(aorsf_forest_get_save_size(forest, AORSF_FORMAT_BINARY,
+        AORSF_FLAG_HAS_IMPORTANCE | AORSF_FLAG_HAS_METADATA, &save_size));
+    ASSERT_TRUE(save_size > 0);
+
+    unsigned char* buffer = malloc(save_size);
+    size_t written;
+    ASSERT_SUCCESS(aorsf_forest_save(forest, AORSF_FORMAT_BINARY,
+        AORSF_FLAG_HAS_IMPORTANCE | AORSF_FLAG_HAS_METADATA, buffer, save_size, &written));
+
+    /* Load and verify metadata preserved */
+    aorsf_forest_handle loaded = NULL;
+    ASSERT_SUCCESS(aorsf_forest_load(&loaded, buffer, written));
+    ASSERT_TRUE(aorsf_forest_has_feature_names(loaded) == 1);
+    ASSERT_TRUE(aorsf_forest_has_feature_stats(loaded) == 1);
+
+    const char* loaded_names[5];
+    ASSERT_SUCCESS(aorsf_forest_get_feature_names(loaded, loaded_names, n_cols));
+    for (int i = 0; i < n_cols; i++) {
+        ASSERT_TRUE(strcmp(loaded_names[i], names[i]) == 0);
+    }
+
+    double loaded_means[5];
+    double loaded_stds[5];
+    ASSERT_SUCCESS(aorsf_forest_get_feature_stats(loaded, loaded_means, loaded_stds, n_cols));
+    for (int i = 0; i < n_cols; i++) {
+        ASSERT_TRUE(fabs(loaded_means[i] - means[i]) < 1e-10);
+        ASSERT_TRUE(fabs(loaded_stds[i] - stds[i]) < 1e-10);
+    }
+
+    free(buffer);
+    aorsf_forest_destroy(loaded);
+
+    /* Test metadata serialization (JSON) */
+    ASSERT_SUCCESS(aorsf_forest_get_save_size(forest, AORSF_FORMAT_JSON,
+        AORSF_FLAG_HAS_IMPORTANCE | AORSF_FLAG_HAS_METADATA, &save_size));
+    buffer = malloc(save_size * 2);  /* Extra space for safety */
+    ASSERT_SUCCESS(aorsf_forest_save(forest, AORSF_FORMAT_JSON,
+        AORSF_FLAG_HAS_IMPORTANCE | AORSF_FLAG_HAS_METADATA, buffer, save_size * 2, &written));
+
+    ASSERT_SUCCESS(aorsf_forest_load(&loaded, buffer, written));
+    ASSERT_TRUE(aorsf_forest_has_feature_names(loaded) == 1);
+    ASSERT_TRUE(aorsf_forest_has_feature_stats(loaded) == 1);
+
+    /* Cleanup */
+    free(buffer);
+    aorsf_forest_destroy(loaded);
+    aorsf_data_destroy(data);
+    aorsf_forest_destroy(forest);
+    free(x);
+    free(y);
+
+    printf("PASSED\n");
+}
+
 void test_version(void) {
     printf("Testing version... ");
 
@@ -283,6 +534,9 @@ int main(void) {
     test_data_create_destroy();
     test_classification_fit_predict();
     test_survival_fit_predict();
+    test_serialization_binary();
+    test_serialization_json();
+    test_metadata();
     test_error_handling();
 
     printf("\n=== All tests passed! ===\n");

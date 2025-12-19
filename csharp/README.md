@@ -99,6 +99,58 @@ double[] riskScores = survivalForest.Predict(testFeatures);
 | `Permute` | Permutation importance | Moderate |
 | `Anova` | ANOVA-based importance | Fast |
 
+## Model Serialization
+
+Save and load trained models in binary or JSON format.
+
+### Save to File
+
+```csharp
+// Save in binary format (default, fast and compact)
+classifier.Save("model.orsf");
+
+// Save in JSON format (human-readable)
+classifier.Save("model.json", SerializationFormat.Json);
+
+// Include importance scores and metadata
+classifier.Save("model.orsf", SerializationFormat.Binary,
+    SerializationFlags.IncludeImportance | SerializationFlags.IncludeMetadata);
+```
+
+### Load from File
+
+```csharp
+// Load model (format auto-detected)
+var classifier = ObliqueForestClassifier.Load("model.orsf");
+var regressor = ObliqueForestRegressor.Load("model.orsf");
+var survival = ObliqueForestSurvival.Load("model.orsf");
+```
+
+### Serialize to Bytes
+
+```csharp
+// Save to byte array (useful for databases, network transfer)
+byte[] data = classifier.SaveToBytes(SerializationFormat.Binary,
+    SerializationFlags.IncludeImportance);
+
+// Load from byte array
+var loaded = ObliqueForestClassifier.LoadFromBytes(data);
+```
+
+### Serialization Flags
+
+| Flag | Description |
+|------|-------------|
+| `None` | Core model only |
+| `IncludeImportance` | Include variable importance scores |
+| `IncludeOobData` | Include out-of-bag data for partial dependence |
+| `IncludeMetadata` | Include feature names and statistics |
+| `All` | Include all optional data |
+
+### Cross-Language Models
+
+Models saved with the C# wrapper can be loaded in Python and vice versa, enabling training in one language and deployment in another.
+
 ## Platform Support
 
 - Windows x64

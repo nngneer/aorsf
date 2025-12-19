@@ -7,6 +7,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Find Armadillo
 find_package(Armadillo REQUIRED)
 
+# Fetch nlohmann/json (header-only JSON library)
+include(FetchContent)
+FetchContent_Declare(
+    json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.11.3
+)
+FetchContent_MakeAvailable(json)
+
 # Find OpenMP (optional)
 find_package(OpenMP)
 
@@ -16,11 +25,13 @@ option(BUILD_SHARED "Build shared library" ON)
 # C API sources
 set(AORSF_C_API_SOURCES
     aorsf_c.cpp
+    aorsf_serialize.cpp
 )
 
 set(AORSF_C_API_HEADERS
     aorsf_c.h
     aorsf_export.h
+    aorsf_serialize.h
 )
 
 # Core library sources (include directly to avoid dependency issues)
@@ -74,6 +85,8 @@ target_include_directories(aorsf_c
 target_link_libraries(aorsf_c
     PUBLIC
         ${ARMADILLO_LIBRARIES}
+    PRIVATE
+        nlohmann_json::nlohmann_json
 )
 
 if(OpenMP_CXX_FOUND)

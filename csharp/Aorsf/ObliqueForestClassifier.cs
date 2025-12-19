@@ -260,6 +260,116 @@ namespace Aorsf
             return (double)correct / labels.Length;
         }
 
+        /// <summary>
+        /// Save the fitted model to a file.
+        /// </summary>
+        /// <param name="filepath">Path to save the model.</param>
+        /// <param name="format">Serialization format (Binary or Json).</param>
+        /// <param name="flags">Optional flags to control what data is included.</param>
+        public void Save(string filepath, SerializationFormat format = SerializationFormat.Binary,
+                         SerializationFlags flags = SerializationFlags.IncludeImportance)
+        {
+            if (!IsFitted)
+                throw new InvalidOperationException("Model not fitted. Call Fit() first.");
+
+            int err = NativeMethods.aorsf_forest_save_file(
+                _handle, filepath, (int)format, (uint)flags);
+            AorsfException.ThrowIfError(err);
+        }
+
+        /// <summary>
+        /// Save the fitted model to a byte array.
+        /// </summary>
+        /// <param name="format">Serialization format (Binary or Json).</param>
+        /// <param name="flags">Optional flags to control what data is included.</param>
+        /// <returns>Byte array containing the serialized model.</returns>
+        public byte[] SaveToBytes(SerializationFormat format = SerializationFormat.Binary,
+                                   SerializationFlags flags = SerializationFlags.IncludeImportance)
+        {
+            if (!IsFitted)
+                throw new InvalidOperationException("Model not fitted. Call Fit() first.");
+
+            // Get required size
+            int err = NativeMethods.aorsf_forest_get_save_size(
+                _handle, (int)format, (uint)flags, out UIntPtr size);
+            AorsfException.ThrowIfError(err);
+
+            // Allocate buffer and serialize
+            byte[] buffer = new byte[(int)size];
+            err = NativeMethods.aorsf_forest_save(
+                _handle, (int)format, (uint)flags, buffer, size, out UIntPtr written);
+            AorsfException.ThrowIfError(err);
+
+            // Return exact size if different
+            if ((int)written != buffer.Length)
+            {
+                byte[] result = new byte[(int)written];
+                Array.Copy(buffer, result, (int)written);
+                return result;
+            }
+            return buffer;
+        }
+
+        /// <summary>
+        /// Load a model from a file.
+        /// </summary>
+        /// <param name="filepath">Path to the saved model.</param>
+        /// <returns>Loaded classifier.</returns>
+        public static ObliqueForestClassifier Load(string filepath)
+        {
+            int err = NativeMethods.aorsf_forest_load_file(out IntPtr handle, filepath);
+            AorsfException.ThrowIfError(err);
+
+            var classifier = new ObliqueForestClassifier();
+            classifier._handle = handle;
+            classifier._featureCount = NativeMethods.aorsf_forest_get_n_features(handle);
+            classifier._classCount = NativeMethods.aorsf_forest_get_n_class(handle);
+
+            // Try to get importance if available
+            classifier.FeatureImportances = new double[classifier._featureCount];
+            err = NativeMethods.aorsf_forest_get_importance(
+                handle, classifier.FeatureImportances, classifier._featureCount);
+            if (err != NativeMethods.AORSF_SUCCESS)
+                classifier.FeatureImportances = null;
+
+            // Try to get OOB score
+            err = NativeMethods.aorsf_forest_get_oob_error(handle, out double oobError);
+            if (err == NativeMethods.AORSF_SUCCESS)
+                classifier.OutOfBagScore = oobError;
+
+            return classifier;
+        }
+
+        /// <summary>
+        /// Load a model from a byte array.
+        /// </summary>
+        /// <param name="data">Byte array containing the serialized model.</param>
+        /// <returns>Loaded classifier.</returns>
+        public static ObliqueForestClassifier LoadFromBytes(byte[] data)
+        {
+            int err = NativeMethods.aorsf_forest_load(out IntPtr handle, data, (UIntPtr)data.Length);
+            AorsfException.ThrowIfError(err);
+
+            var classifier = new ObliqueForestClassifier();
+            classifier._handle = handle;
+            classifier._featureCount = NativeMethods.aorsf_forest_get_n_features(handle);
+            classifier._classCount = NativeMethods.aorsf_forest_get_n_class(handle);
+
+            // Try to get importance if available
+            classifier.FeatureImportances = new double[classifier._featureCount];
+            err = NativeMethods.aorsf_forest_get_importance(
+                handle, classifier.FeatureImportances, classifier._featureCount);
+            if (err != NativeMethods.AORSF_SUCCESS)
+                classifier.FeatureImportances = null;
+
+            // Try to get OOB score
+            err = NativeMethods.aorsf_forest_get_oob_error(handle, out double oobError);
+            if (err == NativeMethods.AORSF_SUCCESS)
+                classifier.OutOfBagScore = oobError;
+
+            return classifier;
+        }
+
         public void Dispose()
         {
             Dispose(true);

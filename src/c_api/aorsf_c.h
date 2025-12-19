@@ -17,6 +17,8 @@ typedef enum {
     AORSF_ERROR_NOT_FITTED = -3,
     AORSF_ERROR_COMPUTATION = -4,
     AORSF_ERROR_OUT_OF_MEMORY = -5,
+    AORSF_ERROR_IO = -6,
+    AORSF_ERROR_FORMAT = -7,
     AORSF_ERROR_UNKNOWN = -99
 } aorsf_error_t;
 
@@ -209,5 +211,176 @@ AORSF_C_API const char* aorsf_get_last_error(void);
 
 /* Get version string */
 AORSF_C_API const char* aorsf_get_version(void);
+
+/* ============== Serialization Functions ============== */
+
+/* Serialization format enum */
+typedef enum {
+    AORSF_FORMAT_BINARY = 0,
+    AORSF_FORMAT_JSON = 1
+} aorsf_format_t;
+
+/* Serialization flags */
+#define AORSF_FLAG_HAS_IMPORTANCE  0x01
+#define AORSF_FLAG_HAS_OOB         0x02
+#define AORSF_FLAG_HAS_METADATA    0x04
+
+/**
+ * Get the size needed to serialize a fitted forest.
+ *
+ * @param handle    Fitted forest handle
+ * @param format    Serialization format (BINARY or JSON)
+ * @param flags     Flags controlling what to include (HAS_IMPORTANCE, HAS_OOB, HAS_METADATA)
+ * @param size      Output: size in bytes needed
+ * @return          AORSF_SUCCESS or error code
+ */
+AORSF_C_API aorsf_error_t aorsf_forest_get_save_size(
+    aorsf_forest_handle handle,
+    aorsf_format_t format,
+    uint32_t flags,
+    size_t* size
+);
+
+/**
+ * Save a fitted forest to a memory buffer.
+ *
+ * @param handle      Fitted forest handle
+ * @param format      Serialization format
+ * @param flags       Flags controlling what to include
+ * @param buffer      Output buffer (caller allocated)
+ * @param buffer_size Size of buffer
+ * @param written     Output: bytes actually written
+ * @return            AORSF_SUCCESS or error code
+ */
+AORSF_C_API aorsf_error_t aorsf_forest_save(
+    aorsf_forest_handle handle,
+    aorsf_format_t format,
+    uint32_t flags,
+    unsigned char* buffer,
+    size_t buffer_size,
+    size_t* written
+);
+
+/**
+ * Load a forest from a memory buffer.
+ *
+ * @param handle      Output: new forest handle
+ * @param buffer      Input buffer containing serialized forest
+ * @param buffer_size Size of buffer
+ * @return            AORSF_SUCCESS or error code
+ */
+AORSF_C_API aorsf_error_t aorsf_forest_load(
+    aorsf_forest_handle* handle,
+    const unsigned char* buffer,
+    size_t buffer_size
+);
+
+/**
+ * Save a fitted forest to a file.
+ *
+ * @param handle   Fitted forest handle
+ * @param filepath Output file path
+ * @param format   Serialization format
+ * @param flags    Flags controlling what to include
+ * @return         AORSF_SUCCESS or error code
+ */
+AORSF_C_API aorsf_error_t aorsf_forest_save_file(
+    aorsf_forest_handle handle,
+    const char* filepath,
+    aorsf_format_t format,
+    uint32_t flags
+);
+
+/**
+ * Load a forest from a file.
+ *
+ * @param handle   Output: new forest handle
+ * @param filepath Input file path
+ * @return         AORSF_SUCCESS or error code
+ */
+AORSF_C_API aorsf_error_t aorsf_forest_load_file(
+    aorsf_forest_handle* handle,
+    const char* filepath
+);
+
+/* ============== Metadata Functions ============== */
+
+/**
+ * Set feature names for the forest.
+ *
+ * @param handle        Forest handle
+ * @param names         Array of null-terminated strings [n_features]
+ * @param n_features    Number of feature names (must match forest's n_features)
+ * @return              AORSF_SUCCESS or error code
+ */
+AORSF_C_API aorsf_error_t aorsf_forest_set_feature_names(
+    aorsf_forest_handle handle,
+    const char** names,
+    int32_t n_features
+);
+
+/**
+ * Get feature names from the forest.
+ *
+ * @param handle        Forest handle
+ * @param names         Output array of string pointers [n_features]
+ * @param n_features    Size of names array
+ * @return              AORSF_SUCCESS or error code
+ *
+ * Note: Returned pointers are valid until the handle is destroyed or names are modified.
+ */
+AORSF_C_API aorsf_error_t aorsf_forest_get_feature_names(
+    aorsf_forest_handle handle,
+    const char** names,
+    int32_t n_features
+);
+
+/**
+ * Check if feature names are available.
+ *
+ * @param handle  Forest handle
+ * @return        1 if names are available, 0 otherwise
+ */
+AORSF_C_API int32_t aorsf_forest_has_feature_names(aorsf_forest_handle handle);
+
+/**
+ * Set feature normalization statistics (means and standard deviations).
+ *
+ * @param handle        Forest handle
+ * @param means         Array of feature means [n_features]
+ * @param stds          Array of feature standard deviations [n_features]
+ * @param n_features    Number of features
+ * @return              AORSF_SUCCESS or error code
+ */
+AORSF_C_API aorsf_error_t aorsf_forest_set_feature_stats(
+    aorsf_forest_handle handle,
+    const double* means,
+    const double* stds,
+    int32_t n_features
+);
+
+/**
+ * Get feature normalization statistics.
+ *
+ * @param handle        Forest handle
+ * @param means         Output array for means [n_features] (can be NULL)
+ * @param stds          Output array for stds [n_features] (can be NULL)
+ * @param n_features    Size of output arrays
+ * @return              AORSF_SUCCESS or error code
+ */
+AORSF_C_API aorsf_error_t aorsf_forest_get_feature_stats(
+    aorsf_forest_handle handle,
+    double* means,
+    double* stds,
+    int32_t n_features
+);
+
+/**
+ * Check if feature statistics are available.
+ *
+ * @param handle  Forest handle
+ * @return        1 if stats are available, 0 otherwise
+ */
+AORSF_C_API int32_t aorsf_forest_has_feature_stats(aorsf_forest_handle handle);
 
 #endif /* AORSF_C_H */

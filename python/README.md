@@ -259,6 +259,10 @@ clf = joblib.load('model.joblib')
 
 **Note**: Models with custom callback functions (`lincomb_func`, `oobag_eval_func`) cannot be pickled directly. Set these to `None` before pickling, or use module-level functions.
 
+### Cross-Language Serialization
+
+For advanced use cases requiring cross-language model sharing (e.g., training in Python and deploying in C#), the underlying C API provides binary and JSON serialization formats. See `src/c_api/README.md` for details on the native serialization API.
+
 ## scikit-learn Compatibility
 
 pyaorsf estimators are fully compatible with scikit-learn.
