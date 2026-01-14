@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /opt/homebrew/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E rm -f
+RM = /opt/homebrew/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/mweiss/sandbox/aorsf/src/core
+CMAKE_SOURCE_DIR = /Users/mweiss/repos/aorsf/src/core
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/mweiss/sandbox/aorsf/src/core/build
+CMAKE_BINARY_DIR = /Users/mweiss/repos/aorsf/src/core/build
 
 # Include any dependencies generated for this target.
 include tests/CMakeFiles/test_survival.dir/depend.make
@@ -73,18 +73,18 @@ tests/CMakeFiles/test_survival.dir/codegen:
 .PHONY : tests/CMakeFiles/test_survival.dir/codegen
 
 tests/CMakeFiles/test_survival.dir/test_survival.cpp.o: tests/CMakeFiles/test_survival.dir/flags.make
-tests/CMakeFiles/test_survival.dir/test_survival.cpp.o: /Users/mweiss/sandbox/aorsf/src/core/tests/test_survival.cpp
+tests/CMakeFiles/test_survival.dir/test_survival.cpp.o: /Users/mweiss/repos/aorsf/src/core/tests/test_survival.cpp
 tests/CMakeFiles/test_survival.dir/test_survival.cpp.o: tests/CMakeFiles/test_survival.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/test_survival.dir/test_survival.cpp.o"
-	cd /Users/mweiss/sandbox/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/test_survival.dir/test_survival.cpp.o -MF CMakeFiles/test_survival.dir/test_survival.cpp.o.d -o CMakeFiles/test_survival.dir/test_survival.cpp.o -c /Users/mweiss/sandbox/aorsf/src/core/tests/test_survival.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/test_survival.dir/test_survival.cpp.o"
+	cd /Users/mweiss/repos/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/test_survival.dir/test_survival.cpp.o -MF CMakeFiles/test_survival.dir/test_survival.cpp.o.d -o CMakeFiles/test_survival.dir/test_survival.cpp.o -c /Users/mweiss/repos/aorsf/src/core/tests/test_survival.cpp
 
 tests/CMakeFiles/test_survival.dir/test_survival.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_survival.dir/test_survival.cpp.i"
-	cd /Users/mweiss/sandbox/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mweiss/sandbox/aorsf/src/core/tests/test_survival.cpp > CMakeFiles/test_survival.dir/test_survival.cpp.i
+	cd /Users/mweiss/repos/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mweiss/repos/aorsf/src/core/tests/test_survival.cpp > CMakeFiles/test_survival.dir/test_survival.cpp.i
 
 tests/CMakeFiles/test_survival.dir/test_survival.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_survival.dir/test_survival.cpp.s"
-	cd /Users/mweiss/sandbox/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mweiss/sandbox/aorsf/src/core/tests/test_survival.cpp -o CMakeFiles/test_survival.dir/test_survival.cpp.s
+	cd /Users/mweiss/repos/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mweiss/repos/aorsf/src/core/tests/test_survival.cpp -o CMakeFiles/test_survival.dir/test_survival.cpp.s
 
 # Object files for target test_survival
 test_survival_OBJECTS = \
@@ -96,21 +96,20 @@ test_survival_EXTERNAL_OBJECTS =
 tests/test_survival: tests/CMakeFiles/test_survival.dir/test_survival.cpp.o
 tests/test_survival: tests/CMakeFiles/test_survival.dir/build.make
 tests/test_survival: libaorsf_core.a
-tests/test_survival: /usr/local/lib/libarmadillo.dylib
-tests/test_survival: /usr/local/lib/libomp.dylib
+tests/test_survival: /opt/homebrew/lib/libarmadillo.dylib
 tests/test_survival: tests/CMakeFiles/test_survival.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_survival"
-	cd /Users/mweiss/sandbox/aorsf/src/core/build/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_survival.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_survival"
+	cd /Users/mweiss/repos/aorsf/src/core/build/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_survival.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 tests/CMakeFiles/test_survival.dir/build: tests/test_survival
 .PHONY : tests/CMakeFiles/test_survival.dir/build
 
 tests/CMakeFiles/test_survival.dir/clean:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build/tests && $(CMAKE_COMMAND) -P CMakeFiles/test_survival.dir/cmake_clean.cmake
+	cd /Users/mweiss/repos/aorsf/src/core/build/tests && $(CMAKE_COMMAND) -P CMakeFiles/test_survival.dir/cmake_clean.cmake
 .PHONY : tests/CMakeFiles/test_survival.dir/clean
 
 tests/CMakeFiles/test_survival.dir/depend:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/mweiss/sandbox/aorsf/src/core /Users/mweiss/sandbox/aorsf/src/core/tests /Users/mweiss/sandbox/aorsf/src/core/build /Users/mweiss/sandbox/aorsf/src/core/build/tests /Users/mweiss/sandbox/aorsf/src/core/build/tests/CMakeFiles/test_survival.dir/DependInfo.cmake "--color=$(COLOR)" test_survival
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/mweiss/repos/aorsf/src/core /Users/mweiss/repos/aorsf/src/core/tests /Users/mweiss/repos/aorsf/src/core/build /Users/mweiss/repos/aorsf/src/core/build/tests /Users/mweiss/repos/aorsf/src/core/build/tests/CMakeFiles/test_survival.dir/DependInfo.cmake "--color=$(COLOR)" test_survival
 .PHONY : tests/CMakeFiles/test_survival.dir/depend
 

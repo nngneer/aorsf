@@ -1,0 +1,7 @@
+/Users/mweiss/repos/aorsf/src/core/CMakeFiles/aorsf_core.dir
+/Users/mweiss/repos/aorsf/src/core/CMakeFiles/edit_cache.dir
+/Users/mweiss/repos/aorsf/src/core/CMakeFiles/rebuild_cache.dir
+/Users/mweiss/repos/aorsf/src/core/CMakeFiles/list_install_components.dir
+/Users/mweiss/repos/aorsf/src/core/CMakeFiles/install.dir
+/Users/mweiss/repos/aorsf/src/core/CMakeFiles/install/local.dir
+/Users/mweiss/repos/aorsf/src/core/CMakeFiles/install/strip.dir

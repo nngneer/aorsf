@@ -48,27 +48,37 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /opt/homebrew/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E rm -f
+RM = /opt/homebrew/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/mweiss/sandbox/aorsf/src/core
+CMAKE_SOURCE_DIR = /Users/mweiss/repos/aorsf/src/core
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/mweiss/sandbox/aorsf/src/core/build
+CMAKE_BINARY_DIR = /Users/mweiss/repos/aorsf/src/core/build
 
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
+	/opt/homebrew/bin/ctest $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
-	/usr/local/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/opt/homebrew/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +88,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/usr/local/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/opt/homebrew/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -97,49 +107,49 @@ list_install_components/fast: list_install_components
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/usr/local/bin/cmake -P cmake_install.cmake
+	/opt/homebrew/bin/cmake -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/usr/local/bin/cmake -P cmake_install.cmake
+	/opt/homebrew/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
 install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
 install/strip/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/opt/homebrew/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles /Users/mweiss/sandbox/aorsf/src/core/build/tests//CMakeFiles/progress.marks
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles 0
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles /Users/mweiss/repos/aorsf/src/core/build/tests//CMakeFiles/progress.marks
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/clean
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,22 +158,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 tests/CMakeFiles/test_standalone.dir/rule:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_standalone.dir/rule
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_standalone.dir/rule
 .PHONY : tests/CMakeFiles/test_standalone.dir/rule
 
 # Convenience name for target.
@@ -172,12 +182,12 @@ test_standalone: tests/CMakeFiles/test_standalone.dir/rule
 
 # fast build rule for target.
 test_standalone/fast:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/build
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/build
 .PHONY : test_standalone/fast
 
 # Convenience name for target.
 tests/CMakeFiles/test_survival.dir/rule:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_survival.dir/rule
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_survival.dir/rule
 .PHONY : tests/CMakeFiles/test_survival.dir/rule
 
 # Convenience name for target.
@@ -186,7 +196,7 @@ test_survival: tests/CMakeFiles/test_survival.dir/rule
 
 # fast build rule for target.
 test_survival/fast:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/build
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/build
 .PHONY : test_survival/fast
 
 test_standalone.o: test_standalone.cpp.o
@@ -194,7 +204,7 @@ test_standalone.o: test_standalone.cpp.o
 
 # target to build an object file
 test_standalone.cpp.o:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o
 .PHONY : test_standalone.cpp.o
 
 test_standalone.i: test_standalone.cpp.i
@@ -202,7 +212,7 @@ test_standalone.i: test_standalone.cpp.i
 
 # target to preprocess a source file
 test_standalone.cpp.i:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.i
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.i
 .PHONY : test_standalone.cpp.i
 
 test_standalone.s: test_standalone.cpp.s
@@ -210,7 +220,7 @@ test_standalone.s: test_standalone.cpp.s
 
 # target to generate assembly for a file
 test_standalone.cpp.s:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.s
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.s
 .PHONY : test_standalone.cpp.s
 
 test_survival.o: test_survival.cpp.o
@@ -218,7 +228,7 @@ test_survival.o: test_survival.cpp.o
 
 # target to build an object file
 test_survival.cpp.o:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/test_survival.cpp.o
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/test_survival.cpp.o
 .PHONY : test_survival.cpp.o
 
 test_survival.i: test_survival.cpp.i
@@ -226,7 +236,7 @@ test_survival.i: test_survival.cpp.i
 
 # target to preprocess a source file
 test_survival.cpp.i:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/test_survival.cpp.i
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/test_survival.cpp.i
 .PHONY : test_survival.cpp.i
 
 test_survival.s: test_survival.cpp.s
@@ -234,7 +244,7 @@ test_survival.s: test_survival.cpp.s
 
 # target to generate assembly for a file
 test_survival.cpp.s:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/test_survival.cpp.s
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/test_survival.cpp.s
 .PHONY : test_survival.cpp.s
 
 # Help Target
@@ -249,6 +259,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... test"
 	@echo "... test_standalone"
 	@echo "... test_survival"
 	@echo "... test_standalone.o"
@@ -268,6 +279,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

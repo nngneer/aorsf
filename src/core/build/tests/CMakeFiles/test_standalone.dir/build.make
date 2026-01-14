@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /opt/homebrew/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E rm -f
+RM = /opt/homebrew/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/mweiss/sandbox/aorsf/src/core
+CMAKE_SOURCE_DIR = /Users/mweiss/repos/aorsf/src/core
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/mweiss/sandbox/aorsf/src/core/build
+CMAKE_BINARY_DIR = /Users/mweiss/repos/aorsf/src/core/build
 
 # Include any dependencies generated for this target.
 include tests/CMakeFiles/test_standalone.dir/depend.make
@@ -73,18 +73,18 @@ tests/CMakeFiles/test_standalone.dir/codegen:
 .PHONY : tests/CMakeFiles/test_standalone.dir/codegen
 
 tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o: tests/CMakeFiles/test_standalone.dir/flags.make
-tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o: /Users/mweiss/sandbox/aorsf/src/core/tests/test_standalone.cpp
+tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o: /Users/mweiss/repos/aorsf/src/core/tests/test_standalone.cpp
 tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o: tests/CMakeFiles/test_standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o"
-	cd /Users/mweiss/sandbox/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o -MF CMakeFiles/test_standalone.dir/test_standalone.cpp.o.d -o CMakeFiles/test_standalone.dir/test_standalone.cpp.o -c /Users/mweiss/sandbox/aorsf/src/core/tests/test_standalone.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o"
+	cd /Users/mweiss/repos/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o -MF CMakeFiles/test_standalone.dir/test_standalone.cpp.o.d -o CMakeFiles/test_standalone.dir/test_standalone.cpp.o -c /Users/mweiss/repos/aorsf/src/core/tests/test_standalone.cpp
 
 tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_standalone.dir/test_standalone.cpp.i"
-	cd /Users/mweiss/sandbox/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mweiss/sandbox/aorsf/src/core/tests/test_standalone.cpp > CMakeFiles/test_standalone.dir/test_standalone.cpp.i
+	cd /Users/mweiss/repos/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mweiss/repos/aorsf/src/core/tests/test_standalone.cpp > CMakeFiles/test_standalone.dir/test_standalone.cpp.i
 
 tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_standalone.dir/test_standalone.cpp.s"
-	cd /Users/mweiss/sandbox/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mweiss/sandbox/aorsf/src/core/tests/test_standalone.cpp -o CMakeFiles/test_standalone.dir/test_standalone.cpp.s
+	cd /Users/mweiss/repos/aorsf/src/core/build/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mweiss/repos/aorsf/src/core/tests/test_standalone.cpp -o CMakeFiles/test_standalone.dir/test_standalone.cpp.s
 
 # Object files for target test_standalone
 test_standalone_OBJECTS = \
@@ -96,21 +96,20 @@ test_standalone_EXTERNAL_OBJECTS =
 tests/test_standalone: tests/CMakeFiles/test_standalone.dir/test_standalone.cpp.o
 tests/test_standalone: tests/CMakeFiles/test_standalone.dir/build.make
 tests/test_standalone: libaorsf_core.a
-tests/test_standalone: /usr/local/lib/libarmadillo.dylib
-tests/test_standalone: /usr/local/lib/libomp.dylib
+tests/test_standalone: /opt/homebrew/lib/libarmadillo.dylib
 tests/test_standalone: tests/CMakeFiles/test_standalone.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_standalone"
-	cd /Users/mweiss/sandbox/aorsf/src/core/build/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_standalone.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_standalone"
+	cd /Users/mweiss/repos/aorsf/src/core/build/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_standalone.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 tests/CMakeFiles/test_standalone.dir/build: tests/test_standalone
 .PHONY : tests/CMakeFiles/test_standalone.dir/build
 
 tests/CMakeFiles/test_standalone.dir/clean:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build/tests && $(CMAKE_COMMAND) -P CMakeFiles/test_standalone.dir/cmake_clean.cmake
+	cd /Users/mweiss/repos/aorsf/src/core/build/tests && $(CMAKE_COMMAND) -P CMakeFiles/test_standalone.dir/cmake_clean.cmake
 .PHONY : tests/CMakeFiles/test_standalone.dir/clean
 
 tests/CMakeFiles/test_standalone.dir/depend:
-	cd /Users/mweiss/sandbox/aorsf/src/core/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/mweiss/sandbox/aorsf/src/core /Users/mweiss/sandbox/aorsf/src/core/tests /Users/mweiss/sandbox/aorsf/src/core/build /Users/mweiss/sandbox/aorsf/src/core/build/tests /Users/mweiss/sandbox/aorsf/src/core/build/tests/CMakeFiles/test_standalone.dir/DependInfo.cmake "--color=$(COLOR)" test_standalone
+	cd /Users/mweiss/repos/aorsf/src/core/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/mweiss/repos/aorsf/src/core /Users/mweiss/repos/aorsf/src/core/tests /Users/mweiss/repos/aorsf/src/core/build /Users/mweiss/repos/aorsf/src/core/build/tests /Users/mweiss/repos/aorsf/src/core/build/tests/CMakeFiles/test_standalone.dir/DependInfo.cmake "--color=$(COLOR)" test_standalone
 .PHONY : tests/CMakeFiles/test_standalone.dir/depend
 

@@ -4,7 +4,9 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/mweiss/sandbox/aorsf/src/core
+CXX_INCLUDES = -I/Users/mweiss/repos/aorsf/src/core -I/opt/homebrew/include
 
-CXX_FLAGS = -std=gnu++17 -Xclang -fopenmp
+CXX_FLAGSarm64 = -std=gnu++17 -arch arm64
+
+CXX_FLAGS = -std=gnu++17 -arch arm64
 

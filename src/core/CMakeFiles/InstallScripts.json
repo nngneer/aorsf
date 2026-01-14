@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/mweiss/repos/aorsf/src/core/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

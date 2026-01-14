@@ -58,8 +58,8 @@ Fitting Oblique Random Classification Forest...
       N predictors total: 7
    N predictors per node: 3
  Min observations in leaf: 5
-          OOB stat value: 0.97
-           OOB stat type: Accuracy
+          OOB stat value: 0.98
+           OOB stat type: AUC-ROC
      Variable importance: anova
 
 -----------------------------------------

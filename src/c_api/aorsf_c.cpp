@@ -314,7 +314,7 @@ AORSF_C_API aorsf_error_t aorsf_forest_fit(
                     break;
                 case aorsf::TREE_CLASSIFICATION:
                     oobag_eval_type = aorsf::EVAL_CONCORD;
-                    pred_type_init = aorsf::PRED_CLASS;
+                    pred_type_init = aorsf::PRED_PROBABILITY;
                     break;
                 case aorsf::TREE_REGRESSION:
                     oobag_eval_type = aorsf::EVAL_RSQ;

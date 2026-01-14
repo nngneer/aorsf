@@ -53,7 +53,6 @@ target_include_directories(aorsf_core
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
         $<INSTALL_INTERFACE:include/aorsf>
-    PRIVATE
         ${ARMADILLO_INCLUDE_DIRS}
 )
 
@@ -87,5 +86,6 @@ install(EXPORT aorsf_coreTargets
 # Optional: Build tests
 option(BUILD_TESTS "Build standalone tests" OFF)
 if(BUILD_TESTS)
+    enable_testing()
     add_subdirectory(tests)
 endif()

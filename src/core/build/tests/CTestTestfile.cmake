@@ -1,10 +1,10 @@
 # CMake generated Testfile for 
-# Source directory: /Users/mweiss/sandbox/aorsf/src/core/tests
-# Build directory: /Users/mweiss/sandbox/aorsf/src/core/build/tests
+# Source directory: /Users/mweiss/repos/aorsf/src/core/tests
+# Build directory: /Users/mweiss/repos/aorsf/src/core/build/tests
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
-add_test(standalone_test "/Users/mweiss/sandbox/aorsf/src/core/build/tests/test_standalone")
-set_tests_properties(standalone_test PROPERTIES  _BACKTRACE_TRIPLES "/Users/mweiss/sandbox/aorsf/src/core/tests/CMakeLists.txt;11;add_test;/Users/mweiss/sandbox/aorsf/src/core/tests/CMakeLists.txt;0;")
-add_test(survival_test "/Users/mweiss/sandbox/aorsf/src/core/build/tests/test_survival")
-set_tests_properties(survival_test PROPERTIES  _BACKTRACE_TRIPLES "/Users/mweiss/sandbox/aorsf/src/core/tests/CMakeLists.txt;12;add_test;/Users/mweiss/sandbox/aorsf/src/core/tests/CMakeLists.txt;0;")
+add_test(standalone_test "/Users/mweiss/repos/aorsf/src/core/build/tests/test_standalone")
+set_tests_properties(standalone_test PROPERTIES  _BACKTRACE_TRIPLES "/Users/mweiss/repos/aorsf/src/core/tests/CMakeLists.txt;11;add_test;/Users/mweiss/repos/aorsf/src/core/tests/CMakeLists.txt;0;")
+add_test(survival_test "/Users/mweiss/repos/aorsf/src/core/build/tests/test_survival")
+set_tests_properties(survival_test PROPERTIES  _BACKTRACE_TRIPLES "/Users/mweiss/repos/aorsf/src/core/tests/CMakeLists.txt;12;add_test;/Users/mweiss/repos/aorsf/src/core/tests/CMakeLists.txt;0;")

@@ -4,7 +4,7 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_UNAME"
@@ -20,11 +20,7 @@ events:
     names:
       - "uname"
     candidate_directories:
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
@@ -34,40 +30,18 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     searched_directories:
-      - "/Users/mweiss/.aspire/bin/uname"
-      - "/Users/mweiss/.bun/bin/uname"
-      - "/usr/local/opt/node@20/bin/uname"
-      - "/Users/mweiss/.opam/5.3.0/bin/uname"
-      - "/usr/local/opt/mysql-client/bin/uname"
+      - "/opt/homebrew/bin/uname"
       - "/usr/local/bin/uname"
       - "/System/Cryptexes/App/usr/bin/uname"
     found: "/usr/bin/uname"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -77,36 +51,23 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineSystem.cmake:212 (message)"
       - "CMakeLists.txt:2 (project)"
     message: |
-      The system is: Darwin - 25.1.0 - x86_64
+      The system is: Darwin - 24.6.0 - arm64
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeUnixFindMake.cmake:5 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeUnixFindMake.cmake:5 (find_program)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_MAKE_PROGRAM"
@@ -124,11 +85,7 @@ events:
       - "make"
       - "smake"
     candidate_directories:
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
@@ -138,30 +95,12 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     searched_directories:
-      - "/Users/mweiss/.aspire/bin/gmake"
-      - "/Users/mweiss/.bun/bin/gmake"
-      - "/usr/local/opt/node@20/bin/gmake"
-      - "/Users/mweiss/.opam/5.3.0/bin/gmake"
-      - "/usr/local/opt/mysql-client/bin/gmake"
+      - "/opt/homebrew/bin/gmake"
       - "/usr/local/bin/gmake"
       - "/System/Cryptexes/App/usr/bin/gmake"
       - "/usr/bin/gmake"
@@ -171,39 +110,17 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/gmake"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/gmake"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/gmake"
-      - "/opt/pmk/env/global/bin/gmake"
-      - "/opt/X11/bin/gmake"
-      - "/Library/Apple/usr/bin/gmake"
-      - "/Library/TeX/texbin/gmake"
-      - "/Applications/VMware Fusion.app/Contents/Public/gmake"
       - "/usr/local/share/dotnet/gmake"
       - "/Users/mweiss/.dotnet/tools/gmake"
-      - "/usr/local/go/bin/gmake"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/gmake"
-      - "/Users/mweiss/.codon/bin/gmake"
-      - "/Users/mweiss/.cargo/bin/gmake"
-      - "/usr/local/opt/ruby/bin/gmake"
       - "/Users/mweiss/bin/gmake"
-      - "/usr/local/sbin/gmake"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/gmake"
-      - "/Users/mweiss/.local/bin/gmake"
-      - "/Users/mweiss/bin/omnisharp/gmake"
-      - "/Applications/Racket v8.18/bin/gmake"
-      - "/Users/mweiss/.aspire/bin/make"
-      - "/Users/mweiss/.bun/bin/make"
-      - "/usr/local/opt/node@20/bin/make"
-      - "/Users/mweiss/.opam/5.3.0/bin/make"
-      - "/usr/local/opt/mysql-client/bin/make"
+      - "/Users/mweiss/.dotnet/gmake"
+      - "/opt/homebrew/bin/make"
       - "/usr/local/bin/make"
       - "/System/Cryptexes/App/usr/bin/make"
     found: "/usr/bin/make"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -213,30 +130,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompiler.cmake:73 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:69 (_cmake_find_compiler)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompiler.cmake:73 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:69 (_cmake_find_compiler)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_CXX_COMPILER"
@@ -258,11 +162,7 @@ events:
       - "icx"
       - "clang++"
     candidate_directories:
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
@@ -272,40 +172,18 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     searched_directories:
-      - "/Users/mweiss/.aspire/bin/c++"
-      - "/Users/mweiss/.bun/bin/c++"
-      - "/usr/local/opt/node@20/bin/c++"
-      - "/Users/mweiss/.opam/5.3.0/bin/c++"
-      - "/usr/local/opt/mysql-client/bin/c++"
+      - "/opt/homebrew/bin/c++"
       - "/usr/local/bin/c++"
       - "/System/Cryptexes/App/usr/bin/c++"
     found: "/usr/bin/c++"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -315,33 +193,20 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:2 (project)"
     mode: "file"
     variable: "src_in"
@@ -357,15 +222,11 @@ events:
     names:
       - "CMakeCXXCompilerId.cpp.in"
     candidate_directories:
-      - "/usr/local/share/cmake/Modules/"
-    found: "/usr/local/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
+      - "/opt/homebrew/share/cmake/Modules/"
+    found: "/opt/homebrew/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -375,31 +236,18 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:2 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
@@ -414,20 +262,20 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
       
       The CXX compiler identification is AppleClang, found in:
-        /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/4.2.1/CompilerIdCXX/a.out
+        /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/4.2.1/CompilerIdCXX/a.out
       
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:290 (message)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:290 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:2 (project)"
     message: |
       Detecting CXX compiler apple sysroot: "/usr/bin/c++" "-E" "apple-sdk.cpp"
         # 1 "apple-sdk.cpp"
         # 1 "<built-in>" 1
         # 1 "<built-in>" 3
-        # 481 "<built-in>" 3
+        # 513 "<built-in>" 3
         # 1 "<command line>" 1
         # 1 "<built-in>" 2
         # 1 "apple-sdk.cpp" 2
@@ -460,8 +308,8 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_AR"
@@ -478,11 +326,7 @@ events:
       - "ar"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -491,32 +335,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     found: "/usr/bin/ar"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -526,30 +352,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_RANLIB"
@@ -566,11 +379,7 @@ events:
       - "ranlib"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -579,32 +388,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     found: "/usr/bin/ranlib"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -614,30 +405,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_STRIP"
@@ -654,11 +432,7 @@ events:
       - "strip"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -667,32 +441,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     found: "/usr/bin/strip"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -702,30 +458,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_LINKER"
@@ -742,11 +485,7 @@ events:
       - "ld"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -755,32 +494,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     found: "/usr/bin/ld"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -790,30 +511,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_NM"
@@ -830,11 +538,7 @@ events:
       - "nm"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -843,32 +547,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     found: "/usr/bin/nm"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -878,30 +564,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_OBJDUMP"
@@ -918,11 +591,7 @@ events:
       - "objdump"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -931,32 +600,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     found: "/usr/bin/objdump"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -966,30 +617,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_OBJCOPY"
@@ -1006,11 +644,7 @@ events:
       - "objcopy"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -1019,31 +653,13 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     searched_directories:
       - "/usr/bin/objcopy"
-      - "/Users/mweiss/.aspire/bin/objcopy"
-      - "/Users/mweiss/.bun/bin/objcopy"
-      - "/usr/local/opt/node@20/bin/objcopy"
-      - "/Users/mweiss/.opam/5.3.0/bin/objcopy"
-      - "/usr/local/opt/mysql-client/bin/objcopy"
+      - "/opt/homebrew/bin/objcopy"
       - "/usr/local/bin/objcopy"
       - "/System/Cryptexes/App/usr/bin/objcopy"
       - "/bin/objcopy"
@@ -1052,32 +668,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/objcopy"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/objcopy"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/objcopy"
-      - "/opt/pmk/env/global/bin/objcopy"
-      - "/opt/X11/bin/objcopy"
-      - "/Library/Apple/usr/bin/objcopy"
-      - "/Library/TeX/texbin/objcopy"
-      - "/Applications/VMware Fusion.app/Contents/Public/objcopy"
       - "/usr/local/share/dotnet/objcopy"
       - "/Users/mweiss/.dotnet/tools/objcopy"
-      - "/usr/local/go/bin/objcopy"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/objcopy"
-      - "/Users/mweiss/.codon/bin/objcopy"
-      - "/Users/mweiss/.cargo/bin/objcopy"
-      - "/usr/local/opt/ruby/bin/objcopy"
       - "/Users/mweiss/bin/objcopy"
-      - "/usr/local/sbin/objcopy"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/objcopy"
-      - "/Users/mweiss/.local/bin/objcopy"
-      - "/Users/mweiss/bin/omnisharp/objcopy"
-      - "/Applications/Racket v8.18/bin/objcopy"
+      - "/Users/mweiss/.dotnet/objcopy"
     found: false
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -1087,30 +685,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_READELF"
@@ -1127,11 +712,7 @@ events:
       - "readelf"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -1140,31 +721,13 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     searched_directories:
       - "/usr/bin/readelf"
-      - "/Users/mweiss/.aspire/bin/readelf"
-      - "/Users/mweiss/.bun/bin/readelf"
-      - "/usr/local/opt/node@20/bin/readelf"
-      - "/Users/mweiss/.opam/5.3.0/bin/readelf"
-      - "/usr/local/opt/mysql-client/bin/readelf"
+      - "/opt/homebrew/bin/readelf"
       - "/usr/local/bin/readelf"
       - "/System/Cryptexes/App/usr/bin/readelf"
       - "/bin/readelf"
@@ -1173,32 +736,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/readelf"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/readelf"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/readelf"
-      - "/opt/pmk/env/global/bin/readelf"
-      - "/opt/X11/bin/readelf"
-      - "/Library/Apple/usr/bin/readelf"
-      - "/Library/TeX/texbin/readelf"
-      - "/Applications/VMware Fusion.app/Contents/Public/readelf"
       - "/usr/local/share/dotnet/readelf"
       - "/Users/mweiss/.dotnet/tools/readelf"
-      - "/usr/local/go/bin/readelf"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/readelf"
-      - "/Users/mweiss/.codon/bin/readelf"
-      - "/Users/mweiss/.cargo/bin/readelf"
-      - "/usr/local/opt/ruby/bin/readelf"
       - "/Users/mweiss/bin/readelf"
-      - "/usr/local/sbin/readelf"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/readelf"
-      - "/Users/mweiss/.local/bin/readelf"
-      - "/Users/mweiss/bin/omnisharp/readelf"
-      - "/Applications/Racket v8.18/bin/readelf"
+      - "/Users/mweiss/.dotnet/readelf"
     found: false
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -1208,30 +753,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_DLLTOOL"
@@ -1248,11 +780,7 @@ events:
       - "dlltool"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -1261,31 +789,13 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     searched_directories:
       - "/usr/bin/dlltool"
-      - "/Users/mweiss/.aspire/bin/dlltool"
-      - "/Users/mweiss/.bun/bin/dlltool"
-      - "/usr/local/opt/node@20/bin/dlltool"
-      - "/Users/mweiss/.opam/5.3.0/bin/dlltool"
-      - "/usr/local/opt/mysql-client/bin/dlltool"
+      - "/opt/homebrew/bin/dlltool"
       - "/usr/local/bin/dlltool"
       - "/System/Cryptexes/App/usr/bin/dlltool"
       - "/bin/dlltool"
@@ -1294,32 +804,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/dlltool"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/dlltool"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/dlltool"
-      - "/opt/pmk/env/global/bin/dlltool"
-      - "/opt/X11/bin/dlltool"
-      - "/Library/Apple/usr/bin/dlltool"
-      - "/Library/TeX/texbin/dlltool"
-      - "/Applications/VMware Fusion.app/Contents/Public/dlltool"
       - "/usr/local/share/dotnet/dlltool"
       - "/Users/mweiss/.dotnet/tools/dlltool"
-      - "/usr/local/go/bin/dlltool"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/dlltool"
-      - "/Users/mweiss/.codon/bin/dlltool"
-      - "/Users/mweiss/.cargo/bin/dlltool"
-      - "/usr/local/opt/ruby/bin/dlltool"
       - "/Users/mweiss/bin/dlltool"
-      - "/usr/local/sbin/dlltool"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/dlltool"
-      - "/Users/mweiss/.local/bin/dlltool"
-      - "/Users/mweiss/bin/omnisharp/dlltool"
-      - "/Applications/Racket v8.18/bin/dlltool"
+      - "/Users/mweiss/.dotnet/dlltool"
     found: false
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -1329,30 +821,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_ADDR2LINE"
@@ -1369,11 +848,7 @@ events:
       - "addr2line"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -1382,31 +857,13 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     searched_directories:
       - "/usr/bin/addr2line"
-      - "/Users/mweiss/.aspire/bin/addr2line"
-      - "/Users/mweiss/.bun/bin/addr2line"
-      - "/usr/local/opt/node@20/bin/addr2line"
-      - "/Users/mweiss/.opam/5.3.0/bin/addr2line"
-      - "/usr/local/opt/mysql-client/bin/addr2line"
+      - "/opt/homebrew/bin/addr2line"
       - "/usr/local/bin/addr2line"
       - "/System/Cryptexes/App/usr/bin/addr2line"
       - "/bin/addr2line"
@@ -1415,32 +872,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/addr2line"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/addr2line"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/addr2line"
-      - "/opt/pmk/env/global/bin/addr2line"
-      - "/opt/X11/bin/addr2line"
-      - "/Library/Apple/usr/bin/addr2line"
-      - "/Library/TeX/texbin/addr2line"
-      - "/Applications/VMware Fusion.app/Contents/Public/addr2line"
       - "/usr/local/share/dotnet/addr2line"
       - "/Users/mweiss/.dotnet/tools/addr2line"
-      - "/usr/local/go/bin/addr2line"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/addr2line"
-      - "/Users/mweiss/.codon/bin/addr2line"
-      - "/Users/mweiss/.cargo/bin/addr2line"
-      - "/usr/local/opt/ruby/bin/addr2line"
       - "/Users/mweiss/bin/addr2line"
-      - "/usr/local/sbin/addr2line"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/addr2line"
-      - "/Users/mweiss/.local/bin/addr2line"
-      - "/Users/mweiss/bin/omnisharp/addr2line"
-      - "/Applications/Racket v8.18/bin/addr2line"
+      - "/Users/mweiss/.dotnet/addr2line"
     found: false
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -1450,30 +889,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_TAPI"
@@ -1490,11 +916,7 @@ events:
       - "tapi"
     candidate_directories:
       - "/usr/bin/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/bin/"
@@ -1503,31 +925,13 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     searched_directories:
       - "/usr/bin/tapi"
-      - "/Users/mweiss/.aspire/bin/tapi"
-      - "/Users/mweiss/.bun/bin/tapi"
-      - "/usr/local/opt/node@20/bin/tapi"
-      - "/Users/mweiss/.opam/5.3.0/bin/tapi"
-      - "/usr/local/opt/mysql-client/bin/tapi"
+      - "/opt/homebrew/bin/tapi"
       - "/usr/local/bin/tapi"
       - "/System/Cryptexes/App/usr/bin/tapi"
       - "/bin/tapi"
@@ -1536,32 +940,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/tapi"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/tapi"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/tapi"
-      - "/opt/pmk/env/global/bin/tapi"
-      - "/opt/X11/bin/tapi"
-      - "/Library/Apple/usr/bin/tapi"
-      - "/Library/TeX/texbin/tapi"
-      - "/Applications/VMware Fusion.app/Contents/Public/tapi"
       - "/usr/local/share/dotnet/tapi"
       - "/Users/mweiss/.dotnet/tools/tapi"
-      - "/usr/local/go/bin/tapi"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/tapi"
-      - "/Users/mweiss/.codon/bin/tapi"
-      - "/Users/mweiss/.cargo/bin/tapi"
-      - "/usr/local/opt/ruby/bin/tapi"
       - "/Users/mweiss/bin/tapi"
-      - "/usr/local/sbin/tapi"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/tapi"
-      - "/Users/mweiss/.local/bin/tapi"
-      - "/Users/mweiss/bin/omnisharp/tapi"
-      - "/Applications/Racket v8.18/bin/tapi"
+      - "/Users/mweiss/.dotnet/tapi"
     found: false
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -1571,30 +957,17 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/Platform/Darwin.cmake:76 (find_program)"
-      - "/usr/local/share/cmake/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "/opt/homebrew/share/cmake/Modules/Platform/Darwin.cmake:76 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_INSTALL_NAME_TOOL"
@@ -1610,11 +983,7 @@ events:
     names:
       - "install_name_tool"
     candidate_directories:
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
@@ -1624,40 +993,18 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
     searched_directories:
-      - "/Users/mweiss/.aspire/bin/install_name_tool"
-      - "/Users/mweiss/.bun/bin/install_name_tool"
-      - "/usr/local/opt/node@20/bin/install_name_tool"
-      - "/Users/mweiss/.opam/5.3.0/bin/install_name_tool"
-      - "/usr/local/opt/mysql-client/bin/install_name_tool"
+      - "/opt/homebrew/bin/install_name_tool"
       - "/usr/local/bin/install_name_tool"
       - "/System/Cryptexes/App/usr/bin/install_name_tool"
     found: "/usr/bin/install_name_tool"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -1667,37 +1014,24 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
       CMAKE_INSTALL_PREFIX: "/usr/local"
   -
     kind: "try_compile-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
-      - "/usr/local/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-LuFwAj"
-      binary: "/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-LuFwAj"
+      source: "/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-4GuUjI"
+      binary: "/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-4GuUjI"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -1710,161 +1044,157 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-LuFwAj'
+        Change Dir: '/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-4GuUjI'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_e1d28/fast
-        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_e1d28.dir/build.make CMakeFiles/cmTC_e1d28.dir/build
-        Building CXX object CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o
-        /usr/bin/c++   -v -Wl,-v -MD -MT CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake/Modules/CMakeCXXCompilerABI.cpp
-        Apple clang version 17.0.0 (clang-1700.6.3.2)
-        Target: x86_64-apple-darwin25.1.0
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_846f7/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_846f7.dir/build.make CMakeFiles/cmTC_846f7.dir/build
+        Building CXX object CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/c++   -arch arm64   -v -Wl,-v -MD -MT CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Apple clang version 17.0.0 (clang-1700.0.13.5)
+        Target: arm64-apple-darwin24.6.0
         Thread model: posix
-        InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+        InstalledDir: /Library/Developer/CommandLineTools/usr/bin
         clang++: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
-        ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"
-         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple x86_64-apple-macosx26.0.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=2 -target-sdk-version=26.1 -fvisibility-inlines-hidden-static-local-var -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -target-cpu penryn -tune-cpu generic -debugger-tuning=lldb -fdebug-compilation-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-LuFwAj -target-linker-version 1230.1 -v -fcoverage-compilation-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-LuFwAj -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fno-cxx-modules -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/local/share/cmake/Modules/CMakeCXXCompilerABI.cpp
-        clang -cc1 version 17.0.0 (clang-1700.6.3.2) default target x86_64-apple-darwin25.1.0
+        ignoring nonexistent directory "/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"
+         "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx15.0.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -target-sdk-version=15.5 -fvisibility-inlines-hidden-static-local-var -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-4GuUjI -target-linker-version 1167.5 -v -fcoverage-compilation-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-4GuUjI -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/17/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -Wno-reserved-identifier -Wno-gnu-folding-constant -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fno-cxx-modules -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -x c++ /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 17.0.0 (clang-1700.0.13.5) default target arm64-apple-darwin24.6.0
+        ignoring nonexistent directory "/usr/local/include"
         ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"
+        ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks"
         ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"
         #include "..." search starts here:
         #include <...> search starts here:
-         /usr/local/include
          /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1
-         /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include
+         /Library/Developer/CommandLineTools/usr/lib/clang/17/include
          /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
-         /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+         /Library/Developer/CommandLineTools/usr/include
          /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
-         /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)
         End of search list.
-        Linking CXX executable cmTC_e1d28
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e1d28.dir/link.txt --verbose=1
-        Apple clang version 17.0.0 (clang-1700.6.3.2)
-        Target: x86_64-apple-darwin25.1.0
+        Linking CXX executable cmTC_846f7
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_846f7.dir/link.txt --verbose=1
+        Apple clang version 17.0.0 (clang-1700.0.13.5)
+        Target: arm64-apple-darwin24.6.0
         Thread model: posix
-        InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 26.0.0 26.1 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_e1d28 -L/usr/local/lib -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a
-        @(#)PROGRAM:ld PROJECT:ld-1230.1
-        BUILD 06:35:00 Dec  2 2025
-        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
+        InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+         "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 15.0.0 15.5 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_846f7 -L/usr/local/lib -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a
+        @(#)PROGRAM:ld PROJECT:ld-1167.5
+        BUILD 01:45:05 Apr 30 2025
+        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
         will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
         LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
-        TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.3.8)
+        TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.0.3.5)
         Library search paths:
-        	/usr/local/lib
         	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
         	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift
         Framework search paths:
         	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks
-        /usr/bin/c++ -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_e1d28
+        /usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_846f7
         
       exitCode: 0
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:122 (message)"
-      - "/usr/local/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:122 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     message: |
       Effective list of requested architectures (possibly empty)  : ""
-      Effective list of architectures found in the ABI info binary: "x86_64"
+      Effective list of architectures found in the ABI info binary: "arm64"
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:217 (message)"
-      - "/usr/local/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:217 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     message: |
       Parsed CXX implicit include dir info: rv=done
         found start of include info
         found start of implicit include info
-          add: [/usr/local/include]
           add: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1]
-          add: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include]
+          add: [/Library/Developer/CommandLineTools/usr/lib/clang/17/include]
           add: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
-          add: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+          add: [/Library/Developer/CommandLineTools/usr/include]
         end of search list found
-        collapse include dir [/usr/local/include] ==> [/usr/local/include]
         collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1]
-        collapse include dir [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include] ==> [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include]
+        collapse include dir [/Library/Developer/CommandLineTools/usr/lib/clang/17/include] ==> [/Library/Developer/CommandLineTools/usr/lib/clang/17/include]
         collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
-        collapse include dir [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
-        implicit include dirs: [/usr/local/include;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+        collapse include dir [/Library/Developer/CommandLineTools/usr/include] ==> [/Library/Developer/CommandLineTools/usr/include]
+        implicit include dirs: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1;/Library/Developer/CommandLineTools/usr/lib/clang/17/include;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include;/Library/Developer/CommandLineTools/usr/include]
       
       
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
-      - "/usr/local/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     message: |
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: '/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-LuFwAj']
+        ignore line: [Change Dir: '/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-4GuUjI']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_e1d28/fast]
-        ignore line: [/Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_e1d28.dir/build.make CMakeFiles/cmTC_e1d28.dir/build]
-        ignore line: [Building CXX object CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o]
-        ignore line: [/usr/bin/c++   -v -Wl -v -MD -MT CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
-        ignore line: [Apple clang version 17.0.0 (clang-1700.6.3.2)]
-        ignore line: [Target: x86_64-apple-darwin25.1.0]
+        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_846f7/fast]
+        ignore line: [/Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_846f7.dir/build.make CMakeFiles/cmTC_846f7.dir/build]
+        ignore line: [Building CXX object CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/c++   -arch arm64   -v -Wl -v -MD -MT CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Apple clang version 17.0.0 (clang-1700.0.13.5)]
+        ignore line: [Target: arm64-apple-darwin24.6.0]
         ignore line: [Thread model: posix]
-        ignore line: [InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin]
+        ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
         ignore line: [clang++: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
-        ignore line: [ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"]
-        ignore line: [ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple x86_64-apple-macosx26.0.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=all -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=2 -target-sdk-version=26.1 -fvisibility-inlines-hidden-static-local-var -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -target-cpu penryn -tune-cpu generic -debugger-tuning=lldb -fdebug-compilation-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-LuFwAj -target-linker-version 1230.1 -v -fcoverage-compilation-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-LuFwAj -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fno-cxx-modules -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/local/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
-        ignore line: [clang -cc1 version 17.0.0 (clang-1700.6.3.2) default target x86_64-apple-darwin25.1.0]
+        ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"]
+        ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx15.0.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -target-sdk-version=15.5 -fvisibility-inlines-hidden-static-local-var -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-4GuUjI -target-linker-version 1167.5 -v -fcoverage-compilation-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-4GuUjI -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/17/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -Wno-reserved-identifier -Wno-gnu-folding-constant -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fno-cxx-modules -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -x c++ /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 17.0.0 (clang-1700.0.13.5) default target arm64-apple-darwin24.6.0]
+        ignore line: [ignoring nonexistent directory "/usr/local/include"]
         ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks"]
         ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"]
         ignore line: [#include "..." search starts here:]
         ignore line: [#include <...> search starts here:]
-        ignore line: [ /usr/local/include]
         ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include]
+        ignore line: [ /Library/Developer/CommandLineTools/usr/lib/clang/17/include]
         ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
-        ignore line: [ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+        ignore line: [ /Library/Developer/CommandLineTools/usr/include]
         ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)]
-        ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)]
         ignore line: [End of search list.]
-        ignore line: [Linking CXX executable cmTC_e1d28]
-        ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e1d28.dir/link.txt --verbose=1]
-        ignore line: [Apple clang version 17.0.0 (clang-1700.6.3.2)]
-        ignore line: [Target: x86_64-apple-darwin25.1.0]
+        ignore line: [Linking CXX executable cmTC_846f7]
+        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_846f7.dir/link.txt --verbose=1]
+        ignore line: [Apple clang version 17.0.0 (clang-1700.0.13.5)]
+        ignore line: [Target: arm64-apple-darwin24.6.0]
         ignore line: [Thread model: posix]
-        ignore line: [InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin]
-        link line: [ "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 26.0.0 26.1 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_e1d28 -L/usr/local/lib -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
-          arg [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld] ==> ignore
+        ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
+        link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 15.0.0 15.5 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_846f7 -L/usr/local/lib -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+          arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore
           arg [-demangle] ==> ignore
           arg [-lto_library] ==> ignore, skip following value
-          arg [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib] ==> skip value of -lto_library
+          arg [/Library/Developer/CommandLineTools/usr/lib/libLTO.dylib] ==> skip value of -lto_library
           arg [-dynamic] ==> ignore
           arg [-arch] ==> ignore
-          arg [x86_64] ==> ignore
+          arg [arm64] ==> ignore
           arg [-platform_version] ==> ignore
           arg [macos] ==> ignore
-          arg [26.0.0] ==> ignore
-          arg [26.1] ==> ignore
+          arg [15.0.0] ==> ignore
+          arg [15.5] ==> ignore
           arg [-syslibroot] ==> ignore
           arg [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk] ==> ignore
           arg [-mllvm] ==> ignore
           arg [-enable-linkonceodr-outlining] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_e1d28] ==> ignore
+          arg [cmTC_846f7] ==> ignore
           arg [-L/usr/local/lib] ==> dir [/usr/local/lib]
           arg [-search_paths_first] ==> ignore
           arg [-headerpad_max_install_names] ==> ignore
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_e1d28.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [CMakeFiles/cmTC_846f7.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
           arg [-lc++] ==> lib [c++]
           arg [-lSystem] ==> lib [System]
-          arg [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a] ==> lib [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
-        linker tool for 'CXX': /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld
-        Library search paths: [;/usr/local/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift]
+          arg [/Library/Developer/CommandLineTools/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        linker tool for 'CXX': /Library/Developer/CommandLineTools/usr/bin/ld
+        Library search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift]
         Framework search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks]
         remove lib [System]
-        remove lib [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
-        collapse library dir [/usr/local/lib] ==> [/usr/local/lib]
+        remove lib [/Library/Developer/CommandLineTools/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
         collapse library dir [/usr/local/lib] ==> [/usr/local/lib]
         collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib]
         collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift]
@@ -1878,22 +1208,22 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
-      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
-      - "/usr/local/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/opt/homebrew/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     message: |
-      Running the CXX compiler's linker: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" "-v"
-      @(#)PROGRAM:ld PROJECT:ld-1230.1
-      BUILD 06:35:00 Dec  2 2025
-      configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
+      Running the CXX compiler's linker: "/Library/Developer/CommandLineTools/usr/bin/ld" "-v"
+      @(#)PROGRAM:ld PROJECT:ld-1167.5
+      BUILD 01:45:05 Apr 30 2025
+      configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
       will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
       LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
-      TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.3.8)
+      TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.0.3.5)
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/FindArmadillo.cmake:116 (find_path)"
+      - "/opt/homebrew/share/cmake/Modules/FindArmadillo.cmake:116 (find_path)"
       - "CMakeLists.txt:8 (find_package)"
     mode: "path"
     variable: "ARMADILLO_INCLUDE_DIR"
@@ -1909,11 +1239,7 @@ events:
     names:
       - "armadillo"
     candidate_directories:
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
@@ -1923,26 +1249,14 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
-      - "/opt/pmk/env/global/bin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/include/"
+      - "/opt/homebrew/"
       - "/usr/local/include/"
       - "/usr/local/"
       - "/usr/include/"
@@ -1964,17 +1278,12 @@ events:
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Network/Library/Frameworks/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/"
       - "/Library/Developer/CommandLineTools/Library/Frameworks/"
-      - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/"
       - "/Library/Frameworks/"
       - "/Network/Library/Frameworks/"
       - "/System/Library/Frameworks/"
       - "/Armadillo/include/"
     searched_directories:
-      - "/Users/mweiss/.aspire/bin/armadillo"
-      - "/Users/mweiss/.bun/bin/armadillo"
-      - "/usr/local/opt/node@20/bin/armadillo"
-      - "/Users/mweiss/.opam/5.3.0/bin/armadillo"
-      - "/usr/local/opt/mysql-client/bin/armadillo"
+      - "/opt/homebrew/bin/armadillo"
       - "/usr/local/bin/armadillo"
       - "/System/Cryptexes/App/usr/bin/armadillo"
       - "/usr/bin/armadillo"
@@ -1984,34 +1293,16 @@ events:
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/armadillo"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/armadillo"
       - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/armadillo"
-      - "/opt/pmk/env/global/bin/armadillo"
-      - "/opt/X11/bin/armadillo"
-      - "/Library/Apple/usr/bin/armadillo"
-      - "/Library/TeX/texbin/armadillo"
-      - "/Applications/VMware Fusion.app/Contents/Public/armadillo"
       - "/usr/local/share/dotnet/armadillo"
       - "/Users/mweiss/.dotnet/tools/armadillo"
-      - "/usr/local/go/bin/armadillo"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/armadillo"
-      - "/Users/mweiss/.codon/bin/armadillo"
-      - "/Users/mweiss/.cargo/bin/armadillo"
-      - "/usr/local/opt/ruby/bin/armadillo"
       - "/Users/mweiss/bin/armadillo"
-      - "/usr/local/sbin/armadillo"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/armadillo"
-      - "/Users/mweiss/.local/bin/armadillo"
-      - "/Users/mweiss/bin/omnisharp/armadillo"
-      - "/Applications/Racket v8.18/bin/armadillo"
+      - "/Users/mweiss/.dotnet/armadillo"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/armadillo"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/armadillo"
-    found: "/usr/local/include/"
+    found: "/opt/homebrew/include/"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -2021,33 +1312,20 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
       CMAKE_INSTALL_PREFIX: "/usr/local"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
-        - "/usr/local"
+        - "/opt/homebrew"
         - "/usr/local"
         - "/usr"
         - "/"
-        - "/usr/local"
+        - "/opt/homebrew"
         - "/usr/local"
         - "/usr/X11R6"
         - "/usr/pkg"
@@ -2062,14 +1340,14 @@ events:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Network/Library/Frameworks"
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
         - "/Library/Developer/CommandLineTools/Library/Frameworks"
-        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Developer/CommandLineTools/Library/Frameworks"
         - "/Library/Frameworks"
         - "/Network/Library/Frameworks"
         - "/System/Library/Frameworks"
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/FindArmadillo.cmake:169 (find_library)"
+      - "/opt/homebrew/share/cmake/Modules/FindArmadillo.cmake:169 (find_library)"
       - "CMakeLists.txt:8 (find_package)"
     mode: "library"
     variable: "ARMADILLO_LIBRARY"
@@ -2085,87 +1363,47 @@ events:
     names:
       - "armadillo"
     candidate_directories:
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
       - "/sbin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
-      - "/usr/local/lib/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
       - "/usr/local/"
       - "/usr/lib/"
       - "/usr/"
-      - "/usr/X11R6/lib/"
-      - "/usr/X11R6/"
       - "/opt/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/"
       - "/Library/Developer/CommandLineTools/Library/Frameworks/"
-      - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/"
       - "/Library/Frameworks/"
       - "/System/Library/Frameworks/"
     searched_directories:
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
       - "/sbin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
-    found: "/usr/local/lib/libarmadillo.dylib"
+    found: "/opt/homebrew/lib/libarmadillo.dylib"
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -2175,33 +1413,20 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
       CMAKE_INSTALL_PREFIX: "/usr/local"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
-        - "/usr/local"
+        - "/opt/homebrew"
         - "/usr/local"
         - "/usr"
         - "/"
-        - "/usr/local"
+        - "/opt/homebrew"
         - "/usr/local"
         - "/usr/X11R6"
         - "/usr/pkg"
@@ -2216,20 +1441,20 @@ events:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Network/Library/Frameworks"
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
         - "/Library/Developer/CommandLineTools/Library/Frameworks"
-        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Developer/CommandLineTools/Library/Frameworks"
         - "/Library/Frameworks"
         - "/Network/Library/Frameworks"
         - "/System/Library/Frameworks"
   -
     kind: "try_compile-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:333 (try_compile)"
-      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
+      - "/opt/homebrew/share/cmake/Modules/FindOpenMP.cmake:333 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
       - "CMakeLists.txt:11 (find_package)"
     description: "Detecting CXX OpenMP compiler info"
     directories:
-      source: "/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-t7H1g7"
-      binary: "/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-t7H1g7"
+      source: "/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-atKIAf"
+      binary: "/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-atKIAf"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -2241,46 +1466,25 @@ events:
       variable: "OpenMP_COMPILE_RESULT_CXX_Xclang fopenmp"
       cached: true
       stdout: |
-        Change Dir: '/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-t7H1g7'
+        Change Dir: '/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-atKIAf'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_bda9d/fast
-        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_bda9d.dir/build.make CMakeFiles/cmTC_bda9d.dir/build
-        Building CXX object CMakeFiles/cmTC_bda9d.dir/OpenMPTryFlag.cpp.o
-        /usr/bin/c++   -Xclang -fopenmp -std=gnu++17 -MD -MT CMakeFiles/cmTC_bda9d.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_bda9d.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_bda9d.dir/OpenMPTryFlag.cpp.o -c /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-t7H1g7/OpenMPTryFlag.cpp
-        Linking CXX executable cmTC_bda9d
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bda9d.dir/link.txt --verbose=1
-        Apple clang version 17.0.0 (clang-1700.6.3.2)
-        Target: x86_64-apple-darwin25.1.0
-        Thread model: posix
-        InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 26.0.0 26.1 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_bda9d -L/usr/local/lib -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_bda9d.dir/OpenMPTryFlag.cpp.o -lc++ -lSystem /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a
-        @(#)PROGRAM:ld PROJECT:ld-1230.1
-        BUILD 06:35:00 Dec  2 2025
-        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
-        will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
-        LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
-        TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.3.8)
-        Library search paths:
-        	/usr/local/lib
-        	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
-        	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift
-        Framework search paths:
-        	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks
-        Undefined symbols for architecture x86_64:
-          "_omp_get_max_threads", referenced from:
-              _main in OpenMPTryFlag.cpp.o
-        ld: symbol(s) not found for architecture x86_64
-        clang++: error: linker command failed with exit code 1 (use -v to see invocation)
-        /usr/bin/c++  -Xclang -fopenmp -Wl,-search_paths_first -Wl,-headerpad_max_install_names -v -Wl,-v CMakeFiles/cmTC_bda9d.dir/OpenMPTryFlag.cpp.o -o cmTC_bda9d
-        make[1]: *** [cmTC_bda9d] Error 1
-        make: *** [cmTC_bda9d/fast] Error 2
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_99cb9/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_99cb9.dir/build.make CMakeFiles/cmTC_99cb9.dir/build
+        Building CXX object CMakeFiles/cmTC_99cb9.dir/OpenMPTryFlag.cpp.o
+        /usr/bin/c++   -Xclang -fopenmp -std=gnu++17 -arch arm64 -MD -MT CMakeFiles/cmTC_99cb9.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_99cb9.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_99cb9.dir/OpenMPTryFlag.cpp.o -c /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-atKIAf/OpenMPTryFlag.cpp
+        /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-atKIAf/OpenMPTryFlag.cpp:2:10: fatal error: 'omp.h' file not found
+            2 | #include <omp.h>
+              |          ^~~~~~~
+        1 error generated.
+        make[1]: *** [CMakeFiles/cmTC_99cb9.dir/OpenMPTryFlag.cpp.o] Error 1
+        make: *** [cmTC_99cb9/fast] Error 2
         
       exitCode: 2
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:425 (find_library)"
-      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
+      - "/opt/homebrew/share/cmake/Modules/FindOpenMP.cmake:425 (find_library)"
+      - "/opt/homebrew/share/cmake/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
       - "CMakeLists.txt:11 (find_package)"
     mode: "library"
     variable: "OpenMP_libomp_LIBRARY"
@@ -2300,89 +1504,109 @@ events:
     candidate_directories:
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
       - "/sbin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
-      - "/usr/local/lib/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
       - "/usr/local/"
       - "/usr/lib/"
       - "/usr/"
-      - "/usr/X11R6/lib/"
-      - "/usr/X11R6/"
       - "/opt/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/"
       - "/Library/Developer/CommandLineTools/Library/Frameworks/"
-      - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/"
       - "/Library/Frameworks/"
       - "/System/Library/Frameworks/"
     searched_directories:
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/"
-      - "/Users/mweiss/.aspire/bin/"
-      - "/Users/mweiss/.bun/bin/"
-      - "/usr/local/opt/node@20/bin/"
-      - "/Users/mweiss/.opam/5.3.0/bin/"
-      - "/usr/local/opt/mysql-client/bin/"
+      - "/opt/homebrew/bin/"
       - "/usr/local/bin/"
       - "/System/Cryptexes/App/usr/bin/"
       - "/usr/bin/"
       - "/bin/"
       - "/usr/sbin/"
       - "/sbin/"
-      - "/opt/X11/bin/"
-      - "/Library/Apple/usr/bin/"
-      - "/Library/TeX/texbin/"
-      - "/Applications/VMware Fusion.app/Contents/Public/"
       - "/usr/local/share/dotnet/"
       - "/Users/mweiss/.dotnet/tools/"
-      - "/usr/local/go/bin/"
-      - "/Library/Frameworks/Mono.framework/Versions/Current/Commands/"
-      - "/Users/mweiss/.codon/bin/"
-      - "/Users/mweiss/.cargo/bin/"
-      - "/usr/local/opt/ruby/bin/"
       - "/Users/mweiss/bin/"
-      - "/usr/local/sbin/"
-      - "/Users/mweiss/.gem/ruby/3.2.0/bin/"
-      - "/Users/mweiss/.local/bin/"
-      - "/Users/mweiss/bin/omnisharp/"
-      - "/Applications/Racket v8.18/bin/"
+      - "/Users/mweiss/.dotnet/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
       - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
-    found: "/usr/local/lib/libomp.dylib"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/opt/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/"
+      - "/Library/Developer/CommandLineTools/Library/Frameworks/"
+      - "/Library/Frameworks/"
+      - "/System/Library/Frameworks/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/"
+      - "/opt/homebrew/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Users/mweiss/.dotnet/tools/"
+      - "/Users/mweiss/bin/"
+      - "/Users/mweiss/.dotnet/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/opt/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/"
+      - "/Library/Developer/CommandLineTools/Library/Frameworks/"
+      - "/Library/Frameworks/"
+      - "/System/Library/Frameworks/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/"
+      - "/opt/homebrew/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Users/mweiss/.dotnet/tools/"
+      - "/Users/mweiss/bin/"
+      - "/Users/mweiss/.dotnet/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/opt/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/"
+      - "/Library/Developer/CommandLineTools/Library/Frameworks/"
+      - "/Library/Frameworks/"
+      - "/System/Library/Frameworks/"
+    found: false
     search_context:
       ENV{PATH}:
-        - "/Users/mweiss/.aspire/bin"
-        - "/Users/mweiss/.bun/bin"
-        - "/usr/local/opt/node@20/bin"
-        - "/Users/mweiss/.opam/5.3.0/bin"
-        - "/usr/local/opt/mysql-client/bin/"
+        - "/opt/homebrew/bin"
         - "/usr/local/bin"
         - "/System/Cryptexes/App/usr/bin"
         - "/usr/bin"
@@ -2392,33 +1616,20 @@ events:
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
         - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
-        - "/opt/pmk/env/global/bin"
-        - "/opt/X11/bin"
-        - "/Library/Apple/usr/bin"
-        - "/Library/TeX/texbin"
-        - "/Applications/VMware Fusion.app/Contents/Public"
         - "/usr/local/share/dotnet"
         - "~/.dotnet/tools"
-        - "/usr/local/go/bin"
-        - "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
-        - "/Users/mweiss/.codon/bin"
-        - "/Users/mweiss/.cargo/bin"
-        - "/usr/local/opt/ruby/bin"
-        - "/Users/mweiss/.dotnet/tools"
+        - "/opt/homebrew/bin"
         - "/Users/mweiss/bin"
-        - "/usr/local/sbin"
-        - "/Users/mweiss/.gem/ruby/3.2.0/bin"
-        - "/Users/mweiss/.local/bin"
-        - "/Users/mweiss/bin/omnisharp"
-        - "/Applications/Racket v8.18/bin"
+        - "/Users/mweiss/.dotnet"
+        - "/Users/mweiss/.dotnet/tools"
       CMAKE_INSTALL_PREFIX: "/usr/local"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
-        - "/usr/local"
+        - "/opt/homebrew"
         - "/usr/local"
         - "/usr"
         - "/"
-        - "/usr/local"
+        - "/opt/homebrew"
         - "/usr/local"
         - "/usr/X11R6"
         - "/usr/pkg"
@@ -2433,20 +1644,24 @@ events:
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Network/Library/Frameworks"
         - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
         - "/Library/Developer/CommandLineTools/Library/Frameworks"
-        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Developer/CommandLineTools/Library/Frameworks"
         - "/Library/Frameworks"
         - "/Network/Library/Frameworks"
         - "/System/Library/Frameworks"
+...
+
+---
+events:
   -
     kind: "try_compile-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:435 (try_compile)"
-      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
+      - "/opt/homebrew/share/cmake/Modules/FindOpenMP.cmake:333 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
       - "CMakeLists.txt:11 (find_package)"
-    description: "Trying CXX OpenMP compiler with '/usr/local/lib/libomp.dylib'"
+    description: "Detecting CXX OpenMP compiler info"
     directories:
-      source: "/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-cz6hN3"
-      binary: "/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-cz6hN3"
+      source: "/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-y2BZYs"
+      binary: "/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-y2BZYs"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -2458,27 +1673,34 @@ events:
       variable: "OpenMP_COMPILE_RESULT_CXX_Xclang fopenmp"
       cached: true
       stdout: |
-        Change Dir: '/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-cz6hN3'
+        Change Dir: '/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-y2BZYs'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_e93aa/fast
-        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_e93aa.dir/build.make CMakeFiles/cmTC_e93aa.dir/build
-        Building CXX object CMakeFiles/cmTC_e93aa.dir/OpenMPTryFlag.cpp.o
-        /usr/bin/c++   -std=gnu++17   -Xclang -fopenmp -MD -MT CMakeFiles/cmTC_e93aa.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_e93aa.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_e93aa.dir/OpenMPTryFlag.cpp.o -c /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-cz6hN3/OpenMPTryFlag.cpp
-        Linking CXX executable cmTC_e93aa
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e93aa.dir/link.txt --verbose=1
-        /usr/bin/c++ -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_e93aa.dir/OpenMPTryFlag.cpp.o -o cmTC_e93aa  /usr/local/lib/libomp.dylib
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_dddc3/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_dddc3.dir/build.make CMakeFiles/cmTC_dddc3.dir/build
+        Building CXX object CMakeFiles/cmTC_dddc3.dir/OpenMPTryFlag.cpp.o
+        /usr/bin/c++   -Xclang -fopenmp -std=gnu++17 -arch arm64 -MD -MT CMakeFiles/cmTC_dddc3.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_dddc3.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_dddc3.dir/OpenMPTryFlag.cpp.o -c /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-y2BZYs/OpenMPTryFlag.cpp
+        /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-y2BZYs/OpenMPTryFlag.cpp:2:10: fatal error: 'omp.h' file not found
+            2 | #include <omp.h>
+              |          ^~~~~~~
+        1 error generated.
+        make[1]: *** [CMakeFiles/cmTC_dddc3.dir/OpenMPTryFlag.cpp.o] Error 1
+        make: *** [cmTC_dddc3/fast] Error 2
         
-      exitCode: 0
+      exitCode: 2
+...
+
+---
+events:
   -
     kind: "try_compile-v1"
     backtrace:
-      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:574 (try_compile)"
-      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:714 (_OPENMP_GET_SPEC_DATE)"
+      - "/opt/homebrew/share/cmake/Modules/FindOpenMP.cmake:333 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/FindOpenMP.cmake:640 (_OPENMP_GET_FLAGS)"
       - "CMakeLists.txt:11 (find_package)"
-    description: "Detecting CXX OpenMP version"
+    description: "Detecting CXX OpenMP compiler info"
     directories:
-      source: "/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-0Rtdaz"
-      binary: "/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-0Rtdaz"
+      source: "/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-C9tDty"
+      binary: "/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-C9tDty"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -2487,18 +1709,21 @@ events:
       CMAKE_OSX_DEPLOYMENT_TARGET: ""
       CMAKE_OSX_SYSROOT: ""
     buildResult:
-      variable: "OpenMP_SPECTEST_CXX_"
+      variable: "OpenMP_COMPILE_RESULT_CXX_Xclang fopenmp"
       cached: true
       stdout: |
-        Change Dir: '/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-0Rtdaz'
+        Change Dir: '/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-C9tDty'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_afe36/fast
-        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_afe36.dir/build.make CMakeFiles/cmTC_afe36.dir/build
-        Building CXX object CMakeFiles/cmTC_afe36.dir/OpenMPCheckVersion.cpp.o
-        /usr/bin/c++   -Xclang -fopenmp -std=gnu++17 -MD -MT CMakeFiles/cmTC_afe36.dir/OpenMPCheckVersion.cpp.o -MF CMakeFiles/cmTC_afe36.dir/OpenMPCheckVersion.cpp.o.d -o CMakeFiles/cmTC_afe36.dir/OpenMPCheckVersion.cpp.o -c /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-0Rtdaz/OpenMPCheckVersion.cpp
-        Linking CXX executable cmTC_afe36
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_afe36.dir/link.txt --verbose=1
-        /usr/bin/c++  -Xclang -fopenmp -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_afe36.dir/OpenMPCheckVersion.cpp.o -o cmTC_afe36
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_f6bfa/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_f6bfa.dir/build.make CMakeFiles/cmTC_f6bfa.dir/build
+        Building CXX object CMakeFiles/cmTC_f6bfa.dir/OpenMPTryFlag.cpp.o
+        /usr/bin/c++   -Xclang -fopenmp -std=gnu++17 -arch arm64 -MD -MT CMakeFiles/cmTC_f6bfa.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_f6bfa.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_f6bfa.dir/OpenMPTryFlag.cpp.o -c /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-C9tDty/OpenMPTryFlag.cpp
+        /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles/CMakeScratch/TryCompile-C9tDty/OpenMPTryFlag.cpp:2:10: fatal error: 'omp.h' file not found
+            2 | #include <omp.h>
+              |          ^~~~~~~
+        1 error generated.
+        make[1]: *** [CMakeFiles/cmTC_f6bfa.dir/OpenMPTryFlag.cpp.o] Error 1
+        make: *** [cmTC_f6bfa/fast] Error 2
         
-      exitCode: 0
+      exitCode: 2
 ...

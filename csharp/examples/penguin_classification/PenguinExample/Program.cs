@@ -58,7 +58,7 @@ class Program
         Console.WriteLine($"   N predictors per node: {clf.MaxFeatures}");
         Console.WriteLine($" Min observations in leaf: {clf.MinSamplesLeaf}");
         Console.WriteLine($"          OOB stat value: {clf.OutOfBagScore:F2}");
-        Console.WriteLine($"           OOB stat type: Accuracy");
+        Console.WriteLine($"           OOB stat type: AUC-ROC");
         Console.WriteLine($"     Variable importance: anova");
         Console.WriteLine();
         Console.WriteLine(new string('-', 41));

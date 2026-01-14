@@ -144,6 +144,7 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
         self.n_classes_ = None
         self.n_features_in_ = None
         self.feature_importances_ = None
+        self.oob_score_ = None
 
     def _get_split_rule(self):
         """Convert string split rule to enum value."""
@@ -226,10 +227,12 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
         if self.lincomb_func is not None:
             lincomb_type = _pyaorsf.LinearCombo.CUSTOM.value
 
-        # Determine oobag_eval_type: use custom if oobag_eval_func is provided
-        oobag_eval_type = _pyaorsf.EvalType.NONE.value
+        # Determine oobag_eval_type: use custom if oobag_eval_func is provided,
+        # otherwise use CONCORD (AUC-ROC) for classification
         if self.oobag_eval_func is not None:
             oobag_eval_type = _pyaorsf.EvalType.CUSTOM.value
+        else:
+            oobag_eval_type = _pyaorsf.EvalType.CONCORD.value
 
         # Call C++ fit function
         self._forest_data = _pyaorsf.fit_forest(
@@ -273,6 +276,17 @@ class ObliqueForestClassifier(BaseEstimator, ClassifierMixin):
             self._oob_predictions = self._forest_data['oob_predictions']
         else:
             self._oob_predictions = None
+
+        # Extract OOB evaluation score (AUC-ROC for classification)
+        if 'oob_eval' in self._forest_data:
+            oob_eval = self._forest_data['oob_eval']
+            # oob_eval is a matrix; get the final value (last row, first column)
+            if oob_eval.size > 0:
+                self.oob_score_ = float(oob_eval[-1, 0])
+            else:
+                self.oob_score_ = None
+        else:
+            self.oob_score_ = None
 
         # Extract feature importances if computed
         if 'importance' in self._forest_data:

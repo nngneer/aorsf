@@ -59,8 +59,8 @@ endif()
 add_library(aorsf::aorsf_core STATIC IMPORTED)
 
 set_target_properties(aorsf::aorsf_core PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include/aorsf"
-  INTERFACE_LINK_LIBRARIES "/usr/local/lib/libarmadillo.dylib;OpenMP::OpenMP_CXX"
+  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include/aorsf;/opt/homebrew/include"
+  INTERFACE_LINK_LIBRARIES "/opt/homebrew/lib/libarmadillo.dylib"
 )
 
 # Load information for each installed configuration.

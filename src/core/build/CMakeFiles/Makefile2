@@ -45,19 +45,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /opt/homebrew/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E rm -f
+RM = /opt/homebrew/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/mweiss/sandbox/aorsf/src/core
+CMAKE_SOURCE_DIR = /Users/mweiss/repos/aorsf/src/core
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/mweiss/sandbox/aorsf/src/core/build
+CMAKE_BINARY_DIR = /Users/mweiss/repos/aorsf/src/core/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -110,14 +110,14 @@ tests/clean: tests/CMakeFiles/test_survival.dir/clean
 CMakeFiles/aorsf_core.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/aorsf_core.dir/build.make CMakeFiles/aorsf_core.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/aorsf_core.dir/build.make CMakeFiles/aorsf_core.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target aorsf_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target aorsf_core"
 .PHONY : CMakeFiles/aorsf_core.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/aorsf_core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/aorsf_core.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles 0
 .PHONY : CMakeFiles/aorsf_core.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ aorsf_core: CMakeFiles/aorsf_core.dir/rule
 # codegen rule for target.
 CMakeFiles/aorsf_core.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/aorsf_core.dir/build.make CMakeFiles/aorsf_core.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Finished codegen for target aorsf_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Finished codegen for target aorsf_core"
 .PHONY : CMakeFiles/aorsf_core.dir/codegen
 
 # clean rule for target.
@@ -142,14 +142,14 @@ CMakeFiles/aorsf_core.dir/clean:
 tests/CMakeFiles/test_standalone.dir/all: CMakeFiles/aorsf_core.dir/all
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/depend
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles --progress-num=12,13 "Built target test_standalone"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles --progress-num=12,13 "Built target test_standalone"
 .PHONY : tests/CMakeFiles/test_standalone.dir/all
 
 # Build rule for subdir invocation for target.
 tests/CMakeFiles/test_standalone.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_standalone.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles 0
 .PHONY : tests/CMakeFiles/test_standalone.dir/rule
 
 # Convenience name for target.
@@ -159,7 +159,7 @@ test_standalone: tests/CMakeFiles/test_standalone.dir/rule
 # codegen rule for target.
 tests/CMakeFiles/test_standalone.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_standalone.dir/build.make tests/CMakeFiles/test_standalone.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles --progress-num=12,13 "Finished codegen for target test_standalone"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles --progress-num=12,13 "Finished codegen for target test_standalone"
 .PHONY : tests/CMakeFiles/test_standalone.dir/codegen
 
 # clean rule for target.
@@ -174,14 +174,14 @@ tests/CMakeFiles/test_standalone.dir/clean:
 tests/CMakeFiles/test_survival.dir/all: CMakeFiles/aorsf_core.dir/all
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/depend
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles --progress-num=14,15 "Built target test_survival"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles --progress-num=14,15 "Built target test_survival"
 .PHONY : tests/CMakeFiles/test_survival.dir/all
 
 # Build rule for subdir invocation for target.
 tests/CMakeFiles/test_survival.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_survival.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mweiss/repos/aorsf/src/core/build/CMakeFiles 0
 .PHONY : tests/CMakeFiles/test_survival.dir/rule
 
 # Convenience name for target.
@@ -191,7 +191,7 @@ test_survival: tests/CMakeFiles/test_survival.dir/rule
 # codegen rule for target.
 tests/CMakeFiles/test_survival.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_survival.dir/build.make tests/CMakeFiles/test_survival.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/sandbox/aorsf/src/core/build/CMakeFiles --progress-num=14,15 "Finished codegen for target test_survival"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/mweiss/repos/aorsf/src/core/build/CMakeFiles --progress-num=14,15 "Finished codegen for target test_survival"
 .PHONY : tests/CMakeFiles/test_survival.dir/codegen
 
 # clean rule for target.

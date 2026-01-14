@@ -97,11 +97,15 @@ def main():
     print(f"   N predictors per node: {clf.mtry if clf.mtry else int(np.sqrt(X.shape[1]))}")
     print(f" Min observations in leaf: {clf.leaf_min_obs}")
 
-    # Compute OOB accuracy (approximate, since we don't have true OOB)
-    # Use training accuracy as proxy
-    train_accuracy = clf.score(X, y)
-    print(f"          OOB stat value: {train_accuracy:.2f}")
-    print(f"           OOB stat type: Accuracy")
+    # Get true OOB score (AUC-ROC) from the fitted model
+    if clf.oob_score_ is not None:
+        print(f"          OOB stat value: {clf.oob_score_:.2f}")
+        print(f"           OOB stat type: AUC-ROC")
+    else:
+        # Fallback to training accuracy if OOB not available
+        train_accuracy = clf.score(X, y)
+        print(f"          OOB stat value: {train_accuracy:.2f}")
+        print(f"           OOB stat type: Accuracy (training)")
     print(f"     Variable importance: anova")
     print()
     print("-" * 41)

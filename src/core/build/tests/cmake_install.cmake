@@ -1,4 +1,4 @@
-# Install script for directory: /Users/mweiss/sandbox/aorsf/src/core/tests
+# Install script for directory: /Users/mweiss/repos/aorsf/src/core/tests
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,6 +40,6 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/Users/mweiss/sandbox/aorsf/src/core/build/tests/install_local_manifest.txt"
+  file(WRITE "/Users/mweiss/repos/aorsf/src/core/build/tests/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
